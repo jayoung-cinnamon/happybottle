@@ -1,12 +1,14 @@
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
-
+import GlobalStyle from "styles/GlobalStyle";
 function App() {
   return (
-    <div className="App">
-      <h1>App</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <div className="App">
+        <h1>App</h1>
+      </div>
+    </>
   );
 }
 

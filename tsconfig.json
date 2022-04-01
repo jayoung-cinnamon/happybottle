@@ -15,7 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "libs/*": ["libs/*"],
+      "@components/*": ["components/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["**/*.ts", "**/*.tsx", "src"]
 }
