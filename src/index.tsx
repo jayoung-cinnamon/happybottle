@@ -1,19 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { Router } from "react-router-dom";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { RecoilRoot } from "recoil";
 
-ReactDOM.render(
+const reactNode = document.getElementById("root") as HTMLElement;
+
+ReactDOM.createRoot(reactNode).render(
   <RecoilRoot>
     <App />
-  </RecoilRoot>,
-  document.getElementById("root")
+  </RecoilRoot>
 );

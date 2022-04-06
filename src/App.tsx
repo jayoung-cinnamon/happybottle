@@ -1,13 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
 import GlobalStyle from "styles/GlobalStyle";
+import { Mobile, PC } from "./styles/Mediaquery";
+
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="App">
-        <h1>App</h1>
-      </div>
+      <Mobile>
+        <div>
+          <h1>모바일</h1>
+        </div>
+      </Mobile>
+      <PC>
+        <div>
+          <h1>PC</h1>
+        </div>
+      </PC>
     </>
   );
 }
