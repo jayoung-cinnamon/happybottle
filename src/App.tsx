@@ -1,6 +1,7 @@
 import React from "react";
 import GlobalStyle from "styles/GlobalStyle";
 import { Mobile, PC } from "./styles/Mediaquery";
+
 function App() {
   return (
     <>
