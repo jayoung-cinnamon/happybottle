@@ -1,14 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
-
+import useTimeout from "../../hooks/useTimeout";
 function Main() {
   const [splashScreen, SetSplashScreen] = useState(true);
-  useEffect(() => {
-    //TODO: setTimeout hook으로 변경
-    setTimeout(() => {
-      SetSplashScreen(false);
-    }, 3000);
-  });
+  useTimeout(() => {
+    SetSplashScreen(false);
+  }, 1000);
 
   return splashScreen ? <MainContainer /> : <></>;
 }
