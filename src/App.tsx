@@ -8,7 +8,7 @@ function App() {
     <>
       <GlobalStyle />
       <Main />
-      <Login />
+      {/* <Login /> */}
       {/* <Mobile>
         <div>
           <h1>모바일</h1>
