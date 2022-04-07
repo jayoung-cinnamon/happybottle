@@ -47,6 +47,6 @@ const SplashLogoContainer = styled.div`
 const SplashLogo = styled.div`
   width: 84px;
   height: 81px;
-  background-image: url("images/main/SplashLogo.png");
+  background-image: url("images/main/SmileLogo.png");
   background-size: 100% 100%;
 `;
