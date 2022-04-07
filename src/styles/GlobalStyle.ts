@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: 'Noto Sans KR', sans-serif;
+        /* 배경 테스트용도 */
+        background-color: violet;
     };
     button{
         display: flex;
