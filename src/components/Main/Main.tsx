@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
 import useTimeout from "../../hooks/useTimeout";
 import Login from "components/Login";
-
+import HbMain from "components/HbMain";
 function Main() {
   const [splashScreen, SetSplashScreen] = useState(true);
 
@@ -20,7 +20,8 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
-      {!splashScreen && <Login></Login>}
+      {/* {!splashScreen && <Login></Login>} */}
+      {!splashScreen && <HbMain></HbMain>}
     </MainContainer>
   );
 }
@@ -37,6 +38,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 `;
 
 const SplashLogoContainer = styled.div`
