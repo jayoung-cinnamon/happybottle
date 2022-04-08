@@ -21,6 +21,7 @@ const HeaderContainer = styled.div`
   height: 90px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const TextContainer = styled.div`
@@ -41,7 +42,7 @@ const UserName = styled.div`
 
 const Clover = styled.div`
   width: 90px;
-  height: 90px;
+  height: 80px;
   background-image: url("images/main/Clover.png");
   background-size: 100% 100%;
 `;
