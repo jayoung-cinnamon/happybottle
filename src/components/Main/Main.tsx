@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 import useTimeout from "../../hooks/useTimeout";
 import Login from "components/Login";
 import HbMain from "components/HbMain";
+import Register from "components/Register";
+import NickName from "components/NickName";
 function Main() {
   const [splashScreen, SetSplashScreen] = useState(true);
 
@@ -20,8 +22,10 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
+      {!splashScreen && <NickName></NickName>}
+      {/* {!splashScreen && <Register></Register>} */}
       {/* {!splashScreen && <Login></Login>} */}
-      {!splashScreen && <HbMain></HbMain>}
+      {/* {!splashScreen && <HbMain></HbMain>} */}
     </MainContainer>
   );
 }
