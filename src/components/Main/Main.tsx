@@ -42,7 +42,6 @@ const MainContainer = styled.div`
 `;
 
 const SplashLogoContainer = styled.div`
-  width: 50%;
   height: 25%;
   display: flex;
   flex-direction: column;
