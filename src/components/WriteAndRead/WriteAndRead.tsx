@@ -17,7 +17,6 @@ const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-top: 35px;
-  border: 1px solid red;
   margin-bottom: 35px;
 `;
 
