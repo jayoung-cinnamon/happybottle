@@ -5,7 +5,7 @@ function index() {
   return (
     <RegisterContainer>
       <Logo />
-      <Title>HAPPY BOTTLE</Title>
+      <Title>Hi!</Title>
       <InputContainer>
         <Input name="email" type="email" placeholder="email" required></Input>
         <Input

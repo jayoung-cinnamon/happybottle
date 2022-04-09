@@ -22,9 +22,9 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
-      {!splashScreen && <NickName></NickName>}
+      {/* {!splashScreen && <NickName></NickName>} */}
       {/* {!splashScreen && <Register></Register>} */}
-      {/* {!splashScreen && <Login></Login>} */}
+      {!splashScreen && <Login></Login>}
       {/* {!splashScreen && <HbMain></HbMain>} */}
     </MainContainer>
   );
