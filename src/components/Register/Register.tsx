@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { signUpWithEmailPassword } from "service/auth";
 
 function index() {
   return (
@@ -14,7 +15,11 @@ function index() {
           placeholder="password"
           required
         ></Input>
-        <RegisterInput type="submit" value="회원가입"></RegisterInput>
+        <RegisterInput
+          type="submit"
+          value="회원가입"
+          onClick={signUpWithEmailPassword}
+        ></RegisterInput>
       </InputContainer>
       <LoginContainer>
         <RegisterText>이미 회원이신가요?</RegisterText>

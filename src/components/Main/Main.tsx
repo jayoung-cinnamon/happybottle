@@ -24,8 +24,8 @@ function Main() {
       )}
       {/* {!splashScreen && <Login></Login>} */}
       {/* {!splashScreen && <NickName></NickName>} */}
-      {/* {!splashScreen && <Register></Register>} */}
-      {!splashScreen && <HbMain></HbMain>}
+      {!splashScreen && <Register></Register>}
+      {/* {!splashScreen && <HbMain></HbMain>} */}
     </MainContainer>
   );
 }
