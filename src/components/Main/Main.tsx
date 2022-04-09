@@ -22,10 +22,10 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
+      {/* {!splashScreen && <Login></Login>} */}
       {/* {!splashScreen && <NickName></NickName>} */}
       {/* {!splashScreen && <Register></Register>} */}
-      {!splashScreen && <Login></Login>}
-      {/* {!splashScreen && <HbMain></HbMain>} */}
+      {!splashScreen && <HbMain></HbMain>}
     </MainContainer>
   );
 }
@@ -37,7 +37,7 @@ const MainContainer = styled.div`
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
-  height: 100vh;
+  height: 100%;
   background-color: white;
   display: flex;
   justify-content: center;
