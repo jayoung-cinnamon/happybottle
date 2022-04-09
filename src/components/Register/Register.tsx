@@ -1,41 +1,38 @@
-import React, { useState, useCallback, useEffect } from "react";
-import styled, { css } from "styled-components";
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import React from "react";
+import styled from "styled-components";
+import { signUpWithEmailPassword } from "service/auth";
+
+function index() {
   return (
-    <LoginContainer>
+    <RegisterContainer>
       <Logo />
-      <Title>HAPPY BOTTLE</Title>
+      <Title>Hi!</Title>
       <InputContainer>
-        <Input
-          name="email"
-          type="email"
-          value={email}
-          placeholder="email"
-          required
-        ></Input>
+        <Input name="email" type="email" placeholder="email" required></Input>
         <Input
           name="password"
           type="password"
-          value={password}
           placeholder="password"
           required
         ></Input>
-        <LoginInput type="submit" value="Login"></LoginInput>
+        <RegisterInput
+          type="submit"
+          value="회원가입"
+          onClick={signUpWithEmailPassword}
+        ></RegisterInput>
       </InputContainer>
-      <RegisterContainer>
-        <RegisterText>회원이 아니신가요?</RegisterText>
-        <RegisterBtn>회원가입</RegisterBtn>
-      </RegisterContainer>
+      <LoginContainer>
+        <RegisterText>이미 회원이신가요?</RegisterText>
+        <LoginBtn>로그인</LoginBtn>
+      </LoginContainer>
       <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
-    </LoginContainer>
+    </RegisterContainer>
   );
 }
 
-export default Login;
-// TODO: 컨테이너 위치 조정 필요 - 세로 중앙 정렬
-const LoginContainer = styled.div`
+export default index;
+
+const RegisterContainer = styled.div`
   margin: 0 auto;
   width: 240px;
   height: 430px;
@@ -56,7 +53,7 @@ const Title = styled.div`
 const Logo = styled.div`
   width: 90px;
   height: 90px;
-  background-image: url("images/main/SmileLogo.png");
+  background-image: url("images/main/EyeSmile.png");
   background-repeat: no-repeat;
   background-size: cover;
   /* border: 1px solid red; */
@@ -86,7 +83,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginInput = styled.input`
+const RegisterInput = styled.input`
   font-size: 15px;
   padding: 5px;
   margin-top: 10px;
@@ -95,14 +92,14 @@ const LoginInput = styled.input`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #faaaaa;
+  background: #ff8686;
   border: none;
   border-radius: 3px;
   color: white;
   cursor: pointer;
 `;
 
-const RegisterContainer = styled.div`
+const LoginContainer = styled.div`
   margin-top: 10px;
   width: 210px;
   display: flex;
@@ -114,7 +111,7 @@ const RegisterText = styled.div`
   font-size: 12px;
 `;
 
-const RegisterBtn = styled.button`
+const LoginBtn = styled.button`
   font-size: 13px;
   padding: 3px;
   height: 30px;
@@ -122,7 +119,7 @@ const RegisterBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ff8686;
+  background: #faaaaa;
   border: none;
   border-radius: 3px;
   color: white;

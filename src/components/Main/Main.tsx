@@ -2,7 +2,9 @@ import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
 import useTimeout from "../../hooks/useTimeout";
 import Login from "components/Login";
-
+import HbMain from "components/HbMain";
+import Register from "components/Register";
+import NickName from "components/NickName";
 function Main() {
   const [splashScreen, SetSplashScreen] = useState(true);
 
@@ -20,7 +22,10 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
-      {!splashScreen && <Login></Login>}
+      {/* {!splashScreen && <Login></Login>} */}
+      {/* {!splashScreen && <NickName></NickName>} */}
+      {!splashScreen && <Register></Register>}
+      {/* {!splashScreen && <HbMain></HbMain>} */}
     </MainContainer>
   );
 }
@@ -32,15 +37,15 @@ const MainContainer = styled.div`
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
-  height: 100vh;
+  height: 100%;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 `;
 
 const SplashLogoContainer = styled.div`
-  width: 50%;
   height: 25%;
   display: flex;
   flex-direction: column;
