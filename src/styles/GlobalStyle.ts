@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
         /* 배경 테스트용도 */
         background-color: violet;
+        box-sizing: border-box;
     };
     button{
         display: flex;
