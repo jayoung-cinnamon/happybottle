@@ -1,25 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { signUpWithEmailPassword } from "service/auth";
+import { BrowserRouter, Route } from "react-router-dom";
 
-function index() {
+function Index() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [newAccount, setNewAccount] = useState(true); // 새로운 유저인지 확인(초기값: true)
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      let data;
+      data = await signUpWithEmailPassword(email, password);
+      alert("회원가입완료");
+    } catch (error) {
+      console.log(`error : ${error}`);
+    }
+  };
+
+  const toggleAccount = () => setNewAccount((prev) => !prev);
   return (
     <RegisterContainer>
       <Logo />
       <Title>Hi!</Title>
-      <InputContainer>
-        <Input name="email" type="email" placeholder="email" required></Input>
+      <InputContainer onSubmit={onSubmit}>
         <Input
+          onChange={onChange}
+          value={email}
+          name="email"
+          type="email"
+          placeholder="email"
+          required
+        ></Input>
+        <Input
+          onChange={onChange}
+          value={password}
           name="password"
           type="password"
           placeholder="password"
           required
         ></Input>
-        <RegisterInput
-          type="submit"
-          value="회원가입"
-          onClick={signUpWithEmailPassword}
-        ></RegisterInput>
+        <RegisterInput type="submit" value="회원가입"></RegisterInput>
       </InputContainer>
       <LoginContainer>
         <RegisterText>이미 회원이신가요?</RegisterText>
@@ -30,7 +61,7 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
 
 const RegisterContainer = styled.div`
   margin: 0 auto;
