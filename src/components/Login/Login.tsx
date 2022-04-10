@@ -23,7 +23,7 @@ function Login() {
       let data;
       data = await signInWithEmailPassword(email, password);
       console.log(data);
-      alert("로그인성공2");
+      // alert("로그인성공2");
       navigate("/hbmain");
     } catch (error) {
       console.log(`error: ${error}`);
@@ -34,7 +34,7 @@ function Login() {
       <LoginContainer>
         <Logo />
         <Title>HAPPY BOTTLE</Title>
-        <InputContainer onSubmit={onLogin}>
+        <InputContainer>
           <Input
             onChange={onChange}
             name="email"
@@ -51,7 +51,11 @@ function Login() {
             placeholder="password"
             required
           ></Input>
-          <LoginInput type="submit" value="Login"></LoginInput>
+          <LoginInput
+            type="button"
+            value="Login"
+            onClick={onLogin}
+          ></LoginInput>
         </InputContainer>
         <RegisterContainer>
           <RegisterText>회원이 아니신가요?</RegisterText>

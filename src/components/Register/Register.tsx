@@ -36,7 +36,7 @@ function Index() {
       <RegisterContainer>
         <Logo />
         <Title>Hi!</Title>
-        <InputContainer onSubmit={onRegister}>
+        <InputContainer>
           <Input
             onChange={onChange}
             value={email}
@@ -54,7 +54,7 @@ function Index() {
             required
           ></Input>
 
-          <RegisterInput type="submit" value="회원가입" />
+          <RegisterInput type="button" value="회원가입" onClick={onRegister} />
         </InputContainer>
         <LoginContainer>
           <RegisterText>이미 회원이신가요?</RegisterText>
