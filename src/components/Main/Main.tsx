@@ -10,7 +10,7 @@ function Main() {
 
   useTimeout(() => {
     SetSplashScreen(false);
-  }, 5000);
+  }, 1000);
 
   return (
     <MainContainer>
