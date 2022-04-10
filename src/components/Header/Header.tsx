@@ -25,17 +25,15 @@ const Header = () => {
     console.log("userData: ", userData);
   }, [userData]);
 
-  return userData ? (
+  return (
     <HeaderContainer>
       <TextContainer>
         <Hello>Hello</Hello>
-        <UserName>{userData.displayName}</UserName>
+        {userData ? <UserName>{userData.displayName}</UserName> : <></>}
       </TextContainer>
       <Clover />
       <LogoutBtn onClick={logout} />
     </HeaderContainer>
-  ) : (
-    <></>
   );
 };
 
