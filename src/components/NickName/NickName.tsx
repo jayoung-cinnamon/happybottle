@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { updateUserInfo } from "service/auth";
 function NickName() {
+  const [nickName, setNickName] = useState("");
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "nickname") {
+      setNickName(value);
+      console.log(nickName);
+    }
+  };
+  const updateUserNickName = (e: any) => {
+    try {
+      e.preventDefault();
+      let data = updateUserInfo();
+      console.log(data);
+      alert("수정!");
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
     <MainContainer>
       <NickNameContainer>
@@ -9,12 +30,18 @@ function NickName() {
         <ExplainText>닉네임을 입력해주세요</ExplainText>
         <InputContainer>
           <Input
+            onChange={onChange}
             name="nickname"
             type="text"
             placeholder="nickname"
+            value={nickName}
             required
           ></Input>
-          <LoginInput type="submit" value="회원가입완료"></LoginInput>
+          <LoginInput
+            type="submit"
+            value="회원가입완료"
+            onClick={updateUserNickName}
+          ></LoginInput>
         </InputContainer>
       </NickNameContainer>
     </MainContainer>

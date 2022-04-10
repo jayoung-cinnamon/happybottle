@@ -1,4 +1,8 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { Router } from "react-router-dom";
 
 //로그인
@@ -34,6 +38,7 @@ export function signUpWithEmailPassword(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // ...
+      console.log(userCredential.user);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -74,6 +79,24 @@ export function sendPasswordReset() {
       // ..
     });
   // [END auth_send_password_reset]
+}
+
+// 닉네임 설정
+export function updateUserInfo(nickname) {
+  const auth = getAuth();
+  updateProfile(auth.currentUser, {
+    displayName: nickname,
+  })
+    .then(() => {
+      // Profile updated!
+      // ...
+      alert(auth.currentUser.displayName);
+    })
+    .catch((error) => {
+      // An error occurred
+      // ...
+      console.log(error);
+    });
 }
 
 export function signOut() {
