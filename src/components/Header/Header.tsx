@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { signOut } from "service/auth";
+import { signOut, loginStatus } from "service/auth";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
+  // TODO: 타입 정의 해야하는데 일단은 디스플레이네임만 처리
+  interface UserDataType {
+    displayName: string | null;
+  }
   const navigate = useNavigate();
+  const [userData, setUserData] = useState<UserDataType>();
   const logout = () => {
     try {
       signOut();
@@ -12,15 +17,25 @@ const Header = () => {
       console.log(error);
     }
   };
-  return (
+  useEffect(() => {
+    const user = loginStatus();
+    if (user.currentUser !== null) setUserData(user.currentUser);
+  }, []);
+  useEffect(() => {
+    console.log("userData: ", userData);
+  }, [userData]);
+
+  return userData ? (
     <HeaderContainer>
       <TextContainer>
         <Hello>Hello</Hello>
-        <UserName> user</UserName>
+        <UserName>{userData.displayName}</UserName>
       </TextContainer>
       <Clover />
       <LogoutBtn onClick={logout} />
     </HeaderContainer>
+  ) : (
+    <></>
   );
 };
 
