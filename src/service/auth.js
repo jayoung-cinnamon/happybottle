@@ -11,10 +11,11 @@ export function signInWithEmailPassword(email, password) {
 
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then((result) => {
+      console.log(result);
       // Signed in
-      const user = userCredential.user;
-      console.log(user);
+      // const user = userCredential.user;
+      // console.log(user);
       alert("로그인성공");
       // ...
     })
@@ -74,4 +75,10 @@ export function sendPasswordReset() {
       // ..
     });
   // [END auth_send_password_reset]
+}
+
+export function signOut() {
+  const auth = getAuth();
+  console.log("로그아웃");
+  return auth.signOut();
 }

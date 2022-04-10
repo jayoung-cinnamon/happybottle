@@ -22,6 +22,7 @@ function Index() {
     try {
       let data;
       data = signUpWithEmailPassword(email, password);
+
       console.log(data);
       alert("회원가입완료");
     } catch (error) {

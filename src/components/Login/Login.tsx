@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { signInWithEmailPassword } from "service/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,13 +17,14 @@ function Login() {
       setPassword(value);
     }
   };
-  const onLogin = (e: any) => {
+  const onLogin = async (e: any) => {
     e.preventDefault();
     try {
       let data;
-      data = signInWithEmailPassword(email, password);
+      data = await signInWithEmailPassword(email, password);
       console.log(data);
       alert("로그인성공2");
+      navigate("/hbmain");
     } catch (error) {
       console.log(`error: ${error}`);
     }
@@ -31,7 +34,7 @@ function Login() {
       <LoginContainer>
         <Logo />
         <Title>HAPPY BOTTLE</Title>
-        <InputContainer>
+        <InputContainer onSubmit={onLogin}>
           <Input
             onChange={onChange}
             name="email"
@@ -48,11 +51,7 @@ function Login() {
             placeholder="password"
             required
           ></Input>
-          <LoginInput
-            type="submit"
-            value="Login"
-            onSubmit={onLogin}
-          ></LoginInput>
+          <LoginInput type="submit" value="Login"></LoginInput>
         </InputContainer>
         <RegisterContainer>
           <RegisterText>회원이 아니신가요?</RegisterText>

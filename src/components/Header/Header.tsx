@@ -1,13 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import { signOut } from "service/auth";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    try {
+      let data = signOut();
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <HeaderContainer>
       <TextContainer>
         <Hello>Hello</Hello>
-        <UserName>UserName :)</UserName>
+        <UserName> user</UserName>
       </TextContainer>
       <Clover />
+      <LogoutBtn onSubmit={logout} />
     </HeaderContainer>
   );
 };
@@ -45,4 +58,10 @@ const Clover = styled.div`
   height: 80px;
   background-image: url("images/main/Clover.png");
   background-size: 100% 100%;
+`;
+
+const LogoutBtn = styled.button`
+  border: 1px solid red;
+  width: 30px;
+  height: 30px;
 `;
