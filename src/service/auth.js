@@ -2,14 +2,12 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { Router } from "react-router-dom";
 
 //로그인
 export function signInWithEmailPassword(email, password) {
-  // const email = "test@example.com";
-  // const password = "hunter2";
-
   // [START auth_signin_password]
   const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
 
@@ -20,7 +18,7 @@ export function signInWithEmailPassword(email, password) {
       // Signed in
       // const user = userCredential.user;
       // console.log(user);
-      alert("로그인성공");
+      // alert("로그인성공");
       // ...
     })
     .catch((error) => {
@@ -90,7 +88,7 @@ export function updateUserInfo(nickname) {
     .then(() => {
       // Profile updated!
       // ...
-      alert(auth.currentUser.displayName);
+      console.log(auth.currentUser.displayName);
     })
     .catch((error) => {
       // An error occurred
@@ -103,4 +101,22 @@ export function signOut() {
   const auth = getAuth();
   console.log("로그아웃");
   return auth.signOut();
+}
+export function loginStatus() {
+  const auth = getAuth();
+  return auth;
+  // TODO: 아래 코드 사용 방법 알아야함.
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     console.log("user: ", user);
+  //     // User is signed in, see docs for a list of available properties
+  //     // https://firebase.google.com/docs/reference/js/firebase.User
+  //     const uid = user.uid;
+  //     // ...
+  //     return user;
+  //   } else {
+  //     // User is signed out
+  //     // ...
+  //   }
+  // });
 }
