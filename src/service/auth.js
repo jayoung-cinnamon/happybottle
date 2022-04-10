@@ -33,7 +33,6 @@ export function signUpWithEmailPassword(email, password) {
   const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      alert("회원가입완료");
       // ...
     })
     .catch((error) => {

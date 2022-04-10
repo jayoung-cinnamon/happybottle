@@ -6,8 +6,7 @@ const Header = () => {
   const navigate = useNavigate();
   const logout = () => {
     try {
-      let data = signOut();
-      console.log(data);
+      signOut();
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -20,7 +19,7 @@ const Header = () => {
         <UserName> user</UserName>
       </TextContainer>
       <Clover />
-      <LogoutBtn onSubmit={logout} />
+      <LogoutBtn onClick={logout} />
     </HeaderContainer>
   );
 };

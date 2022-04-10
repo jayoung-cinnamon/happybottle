@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { signUpWithEmailPassword } from "service/auth";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, useNavigate } from "react-router-dom";
 
 function Index() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [newAccount, setNewAccount] = useState(true); // 새로운 유저인지 확인(초기값: true)
@@ -22,9 +23,9 @@ function Index() {
     try {
       let data;
       data = signUpWithEmailPassword(email, password);
-
       console.log(data);
       alert("회원가입완료");
+      navigate("/nickname");
     } catch (error) {
       console.log(`error : ${error}`);
     }
