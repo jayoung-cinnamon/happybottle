@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { updateUserInfo } from "service/auth";
+import { useNavigate } from "react-router-dom";
+
 function NickName() {
+  const navigate = useNavigate();
   const [nickName, setNickName] = useState("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -9,15 +12,18 @@ function NickName() {
     } = e;
     if (name === "nickname") {
       setNickName(value);
-      console.log(nickName);
     }
   };
+  useEffect(() => {
+    console.log("nickname:", nickName);
+  }, [nickName]);
+
   const updateUserNickName = (e: any) => {
     try {
       e.preventDefault();
-      let data = updateUserInfo();
+      let data = updateUserInfo(nickName);
       console.log(data);
-      alert("수정!");
+      navigate("/hbmain");
     } catch (error) {
       alert(error);
     }
@@ -38,7 +44,7 @@ function NickName() {
             required
           ></Input>
           <LoginInput
-            type="submit"
+            type="button"
             value="회원가입완료"
             onClick={updateUserNickName}
           ></LoginInput>
