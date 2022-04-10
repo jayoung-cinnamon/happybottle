@@ -2,24 +2,39 @@ import React from "react";
 import styled from "styled-components";
 function NickName() {
   return (
-    <NickNameContainer>
-      <Logo />
-      <Title>Welcome!</Title>
-      <ExplainText>닉네임을 입력해주세요</ExplainText>
-      <InputContainer>
-        <Input
-          name="nickname"
-          type="text"
-          placeholder="nickname"
-          required
-        ></Input>
-        <LoginInput type="submit" value="회원가입완료"></LoginInput>
-      </InputContainer>
-    </NickNameContainer>
+    <MainContainer>
+      <NickNameContainer>
+        <Logo />
+        <Title>Welcome!</Title>
+        <ExplainText>닉네임을 입력해주세요</ExplainText>
+        <InputContainer>
+          <Input
+            name="nickname"
+            type="text"
+            placeholder="nickname"
+            required
+          ></Input>
+          <LoginInput type="submit" value="회원가입완료"></LoginInput>
+        </InputContainer>
+      </NickNameContainer>
+    </MainContainer>
   );
 }
 
 export default NickName;
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 const NickNameContainer = styled.div`
   margin: 0 auto;

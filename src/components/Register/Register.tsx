@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { signUpWithEmailPassword } from "service/auth";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function Index() {
   const [email, setEmail] = useState<string>("");
@@ -17,51 +17,69 @@ function Index() {
       setPassword(value);
     }
   };
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onRegister = async (e: any) => {
     e.preventDefault();
     try {
       let data;
-      data = await signUpWithEmailPassword(email, password);
+      data = signUpWithEmailPassword(email, password);
+      console.log(data);
       alert("회원가입완료");
     } catch (error) {
       console.log(`error : ${error}`);
     }
   };
 
-  const toggleAccount = () => setNewAccount((prev) => !prev);
   return (
-    <RegisterContainer>
-      <Logo />
-      <Title>Hi!</Title>
-      <InputContainer onSubmit={onSubmit}>
-        <Input
-          onChange={onChange}
-          value={email}
-          name="email"
-          type="email"
-          placeholder="email"
-          required
-        ></Input>
-        <Input
-          onChange={onChange}
-          value={password}
-          name="password"
-          type="password"
-          placeholder="password"
-          required
-        ></Input>
-        <RegisterInput type="submit" value="회원가입"></RegisterInput>
-      </InputContainer>
-      <LoginContainer>
-        <RegisterText>이미 회원이신가요?</RegisterText>
-        <LoginBtn>로그인</LoginBtn>
-      </LoginContainer>
-      <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
-    </RegisterContainer>
+    <MainContainer>
+      <RegisterContainer>
+        <Logo />
+        <Title>Hi!</Title>
+        <InputContainer onSubmit={onRegister}>
+          <Input
+            onChange={onChange}
+            value={email}
+            name="email"
+            type="email"
+            placeholder="email"
+            required
+          ></Input>
+          <Input
+            onChange={onChange}
+            value={password}
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          ></Input>
+
+          <RegisterInput type="submit" value="회원가입" />
+        </InputContainer>
+        <LoginContainer>
+          <RegisterText>이미 회원이신가요?</RegisterText>
+          <StyledLink to="/login">
+            <LoginBtn>로그인</LoginBtn>
+          </StyledLink>
+        </LoginContainer>
+        <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
+      </RegisterContainer>
+    </MainContainer>
   );
 }
 
 export default Index;
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 const RegisterContainer = styled.div`
   margin: 0 auto;
@@ -170,4 +188,8 @@ const GoogleLoginBtn = styled.button`
   border-radius: 3px;
   color: white;
   cursor: pointer;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

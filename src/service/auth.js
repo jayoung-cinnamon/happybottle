@@ -1,9 +1,10 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Router } from "react-router-dom";
 
 //로그인
-export function signInWithEmailPassword() {
-  const email = "test@example.com";
-  const password = "hunter2";
+export function signInWithEmailPassword(email, password) {
+  // const email = "test@example.com";
+  // const password = "hunter2";
 
   // [START auth_signin_password]
   const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
@@ -13,6 +14,8 @@ export function signInWithEmailPassword() {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log(user);
+      alert("로그인성공");
       // ...
     })
     .catch((error) => {
@@ -29,13 +32,6 @@ export function signUpWithEmailPassword(email, password) {
   const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      if (userCredential.user.uid) {
-        alert("이미 가입되어있습니다.");
-      }
-      console.log(userCredential);
-      // Signed in
-      const user = userCredential.user;
-
       alert("회원가입완료");
       // ...
     })
@@ -43,6 +39,7 @@ export function signUpWithEmailPassword(email, password) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(`errorCode+ ${errorCode} | errorMessage ${errorMessage}`);
+
       // ..
     });
 }

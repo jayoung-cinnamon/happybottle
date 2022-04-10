@@ -10,12 +10,14 @@ const GlobalStyle = createGlobalStyle`
         background-color: violet;
         box-sizing: border-box;
     };
+
     button{
         display: flex;
         cursor: pointer;
         outline: none;
         border-radius: 3px;
     };
+
     input{
         display: flex;
         outline: none;
