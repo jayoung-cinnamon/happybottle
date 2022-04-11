@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { loginStatus } from "service/auth";
-import { signOut, getAuth } from "firebase/auth";
+import { signOut, getAuth, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
   const auth = getAuth();
+  const user = auth.currentUser;
+  const [userData, setUserData] = useState<UserDataType>();
   // TODO: 타입 정의 해야하는데 일단은 디스플레이네임만 처리
   interface UserDataType {
     displayName: string | null;
   }
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState<UserDataType>();
+
   const logout = () => {
     try {
       signOut(auth);
@@ -28,6 +30,31 @@ const Header = () => {
     console.log("header userData: ", userData);
   }, [userData]);
 
+  // const onClickDeleteUser = async (e: any, user: any) => {
+  //   e.preventDefault();
+  //   await deleteUser(user)
+  //     .then(() => {
+  //       console.log("삭제");
+  //     })
+  //     .catch((error) => {
+  //       console.log(`user: ${user}`);
+  //       console.log(user);
+  //       console.log(`error! : ${error}`);
+  //     });
+  // };
+
+  const onClickDeleteUser = async (e: any) => {
+    e.preventDefault();
+    try {
+      let data = await deleteUser(user!);
+      console.log(user);
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <HeaderContainer>
       <TextContainer>
@@ -35,7 +62,8 @@ const Header = () => {
         {userData ? <UserName>{userData.displayName}</UserName> : <></>}
       </TextContainer>
       <Clover />
-      <LogoutBtn onClick={logout} />
+      <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+      <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn>
     </HeaderContainer>
   );
 };
