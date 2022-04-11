@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { signOut, loginStatus } from "service/auth";
+import { loginStatus } from "service/auth";
+import { signOut, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const auth = getAuth();
   // TODO: 타입 정의 해야하는데 일단은 디스플레이네임만 처리
   interface UserDataType {
     displayName: string | null;
@@ -11,8 +13,9 @@ const Header = () => {
   const [userData, setUserData] = useState<UserDataType>();
   const logout = () => {
     try {
-      signOut();
+      signOut(auth);
       navigate("/");
+      console.log("로그아웃");
     } catch (error) {
       console.log(error);
     }

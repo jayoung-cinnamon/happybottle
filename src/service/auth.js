@@ -96,11 +96,11 @@ export function updateUserInfo(nickname) {
     });
 }
 
-export function signOut() {
-  const auth = getAuth();
-  console.log("로그아웃");
-  return auth.signOut();
-}
+// export function signOut() {
+//   const auth = getAuth();
+//   console.log("로그아웃");
+//   return auth.signOut();
+// }
 export function loginStatus() {
   const auth = getAuth();
   return auth;
