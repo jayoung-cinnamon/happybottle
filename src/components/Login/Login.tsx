@@ -1,10 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { signInWithEmailPassword } from "service/auth";
 import { Link, useNavigate } from "react-router-dom";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 function Login() {
   const navigate = useNavigate();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,18 +19,41 @@ function Login() {
       setPassword(value);
     }
   };
-  const onLogin = async (e: any) => {
-    e.preventDefault();
+
+  // const onLogin = async (e: any) => {
+  //   e.preventDefault();
+  //   try {
+  //     const auth = getAuth();
+  //     let data;
+  //     data = await signInWithEmailAndPassword(auth, email, password);
+  //     console.log(data);
+  //     alert("로그인성공");
+  //     navigate("/hbmain");
+  //   } catch (error) {
+  //     console.log(error);
+  //     console.log(typeof error);
+  //   }
+  // };
+
+  const hookLogin = async (e: any) => {
     try {
       let data;
-      data = await signInWithEmailPassword(email, password);
-      console.log(data);
-      // alert("로그인성공2");
+      e.preventDefault();
+      data = await signInWithEmailAndPassword(auth, email, password);
       navigate("/hbmain");
-    } catch (error) {
-      console.log(`error: ${error}`);
+      console.log("로그인성공");
+    } catch (error: any) {
+      console.log(error.code);
+      if (error.code.includes("wrong-password")) {
+        alert("비밀번호가 틀렸습니다");
+      }
+      if (error.code.includes("user-not-found")) {
+        alert("이메일을 정확히 입력해주세요");
+      }
+      console.log(error);
     }
   };
+
   return (
     <MainContainer>
       <LoginContainer>
@@ -51,11 +76,7 @@ function Login() {
             placeholder="password"
             required
           ></Input>
-          <LoginInput
-            type="button"
-            value="Login"
-            onClick={onLogin}
-          ></LoginInput>
+          <LoginInput onClick={hookLogin}>로그인</LoginInput>
         </InputContainer>
         <RegisterContainer>
           <RegisterText>회원이 아니신가요?</RegisterText>
@@ -136,7 +157,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginInput = styled.input`
+const LoginInput = styled.button`
   font-size: 15px;
   padding: 5px;
   margin-top: 10px;

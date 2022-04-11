@@ -22,7 +22,7 @@ const Header = () => {
     if (user.currentUser !== null) setUserData(user.currentUser);
   }, []);
   useEffect(() => {
-    console.log("userData: ", userData);
+    console.log("header userData: ", userData);
   }, [userData]);
 
   return (

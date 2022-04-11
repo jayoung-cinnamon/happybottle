@@ -7,28 +7,27 @@ import {
 import { Router } from "react-router-dom";
 
 //로그인
-export function signInWithEmailPassword(email, password) {
-  // [START auth_signin_password]
-  const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
+// export async function signInWithEmailPassword(email, password) {
+//   // [START auth_signin_password]
+//   const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
 
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email, password)
-    .then((result) => {
-      console.log(result);
-      // Signed in
-      // const user = userCredential.user;
-      // console.log(user);
-      // alert("로그인성공");
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("sign in");
-      console.log(`errorCode: ${errorCode} /errorMessage: ${errorMessage} `);
-    });
-  // [END auth_signin_password]
-}
+//   const auth = getAuth();
+//   await signInWithEmailAndPassword(auth, email, password)
+//     .then((result) => {
+//       console.log(`await result user: ${result.user.email}`);
+
+//       console.log(`await result operationType: ${result.operationType}`);
+//       // alert("로그인성공");
+//       // ...
+//     })
+//     .catch((error) => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       console.log("sign in");
+//       console.log(`errorCode: ${errorCode} /errorMessage: ${errorMessage} `);
+//     });
+//   // [END auth_signin_password]
+// }
 
 //회원가입
 export function signUpWithEmailPassword(email, password) {
