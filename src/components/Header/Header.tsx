@@ -3,16 +3,12 @@ import styled from "styled-components";
 import { loginStatus } from "service/auth";
 import { signOut, getAuth, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-const Header = () => {
-  const navigate = useNavigate();
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const [userData, setUserData] = useState<UserDataType>();
-  // TODO: 타입 정의 해야하는데 일단은 디스플레이네임만 처리
-  interface UserDataType {
-    displayName: string | null;
-  }
+import { useAuthState } from "react-firebase-hooks/auth";
 
+const Header = () => {
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
   const logout = () => {
     try {
       signOut(auth);
@@ -22,26 +18,6 @@ const Header = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    const user = loginStatus();
-    if (user.currentUser !== null) setUserData(user.currentUser);
-  }, []);
-  useEffect(() => {
-    console.log("header userData: ", userData);
-  }, [userData]);
-
-  // const onClickDeleteUser = async (e: any, user: any) => {
-  //   e.preventDefault();
-  //   await deleteUser(user)
-  //     .then(() => {
-  //       console.log("삭제");
-  //     })
-  //     .catch((error) => {
-  //       console.log(`user: ${user}`);
-  //       console.log(user);
-  //       console.log(`error! : ${error}`);
-  //     });
-  // };
 
   const onClickDeleteUser = async (e: any) => {
     e.preventDefault();
@@ -59,7 +35,7 @@ const Header = () => {
     <HeaderContainer>
       <TextContainer>
         <Hello>Hello</Hello>
-        {userData ? <UserName>{userData.displayName}</UserName> : <></>}
+        {user ? <UserName>{user.displayName}</UserName> : <></>}
       </TextContainer>
       <Clover />
       <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
