@@ -25,6 +25,7 @@ const Header = () => {
       let data = await deleteUser(user!);
       console.log(user);
       console.log(data);
+      alert("탈퇴되었습니다");
       navigate("/");
     } catch (error) {
       console.log(error);
