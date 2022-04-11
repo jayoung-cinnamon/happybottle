@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { setAuthErrorCode } from "service/auth";
 function Login() {
   const navigate = useNavigate();
   const auth = getAuth();
@@ -19,7 +20,6 @@ function Login() {
       setPassword(value);
     }
   };
-
   // const onLogin = async (e: any) => {
   //   e.preventDefault();
   //   try {
@@ -44,13 +44,7 @@ function Login() {
       console.log("로그인성공");
     } catch (error: any) {
       console.log(error.code);
-      if (error.code.includes("wrong-password")) {
-        alert("비밀번호가 틀렸습니다");
-      }
-      if (error.code.includes("user-not-found")) {
-        alert("이메일을 정확히 입력해주세요");
-      }
-      console.log(error);
+      alert(setAuthErrorCode(error.code));
     }
   };
 
