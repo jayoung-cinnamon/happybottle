@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { updateUserInfo } from "service/auth";
+import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
 
 function NickName() {
+  const auth = getAuth();
+
   const navigate = useNavigate();
   const [nickName, setNickName] = useState("");
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -18,10 +23,10 @@ function NickName() {
     console.log("nickname:", nickName);
   }, [nickName]);
 
-  const updateUserNickName = (e: any) => {
+  const updateUserNickName = async (e: any) => {
     try {
       e.preventDefault();
-      let data = updateUserInfo(nickName);
+      let data = await updateProfile({ displayName: nickName, photoURL: "" });
       console.log(data);
       navigate("/hbmain");
     } catch (error) {

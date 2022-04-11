@@ -31,18 +31,20 @@ const Header = () => {
       console.log(error);
     }
   };
-
-  return (
-    <HeaderContainer>
-      <TextContainer>
-        <Hello>Hello</Hello>
-        {user ? <UserName>{user.displayName}</UserName> : <></>}
-      </TextContainer>
-      <Clover />
-      <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-      <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn>
-    </HeaderContainer>
-  );
+  if (user) {
+    return (
+      <HeaderContainer>
+        <TextContainer>
+          <Hello>Hello</Hello>
+          {user ? <UserName>{user.displayName}</UserName> : <></>}
+        </TextContainer>
+        <Clover />
+        <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+        <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn>
+      </HeaderContainer>
+    );
+  }
+  return <></>;
 };
 
 export default Header;
