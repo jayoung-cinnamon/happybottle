@@ -37,7 +37,7 @@ function UpdateModal() {
     <SlideMenu>
       <SlideWrapper>
         <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-        <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn>
+        <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
       </SlideWrapper>
     </SlideMenu>
   );
@@ -50,19 +50,37 @@ const SlideMenu = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  z-index: 999;
+  z-index: 9;
+  /* border: 1px solid blue; */
 `;
 
 const SlideWrapper = styled.div`
+  margin: 30px;
   width: 90%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border: 1px solid green;
+  background-color: white;
+  border: 5px dotted #729743;
+  border-radius: 10px;
 `;
 
 const LogoutBtn = styled.button`
-  border: 1px solid red;
-  width: 30px;
+  font-size: 15px;
+  padding: 5px;
+  margin-top: 10px;
   height: 30px;
+  width: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #307d15;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+`;
+const DeleteBtn = styled(LogoutBtn)`
+  background: #a31414;
 `;

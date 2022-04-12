@@ -20,20 +20,6 @@ function Login() {
       setPassword(value);
     }
   };
-  // const onLogin = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     const auth = getAuth();
-  //     let data;
-  //     data = await signInWithEmailAndPassword(auth, email, password);
-  //     console.log(data);
-  //     alert("로그인성공");
-  //     navigate("/hbmain");
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log(typeof error);
-  //   }
-  // };
 
   const hookLogin = async (e: any) => {
     try {
