@@ -15,6 +15,10 @@ const Header = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setOpen(false);
+  }, []);
+
   const PopupExample = () => (
     <Popup trigger={<button>Trigger</button>} position="top left">
       {(close: any) => (

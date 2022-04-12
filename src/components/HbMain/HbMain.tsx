@@ -8,7 +8,7 @@ import { modalRecoilStore } from "recoil/mainModal";
 import UpdateModal from "components/UpdateModal";
 function HbMain() {
   const open = useRecoilValue(modalRecoilStore);
-  useEffect(() => {}, [open]);
+
   return (
     <Container>
       <Header></Header>
