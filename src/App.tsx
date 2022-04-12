@@ -9,6 +9,7 @@ import Register from "./components/Register";
 import NickName from "./components/NickName";
 import styled from "styled-components";
 import HbMain from "./components/HbMain";
+import UpdateModal from "components/UpdateModal";
 function App() {
   console.log(initializeApp);
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/nickname" element={<NickName />} />
           <Route path="/hbmain" element={<HbMain />} />
+          <Route path="/updateInfo" element={<UpdateModal />} />
         </Routes>
       </BrowserRouter>
     </>

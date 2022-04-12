@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "components/Header";
 import styled from "styled-components";
 import WriteAndRead from "components/WriteAndRead";
 import BottleContainer from "components/BottleContainer";
+import { useRecoilValue } from "recoil";
+import { modalRecoilStore } from "recoil/mainModal";
+import UpdateModal from "components/UpdateModal";
 function HbMain() {
+  const open = useRecoilValue(modalRecoilStore);
+  useEffect(() => {}, [open]);
   return (
     <Container>
       <Header></Header>
-      <WriteAndRead></WriteAndRead>
-      <BottleContainer></BottleContainer>
+      {open ? (
+        <UpdateModal></UpdateModal>
+      ) : (
+        <>
+          <WriteAndRead></WriteAndRead>
+          <BottleContainer></BottleContainer>
+        </>
+      )}
     </Container>
   );
 }

@@ -4,40 +4,41 @@ import { loginStatus } from "service/auth";
 import { signOut, getAuth, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import Popup from "reactjs-popup";
+import UpdateModal from "components/UpdateModal";
+import { useRecoilState } from "recoil";
+import { modalRecoilStore } from "recoil/mainModal";
 const Header = () => {
   const auth = getAuth();
+
+  const [open, setOpen] = useRecoilState(modalRecoilStore);
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const logout = () => {
-    try {
-      signOut(auth);
-      navigate("/");
-      console.log("로그아웃");
-    } catch (error) {
-      console.log(error);
-    }
+
+  const PopupExample = () => (
+    <Popup trigger={<button>Trigger</button>} position="top left">
+      {(close: any) => (
+        <div>
+          Content here
+          <a className="close" onClick={close}>
+            &times;
+          </a>
+        </div>
+      )}
+    </Popup>
+  );
+
+  const onClickUpdateInfo = (e: React.MouseEvent<HTMLElement>) => {
+    setOpen(!open);
   };
 
-  const onClickDeleteUser = async (e: any) => {
-    e.preventDefault();
-    try {
-      let data = await deleteUser(user!);
-      console.log(user);
-      console.log(data);
-      alert("탈퇴되었습니다");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  useEffect(() => {
+    console.log(`open: ${open}`);
+  }, [open]);
   return (
     <HeaderContainer>
       <HeaderWrapper>
-        <Clover />
-        {/* <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-      <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn> */}
+        <Clover onClick={onClickUpdateInfo} />
         <TextContainer>
           <Hello>Hello</Hello>
           {user ? <UserName>{user.displayName} :)</UserName> : <></>}
