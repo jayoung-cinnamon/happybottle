@@ -10,29 +10,21 @@ function HbMain() {
   const open = useRecoilValue(modalRecoilStore);
 
   return (
-    <Container>
-      <Header></Header>
-      {/* {open ? (
-        <ModalContainer modalOpen={open}>
-          <UpdateModal></UpdateModal>
-        </ModalContainer>
-      ) : (
-        <>
-          <WriteAndRead></WriteAndRead>
-          <BottleContainer></BottleContainer>
-        </>
-      )} */}
-      {open ? (
-        <ModalContainer modalOpen={open}>
-          <UpdateModal></UpdateModal>
-        </ModalContainer>
-      ) : (
-        <></>
-      )}
+    <MainContainer>
+      <Container>
+        <Header></Header>
+        {open ? (
+          <ModalContainer modalOpen={open}>
+            <UpdateModal></UpdateModal>
+          </ModalContainer>
+        ) : (
+          <></>
+        )}
 
-      <WriteAndRead></WriteAndRead>
-      <BottleContainer></BottleContainer>
-    </Container>
+        <WriteAndRead></WriteAndRead>
+        <BottleContainer></BottleContainer>
+      </Container>
+    </MainContainer>
   );
 }
 
@@ -41,6 +33,19 @@ export default HbMain;
 interface SlideProps {
   modalOpen: boolean;
 }
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 const Container = styled.div`
   width: 100%;
