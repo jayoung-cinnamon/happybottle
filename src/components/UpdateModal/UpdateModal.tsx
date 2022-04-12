@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
 import { signOut, getAuth, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { updateUserInfo } from "service/auth";
 
 function UpdateModal() {
   const auth = getAuth();
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-
+  const [updateInfo, setUpdateInfo] = useState(false);
   const logout = () => {
     try {
       signOut(auth);
@@ -33,11 +34,56 @@ function UpdateModal() {
     }
   };
 
+  const onClickUpdateBtn = () => {
+    setUpdateInfo(!updateInfo);
+  };
+
+  useEffect(() => {
+    console.log(`updateInfo: ${updateInfo}`);
+  }, [updateInfo]);
+
+  // const updateUserNickName = (e: any) => {
+  //   try {
+  //     e.preventDefault();
+  //     let data = updateUserInfo(nickName);
+  //     console.log(data);
+  //     navigate("/hbmain");
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
+
   return (
     <SlideMenu>
       <SlideWrapper>
-        <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-        <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
+        <BUttonContainer>
+          <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+        </BUttonContainer>
+        <UpdateContainer>
+          <UpdateBtn onClick={onClickUpdateBtn}>회원정보 수정</UpdateBtn>
+          {updateInfo ? (
+            <>
+              <UpdateBox>
+                {user ? (
+                  <NameContainer>
+                    <UserName>{user.displayName}</UserName>
+                    <Input
+                      name="nickname"
+                      type="text"
+                      placeholder="변경할 닉네임을 입력하세요"
+                      required
+                    ></Input>
+                  </NameContainer>
+                ) : (
+                  <></>
+                )}
+                <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
+              </UpdateBox>
+            </>
+          ) : (
+            <></>
+          )}
+        </UpdateContainer>
       </SlideWrapper>
     </SlideMenu>
   );
@@ -51,7 +97,6 @@ const SlideMenu = styled.div`
   display: flex;
   justify-content: center;
   z-index: 9;
-  /* border: 1px solid blue; */
 `;
 
 const SlideWrapper = styled.div`
@@ -64,6 +109,23 @@ const SlideWrapper = styled.div`
   background-color: white;
   border: 5px dotted #729743;
   border-radius: 10px;
+`;
+
+const BUttonContainer = styled.div`
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const UpdateContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LogoutBtn = styled.button`
@@ -83,4 +145,35 @@ const LogoutBtn = styled.button`
 `;
 const DeleteBtn = styled(LogoutBtn)`
   background: #a31414;
+`;
+const UpdateBtn = styled(LogoutBtn)`
+  background: #729743;
+`;
+
+const UpdateBox = styled.div`
+  width: 100%;
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const UserName = styled.div`
+  font-size: 23px;
+  text-align: right;
+`;
+
+const Input = styled.input`
+  font-size: 13px;
+  padding: 5px;
+  margin-top: 10px;
+  height: 25px;
+  /* width: 200px; */
+  border: 1px solid grey;
+  border-radius: 3px;
+  ::placeholder {
+    color: #faaaaa;
+  }
 `;
