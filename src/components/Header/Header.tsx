@@ -34,13 +34,15 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <TextContainer>
-        <Hello>Hello</Hello>
-        {user ? <UserName>{user.displayName}</UserName> : <></>}
-      </TextContainer>
-      <Clover />
-      <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-      <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn>
+      <HeaderWrapper>
+        <Clover />
+        {/* <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+      <LogoutBtn onClick={onClickDeleteUser}>탈퇴</LogoutBtn> */}
+        <TextContainer>
+          <Hello>Hello</Hello>
+          {user ? <UserName>{user.displayName} :)</UserName> : <></>}
+        </TextContainer>
+      </HeaderWrapper>
     </HeaderContainer>
   );
 };
@@ -49,9 +51,15 @@ export default Header;
 
 const HeaderContainer = styled.div`
   margin-top: 10px;
-  border-bottom: 1px solid black;
   width: 100%;
-  height: 90px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+`;
+
+const HeaderWrapper = styled.div`
+  width: 90%;
+  border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,22 +68,24 @@ const HeaderContainer = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  /* width: 50%; */
   padding: 10px;
 `;
 
 const Hello = styled.div`
-  font-size: 25px;
+  font-size: 23px;
   margin-bottom: 10px;
+  text-align: right;
 `;
 
 const UserName = styled.div`
-  font-size: 25px;
+  font-size: 23px;
+  text-align: right;
 `;
 
 const Clover = styled.div`
-  width: 90px;
-  height: 80px;
+  width: 80px;
+  height: 70px;
   background-image: url("images/main/Clover.png");
   background-size: 100% 100%;
 `;
