@@ -7,6 +7,11 @@ function WriteAndRead() {
   const onClickWrite = () => {
     navigate("/write");
   };
+
+  const onClickRead = () => {
+    navigate("/read");
+  };
+
   return (
     <Container>
       <LogoWrapper>
@@ -14,7 +19,7 @@ function WriteAndRead() {
         <Text>행복한 순간을 기록하세요</Text>
       </LogoWrapper>
       <LogoWrapper>
-        <ReadLogo />
+        <ReadLogo onClick={onClickRead} />
         <Text>꺼내보기</Text>
       </LogoWrapper>
     </Container>

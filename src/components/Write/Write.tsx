@@ -1,11 +1,14 @@
 import React from "react";
 import Header from "components/Header";
 import styled from "styled-components";
+import { format } from "date-fns";
 
 function Write() {
-  // const getDate = () => {
-  //   const curDate = new Date();
-  // };
+  const getDate = () => {
+    const date = new Date();
+    const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
+    return formattedDate;
+  };
 
   return (
     <MainContainer>
@@ -14,7 +17,7 @@ function Write() {
         <PaperWrapper>
           <Paper>
             <TItle type="text" placeholder="제목을 입력해주세요"></TItle>
-            <Date>2022년 04월 12일 오후 9시 22분</Date>
+            <DateContainer>{getDate()}</DateContainer>
             <Content placeholder="오늘 행복했던 순간을 적어주세요 :)"></Content>
           </Paper>
         </PaperWrapper>
@@ -80,7 +83,7 @@ const TItle = styled.input`
   background-color: #ededed;
 `;
 
-const Date = styled.div`
+const DateContainer = styled.div`
   margin: 13px;
   width: 90%;
   font-size: 12px;
