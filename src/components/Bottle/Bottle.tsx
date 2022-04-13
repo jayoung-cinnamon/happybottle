@@ -6,7 +6,7 @@ function Bottle() {
     <MainContainer>
       <Container>
         <Header></Header>
-        Bottle
+        <BottleContainer></BottleContainer>
       </Container>
     </MainContainer>
   );
@@ -30,9 +30,20 @@ const MainContainer = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const BottleContainer = styled.div`
+  margin-top: 30px;
+  width: 90%;
+  min-height: 80vh;
+  background-image: url("images/main/BigBottle.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #729743;
+  border-radius: 10px;
 `;
