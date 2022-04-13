@@ -13,6 +13,7 @@ import UpdateModal from "components/UpdateModal";
 import Write from "components/Write";
 import ArchiveRead from "components/ArchiveRead";
 import Bottle from "components/Bottle";
+import Read from "components/Read/Read";
 function App() {
   console.log(initializeApp);
   return (
@@ -27,8 +28,9 @@ function App() {
           <Route path="/hbmain" element={<HbMain />} />
           <Route path="/updateInfo" element={<UpdateModal />} />
           <Route path="/write" element={<Write />} />
-          <Route path="/read" element={<ArchiveRead />} />
+          <Route path="/archive" element={<ArchiveRead />} />
           <Route path="/bottle" element={<Bottle />} />
+          <Route path="/read" element={<Read />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -9,7 +9,7 @@ function WriteAndRead() {
   };
 
   const onClickRead = () => {
-    navigate("/read");
+    navigate("/archive");
   };
 
   return (

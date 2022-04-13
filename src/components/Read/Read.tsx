@@ -1,24 +1,16 @@
 import React from "react";
-import Header from "components/Header";
 import styled from "styled-components";
-import { format } from "date-fns";
-
-function Write() {
-  const getDate = () => {
-    const date = new Date();
-    const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
-    return formattedDate;
-  };
-
+import Header from "components/Header";
+function Read() {
   return (
     <MainContainer>
       <Container>
         <Header></Header>
         <PaperWrapper>
           <Paper>
-            <Title type="text" placeholder="제목을 입력해주세요"></Title>
-            <DateContainer>{getDate()}</DateContainer>
-            <Content placeholder="오늘 행복했던 순간을 적어주세요 :)"></Content>
+            <Title>꺼내읽기 제목 </Title>
+            <DateContainer>날짜</DateContainer>
+            <Content>꺼내읽기 내용 </Content>
           </Paper>
         </PaperWrapper>
       </Container>
@@ -26,7 +18,7 @@ function Write() {
   );
 }
 
-export default Write;
+export default Read;
 
 const MainContainer = styled.div`
   margin: 0 auto;
@@ -72,7 +64,7 @@ const Paper = styled.div`
   align-items: center;
 `;
 
-const Title = styled.input`
+const Title = styled.div`
   margin-top: 30px;
   padding-bottom: 10px;
   width: 90%;
@@ -92,7 +84,7 @@ const DateContainer = styled.div`
   font-weight: 400;
 `;
 
-const Content = styled.textarea`
+const Content = styled.div`
   margin-top: 10px;
   background-color: #ededed;
   min-height: 100vh;
