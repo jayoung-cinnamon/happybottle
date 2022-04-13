@@ -13,13 +13,13 @@ function HbMain() {
     <MainContainer>
       <Container>
         <Header></Header>
-        {open ? (
+        {/* {open ? (
           <ModalContainer modalOpen={open}>
             <UpdateModal></UpdateModal>
           </ModalContainer>
         ) : (
           <></>
-        )}
+        )} */}
 
         <WriteAndRead></WriteAndRead>
         <BottleContainer></BottleContainer>
