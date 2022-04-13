@@ -102,14 +102,16 @@ const LogoutBtn = styled.button`
 const ModalContainer = styled.div<SlideProps>`
   width: 100%;
   /* border: 1px solid blue; */
-  position: absolute;
-
   height: 50%;
   /* transition: transform 1s linear;
   transform: translateX(-100%);
   position: fixed; */
   /* left: 0; */
   z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* ${(props) =>
     props.modalOpen &&
     css`
