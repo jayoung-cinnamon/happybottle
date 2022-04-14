@@ -34,6 +34,10 @@ function UpdateModal() {
     }
   };
 
+  const onClickHomeBtn = () => {
+    navigate("/hbmain");
+  };
+
   const onClickUpdateBtn = () => {
     setUpdateInfo(!updateInfo);
   };
@@ -57,6 +61,7 @@ function UpdateModal() {
     <SlideMenu>
       <SlideWrapper>
         <BUttonContainer>
+          <HomeBtn onClick={onClickHomeBtn}>홈</HomeBtn>
           <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
         </BUttonContainer>
         <UpdateContainer>
@@ -115,6 +120,7 @@ const BUttonContainer = styled.div`
   width: 100%;
   height: 30%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -150,7 +156,12 @@ const UpdateBtn = styled(LogoutBtn)`
   background: #729743;
 `;
 
+const HomeBtn = styled(LogoutBtn)`
+  background-color: #485edf;
+`;
+
 const UpdateBox = styled.div`
+  border: 1px solid blue;
   width: 100%;
 `;
 

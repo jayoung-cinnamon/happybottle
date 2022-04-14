@@ -7,20 +7,10 @@ import { useRecoilValue } from "recoil";
 import { modalRecoilStore } from "recoil/mainModal";
 import UpdateModal from "components/UpdateModal";
 function HbMain() {
-  const open = useRecoilValue(modalRecoilStore);
-
   return (
     <MainContainer>
       <Container>
         <Header></Header>
-        {/* {open ? (
-          <ModalContainer modalOpen={open}>
-            <UpdateModal></UpdateModal>
-          </ModalContainer>
-        ) : (
-          <></>
-        )} */}
-
         <WriteAndRead></WriteAndRead>
         <BottleContainer></BottleContainer>
       </Container>
