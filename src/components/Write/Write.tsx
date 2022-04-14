@@ -2,12 +2,23 @@ import React from "react";
 import Header from "components/Header";
 import styled from "styled-components";
 import { format } from "date-fns";
-
+import { useNavigate } from "react-router-dom";
 function Write() {
+  const navigate = useNavigate();
   const getDate = () => {
     const date = new Date();
     const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
     return formattedDate;
+  };
+
+  const onClickSave = () => {
+    if (
+      window.confirm(`저장 후엔 수정할 수 없어요🥲
+계속 저장할까요?`)
+    ) {
+      alert("저장되었어요! 한 달 뒤에 만나요!😙");
+    } else {
+    }
   };
 
   return (
@@ -20,6 +31,9 @@ function Write() {
             <DateContainer>{getDate()}</DateContainer>
             <Content placeholder="오늘 행복했던 순간을 적어주세요 :)"></Content>
           </Paper>
+          <BtnWrapper>
+            <SubmitBtn onClick={onClickSave}>병에 담기</SubmitBtn>
+          </BtnWrapper>
         </PaperWrapper>
       </Container>
     </MainContainer>
@@ -54,6 +68,7 @@ const Container = styled.div`
 const PaperWrapper = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -63,8 +78,6 @@ const PaperWrapper = styled.div`
 const Paper = styled.div`
   width: 90%;
   background-color: #ededed;
-
-  min-height: 100vh;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -101,4 +114,26 @@ const Content = styled.textarea`
   resize: none;
   border: none;
   width: 90%;
+`;
+
+const BtnWrapper = styled.div`
+  width: 90%;
+  margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const SubmitBtn = styled.button`
+  width: 100px;
+  height: 45px;
+  background-color: #a5aac7;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
 `;
