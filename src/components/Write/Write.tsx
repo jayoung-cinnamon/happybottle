@@ -3,7 +3,9 @@ import Header from "components/Header";
 import styled from "styled-components";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { initializeApp } from "service/firebase";
 function Write() {
+  const dbService = initializeApp.firestore();
   const navigate = useNavigate();
   const getDate = () => {
     const date = new Date();
@@ -11,11 +13,22 @@ function Write() {
     return formattedDate;
   };
 
-  const onClickSave = () => {
+  const obSubmit = async (e: any) => {
+    e.preventDefault();
+    await dbService.collection("happymemo").add({
+      content: "Test Content",
+      date: getDate(),
+      title: "TEst-Title",
+    });
+  };
+
+  const onClickSave = (e: any) => {
     if (
       window.confirm(`저장 후엔 수정할 수 없어요🥲
 계속 저장할까요?`)
     ) {
+      obSubmit(e);
+      console.log(e);
       alert("저장되었어요! 한 달 뒤에 만나요!😙");
     } else {
     }
