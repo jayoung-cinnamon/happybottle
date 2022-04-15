@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "components/Header";
 import styled from "styled-components";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "service/firebase";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { randomUid } from "utils/common";
 function Write() {
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
@@ -15,26 +16,48 @@ function Write() {
     const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
     return formattedDate;
   };
-
-  const writeUserData = (
-    userUid: string,
-    writtenDate: string,
-    memoColor: string,
-    title: string,
-    contents: string,
-    picture: string
-  ) => {
-    const db = getDatabase();
-    set(ref(db, "userUid/" + userUid), {
-      userUid: auth.currentUser?.uid,
-      contents: "today is a good day!",
-      memoColor: "blue",
-      picture: "picture.jpg",
-      title: "hi",
-      writtenDate: getDate(),
-    });
-    console.log(`writeUserData!`);
+  const getDate1 = () => {
+    const date = new Date();
+    const formattedDate = format(date, "yyyyMMddHHmmss");
+    return formattedDate;
   };
+  const [random, setRandom] = useState(randomUid(28));
+  const target = "DJ0M8Nvg77MIVfNr92btW7PYKI83";
+  useEffect(() => {
+    const db = getDatabase();
+    const userUid = auth.currentUser?.uid;
+    const memoRef = ref(db, `${userUid}/${target}`);
+    onValue(memoRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("data: ", data);
+      // TODO: 데이터 읽어오는 부분 수정 필요
+      console.log(Object.values(data));
+    });
+  }, []);
+
+  const writeUserData = () =>
+    // userUid: string,
+    // writtenDate: string,
+    // memoColor: string,
+    // title: string,
+    // contents: string,
+    // picture: string
+    {
+      const db = getDatabase();
+      const userUid = auth.currentUser?.uid;
+      set(ref(db, `${userUid}/${target}/${getDate1()}`), {
+        bottleName: "보틀 이름",
+        bottleShape: "normal-jar",
+        memo: {
+          memoColor: "blue",
+          title: "hi",
+          contents: "today is a good day!",
+          picture: "picture.jpg",
+          writtenDate: getDate(),
+        },
+      });
+      console.log(`writeUserData!`);
+    };
 
   //   const obSubmit = (e: any) => {
   //     e.preventDefault();
