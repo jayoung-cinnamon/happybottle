@@ -5,8 +5,10 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set } from "firebase/database";
+import { getAuth } from "firebase/auth";
 function Write() {
-  // const dbService = initializeApp.firestore();
+  const auth = getAuth();
+  console.log(auth.currentUser?.uid);
   const navigate = useNavigate();
   const getDate = () => {
     const date = new Date();
@@ -14,50 +16,43 @@ function Write() {
     return formattedDate;
   };
 
-  // function writeUserData(
-  //   userId: string,
-  //   name: string,
-  //   email: string,
-  //   imageUrl: string
-  // ) {
-  //   const db = getDatabase();
-  //   set(ref(db, "userUid/" + userId), {
-  //     writtenDate: getDate(),
-  //     email: "73381216@naver.com",
-  //     profile_picture: "hi.jpg",
-  //   });
-  // }
   const writeUserData = (
     userUid: string,
     writtenDate: string,
-    email: string,
+    memoColor: string,
+    title: string,
+    contents: string,
     picture: string
   ) => {
     const db = getDatabase();
     set(ref(db, "userUid/" + userUid), {
+      userUid: auth.currentUser?.uid,
+      contents: "today is a good day!",
+      memoColor: "blue",
+      picture: "picture.jpg",
+      title: "hi",
       writtenDate: getDate(),
-      email: "73381216@naver.com",
-      picture: "hi.jpg",
     });
-    console.log(`db`);
-  };
-  const obSubmit = async (e: any) => {
-    e.preventDefault();
-    return writeUserData;
+    console.log(`writeUserData!`);
   };
 
-  const onClickSave = (e: any) => {
-    if (
-      window.confirm(`저장 후엔 수정할 수 없어요🥲
-계속 저장할까요?`)
-    ) {
-      obSubmit(e);
-      console.log(e);
-      alert("저장되었어요! 한 달 뒤에 만나요!😙");
-    } else {
-      console.log("취소");
-    }
-  };
+  //   const obSubmit = (e: any) => {
+  //     e.preventDefault();
+  //     console.log("onSubmit!");
+  //     return writeUserData;
+  //   };
+
+  //   const onClickSave = (e: any) => {
+  //     if (
+  //       window.confirm(`저장 후엔 수정할 수 없어요🥲
+  // 계속 저장할까요?`)
+  //     ) {
+  //       obSubmit(e);
+  //       alert("저장되었어요! 한 달 뒤에 만나요!😙");
+  //     } else {
+  //       console.log("취소");
+  //     }
+  //   };
 
   return (
     <MainContainer>
@@ -70,7 +65,7 @@ function Write() {
             <Content placeholder="오늘 행복했던 순간을 적어주세요 :)"></Content>
           </Paper>
           <BtnWrapper>
-            <SubmitBtn onClick={onClickSave}>병에 담기</SubmitBtn>
+            <SubmitBtn onClick={writeUserData}>병에 담기</SubmitBtn>
           </BtnWrapper>
         </PaperWrapper>
       </Container>
