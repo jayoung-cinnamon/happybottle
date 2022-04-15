@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "service/firebase";
+import { getDatabase, ref, set } from "firebase/database";
 function Write() {
-  const dbService = initializeApp.firestore();
+  // const dbService = initializeApp.firestore();
   const navigate = useNavigate();
   const getDate = () => {
     const date = new Date();
@@ -13,13 +14,36 @@ function Write() {
     return formattedDate;
   };
 
+  // function writeUserData(
+  //   userId: string,
+  //   name: string,
+  //   email: string,
+  //   imageUrl: string
+  // ) {
+  //   const db = getDatabase();
+  //   set(ref(db, "userUid/" + userId), {
+  //     writtenDate: getDate(),
+  //     email: "73381216@naver.com",
+  //     profile_picture: "hi.jpg",
+  //   });
+  // }
+  const writeUserData = (
+    userUid: string,
+    writtenDate: string,
+    email: string,
+    picture: string
+  ) => {
+    const db = getDatabase();
+    set(ref(db, "userUid/" + userUid), {
+      writtenDate: getDate(),
+      email: "73381216@naver.com",
+      picture: "hi.jpg",
+    });
+    console.log(`db`);
+  };
   const obSubmit = async (e: any) => {
     e.preventDefault();
-    await dbService.collection("happymemo").add({
-      content: "Test Content",
-      date: getDate(),
-      title: "TEst-Title",
-    });
+    return writeUserData;
   };
 
   const onClickSave = (e: any) => {
@@ -31,6 +55,7 @@ function Write() {
       console.log(e);
       alert("저장되었어요! 한 달 뒤에 만나요!😙");
     } else {
+      console.log("취소");
     }
   };
 
