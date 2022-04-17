@@ -14,6 +14,7 @@ import Write from "components/Write";
 import ArchiveRead from "components/ArchiveRead";
 import Bottle from "components/Bottle";
 import Read from "components/Read/Read";
+import CreateBottle from "components/CreateBottle";
 function App() {
   console.log(initializeApp);
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/archive" element={<ArchiveRead />} />
           <Route path="/bottle" element={<Bottle />} />
           <Route path="/read" element={<Read />} />
+          <Route path="/createbottle" element={<CreateBottle />} />
         </Routes>
       </BrowserRouter>
     </>
