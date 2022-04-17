@@ -10,7 +10,7 @@ function Main() {
 
   useTimeout(() => {
     SetSplashScreen(false);
-  }, 5000);
+  }, 1000);
 
   return (
     <MainContainer>
@@ -22,9 +22,9 @@ function Main() {
           </SplashLogoContainer>
         </>
       )}
-      {/* {!splashScreen && <Login></Login>} */}
+      {!splashScreen && <Login></Login>}
       {/* {!splashScreen && <NickName></NickName>} */}
-      {!splashScreen && <Register></Register>}
+      {/* {!splashScreen && <Register></Register>} */}
       {/* {!splashScreen && <HbMain></HbMain>} */}
     </MainContainer>
   );

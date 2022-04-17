@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 function BottleContainer() {
+  const navigate = useNavigate();
+  const onCLickBottle = () => {
+    navigate("/bottle");
+  };
   return (
     <Container>
       <BottleWrapper>
-        <Bottle1 />
+        <Bottle1 onClick={onCLickBottle} />
         <Bottle1 />
       </BottleWrapper>
       <BottleWrapper>

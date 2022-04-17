@@ -7,15 +7,18 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-family: 'Noto Sans KR', sans-serif;
         /* 배경 테스트용도 */
-        background-color: violet;
+        /* background-color: violet; */
+        background-color: #F3FFEC;
         box-sizing: border-box;
     };
+
     button{
         display: flex;
         cursor: pointer;
         outline: none;
         border-radius: 3px;
     };
+
     input{
         display: flex;
         outline: none;

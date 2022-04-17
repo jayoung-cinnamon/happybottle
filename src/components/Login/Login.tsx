@@ -1,39 +1,90 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { setAuthErrorCode } from "service/auth";
 function Login() {
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+
+  const hookLogin = async (e: any) => {
+    try {
+      let data;
+      e.preventDefault();
+      data = await signInWithEmailAndPassword(auth, email, password);
+      navigate("/hbmain");
+      console.log("로그인성공");
+    } catch (error: any) {
+      console.log(error.code);
+      alert(setAuthErrorCode(error.code));
+    }
+  };
+
   return (
-    <LoginContainer>
-      <Logo />
-      <Title>HAPPY BOTTLE</Title>
-      <InputContainer>
-        <Input
-          name="email"
-          type="email"
-          value={email}
-          placeholder="email"
-          required
-        ></Input>
-        <Input
-          name="password"
-          type="password"
-          value={password}
-          placeholder="password"
-          required
-        ></Input>
-        <LoginInput type="submit" value="Login"></LoginInput>
-      </InputContainer>
-      <RegisterContainer>
-        <RegisterText>회원이 아니신가요?</RegisterText>
-        <RegisterBtn>회원가입</RegisterBtn>
-      </RegisterContainer>
-      <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
-    </LoginContainer>
+    <MainContainer>
+      <LoginContainer>
+        <Logo />
+        <Title>HAPPY BOTTLE</Title>
+        <InputContainer>
+          <Input
+            onChange={onChange}
+            name="email"
+            type="email"
+            value={email}
+            placeholder="email"
+            required
+          ></Input>
+          <Input
+            onChange={onChange}
+            name="password"
+            type="password"
+            value={password}
+            placeholder="password"
+            required
+          ></Input>
+          <LoginInput onClick={hookLogin}>로그인</LoginInput>
+        </InputContainer>
+        <RegisterContainer>
+          <RegisterText>회원이 아니신가요?</RegisterText>
+          <StyledLink to="/register">
+            <RegisterBtn>회원가입</RegisterBtn>
+          </StyledLink>
+        </RegisterContainer>
+        <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
+      </LoginContainer>
+    </MainContainer>
   );
 }
 
 export default Login;
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
+
 // TODO: 컨테이너 위치 조정 필요 - 세로 중앙 정렬
 const LoginContainer = styled.div`
   margin: 0 auto;
@@ -86,7 +137,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginInput = styled.input`
+const LoginInput = styled.button`
   font-size: 15px;
   padding: 5px;
   margin-top: 10px;
@@ -142,4 +193,8 @@ const GoogleLoginBtn = styled.button`
   border-radius: 3px;
   color: white;
   cursor: pointer;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

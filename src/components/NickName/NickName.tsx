@@ -1,25 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { updateUserInfo } from "service/auth";
+import { useNavigate } from "react-router-dom";
+
 function NickName() {
+  const navigate = useNavigate();
+  const [nickName, setNickName] = useState("");
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "nickname") {
+      setNickName(value);
+    }
+  };
+  useEffect(() => {
+    console.log("nickname:", nickName);
+  }, [nickName]);
+
+  const updateUserNickName = (e: any) => {
+    try {
+      e.preventDefault();
+      let data = updateUserInfo(nickName);
+      console.log(data);
+      navigate("/hbmain");
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
-    <NickNameContainer>
-      <Logo />
-      <Title>Welcome!</Title>
-      <ExplainText>닉네임을 입력해주세요</ExplainText>
-      <InputContainer>
-        <Input
-          name="nickname"
-          type="text"
-          placeholder="nickname"
-          required
-        ></Input>
-        <LoginInput type="submit" value="회원가입완료"></LoginInput>
-      </InputContainer>
-    </NickNameContainer>
+    <MainContainer>
+      <NickNameContainer>
+        <Logo />
+        <Title>Welcome!</Title>
+        <ExplainText>닉네임을 입력해주세요</ExplainText>
+        <InputContainer>
+          <Input
+            onChange={onChange}
+            name="nickname"
+            type="text"
+            placeholder="nickname"
+            value={nickName}
+            required
+          ></Input>
+          <LoginInput
+            type="button"
+            value="회원가입완료"
+            onClick={updateUserNickName}
+          ></LoginInput>
+        </InputContainer>
+      </NickNameContainer>
+    </MainContainer>
   );
 }
 
 export default NickName;
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 const NickNameContainer = styled.div`
   margin: 0 auto;
