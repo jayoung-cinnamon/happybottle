@@ -1,14 +1,37 @@
 import React from "react";
 import Header from "components/Header";
 import styled from "styled-components";
+import { Mobile, PC } from "styles/Mediaquery";
+import { useNavigate } from "react-router-dom";
+import BottleTitlePopup from "components/BottleTitlePopup";
 
 function CreateBottle() {
+  const navigate = useNavigate();
+  const onClickTitle = () => {
+    console.log("createBottle");
+    return (
+      <>
+        <BottleTitlePopup />
+      </>
+    );
+  };
   return (
     <MainContainer>
       <Container>
         <Header></Header>
         <BottleContainer>
-          <TaggedBottle />
+          <TaggedBottle>
+            <Mobile>
+              <MobileTitleInput>
+                <BottleTitlePopup />
+              </MobileTitleInput>
+            </Mobile>
+            <PC>
+              <PCTitleInput>
+                <BottleTitlePopup />
+              </PCTitleInput>
+            </PC>
+          </TaggedBottle>
         </BottleContainer>
       </Container>
     </MainContainer>
@@ -46,20 +69,37 @@ const BottleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
-const TaggedBottle = styled.img`
+const TaggedBottle = styled.div`
   min-height: 80vh;
   min-width: 100%;
   background-image: url("images/main/TaggedBottle.png");
   background-position: 65% 50%;
   background-repeat: no-repeat;
-  background-color: #ffa7da;
+  background-color: #b7a7ff;
   background-size: 300px;
   border-radius: 10px;
-  position: relative;
-  /* background-position: 170%; */
-  /* z-index: 999; */
-  border: 1px solid blue;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MobileTitleInput = styled.div`
+  font-size: 20px;
+  height: 50px;
+  color: white;
+  background-color: transparent;
+  transform: rotate(-24deg);
+  line-height: 1.5;
+  width: 70px;
+  text-align: center;
+  margin-left: 170px;
+  margin-bottom: 30px;
+`;
+
+const PCTitleInput = styled(MobileTitleInput)`
+  margin-left: 240px;
 `;
