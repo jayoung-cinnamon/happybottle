@@ -1,8 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
+import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { randomUid } from "utils/common";
+import { getDateStringType } from "utils/date";
 
 function BottleTitlePopup() {
+  const auth = getAuth();
+  const [bottleUid, setBottleUid] = useState(randomUid(28));
+  const [bottleName, setBottleName] = useState("");
+  const [bottleShape, setBottleShape] = useState("");
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const {
+      target: { value },
+    } = e;
+
+    setBottleName(value);
+  };
+  const onChangeShape = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const {
+      target: { value },
+    } = e;
+    setBottleShape(value);
+  };
+
+  const createSubject = async (e: any) => {
+    try {
+      console.log("주제작성");
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(bottleName);
+    console.log(bottleShape);
+  }, [bottleName, bottleShape]);
+
+  const createBottleName = () => {
+    const db = getDatabase();
+    const userUid = auth.currentUser?.uid;
+    const target = bottleUid;
+    set(ref(db, `${userUid}/${target}/${getDateStringType()}`), {
+      bottleName: bottleName,
+      bottleShape: bottleShape,
+    });
+    console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
+  };
+
   return (
     <Popup trigger={<CreateBottleBtn>Click Me!</CreateBottleBtn>} modal nested>
       {(close: any) => (
@@ -13,17 +61,41 @@ function BottleTitlePopup() {
           </TitleBox>
           <ModalPage>
             <TagInputBox>
-              <TagInput placeholder="주제를 입력해주세요" />
+              <TagInput
+                onChange={onChangeName}
+                name="bottleName"
+                value={bottleName}
+                type="text"
+                placeholder="주제를 입력해주세요"
+                required
+              />
+              <Item>
+                <RadioButton
+                  type="radio"
+                  name="radio"
+                  value="white"
+                  checked={bottleShape === "white"}
+                  onChange={onChangeShape}
+                />
+                <RadioButtonLabel />
+                <div>흰색 병</div>
+              </Item>
+              <Item>
+                <RadioButton
+                  type="radio"
+                  name="radio"
+                  value="blue"
+                  checked={bottleShape === "blue"}
+                  onChange={onChangeShape}
+                />
+                <RadioButtonLabel />
+                <div>파란 병</div>
+              </Item>
+              <SubjectSubmitBtn onClick={createBottleName}>
+                보틀만들기
+              </SubjectSubmitBtn>
             </TagInputBox>
           </ModalPage>
-
-          {/* <Popup
-              trigger={<button className="button"> Trigger </button>}
-              position="top center"
-              nested
-            >
-              <span>보틀 생성</span>
-            </Popup> */}
         </ModalPopupContainer>
       )}
     </Popup>
@@ -33,17 +105,14 @@ function BottleTitlePopup() {
 export default BottleTitlePopup;
 
 const ModalPopupContainer = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-  /* position: absolute; */
 `;
 
 const ModalPage = styled.div`
-  /* border: 1px solid blue; */
   height: 100%;
   min-width: 320px;
   min-height: 300px;
@@ -82,14 +151,15 @@ const TagInputBox = styled.div`
   width: 280px;
   height: 260px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const TagInput = styled.input`
   color: white;
-  width: 250px;
-  font-size: 30px;
+  width: 200px;
+  font-size: 25px;
   border: none;
   text-align: center;
   line-height: 2;
@@ -97,5 +167,57 @@ const TagInput = styled.input`
   border-bottom: 1px solid white;
   ::placeholder {
     color: #ffffff2d;
+  }
+  margin-bottom: 10px;
+`;
+
+const SubjectSubmitBtn = styled.button`
+  font-size: 15px;
+  padding: 5px;
+  margin-top: 30px;
+  margin-left: 100px;
+  height: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(116, 187, 187);
+  border: none;
+  border-radius: 3px;
+  color: black;
+  cursor: pointer;
+`;
+
+const Item = styled.div`
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  position: relative;
+  border-radius: 2px;
+  color: white;
+  font-weight: 500;
+`;
+
+const RadioButtonLabel = styled.label`
+  position: absolute;
+  top: 25%;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #ccc;
+`;
+const RadioButton = styled.input`
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+
+  width: 100px;
+  height: 25px;
+  margin-right: 10px;
+  &:hover ~ ${RadioButtonLabel} {
+    background: #ff8686;
   }
 `;
