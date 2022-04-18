@@ -78,7 +78,7 @@ const TaggedBottle = styled.div`
   background-image: url("images/main/TaggedBottle.png");
   background-position: 65% 50%;
   background-repeat: no-repeat;
-  background-color: #b7a7ff;
+  background-color: #5d97bd;
   background-size: 300px;
   border-radius: 10px;
   font-weight: 600;

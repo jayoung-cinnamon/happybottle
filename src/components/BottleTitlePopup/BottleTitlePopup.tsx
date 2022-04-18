@@ -27,14 +27,6 @@ function BottleTitlePopup() {
     setBottleShape(value);
   };
 
-  const createSubject = async (e: any) => {
-    try {
-      console.log("주제작성");
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     console.log(bottleName);
     console.log(bottleShape);
@@ -124,6 +116,7 @@ const ModalPage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 5px dotted white;
 `;
 
 const CreateBottleBtn = styled.div``;
@@ -213,11 +206,17 @@ const RadioButton = styled.input`
   opacity: 0;
   z-index: 1;
   cursor: pointer;
-
   width: 100px;
   height: 25px;
   margin-right: 10px;
+
   &:hover ~ ${RadioButtonLabel} {
     background: #ff8686;
   }
+
+  ${(props) =>
+    props.checked &&
+    ` 
+    background-color:red;
+  `}
 `;
