@@ -5,27 +5,46 @@ import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType } from "utils/date";
+import { useNavigate } from "react-router-dom";
 
 function BottleTitlePopup() {
   const auth = getAuth();
+  const navigate = useNavigate();
   const [bottleUid, setBottleUid] = useState(randomUid(28));
   const [bottleName, setBottleName] = useState("");
   const [bottleShape, setBottleShape] = useState("");
+
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const {
       target: { value },
     } = e;
-
+    console.log(`bottleName:${bottleName}`);
+    console.log(`bottleShape:${bottleShape}`);
     setBottleName(value);
   };
+
   const onChangeShape = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const {
       target: { value },
     } = e;
+
     setBottleShape(value);
   };
+
+  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   const {
+  //     target: { name, value },
+  //   } = e;
+
+  //   if (name === "bottleName") {
+  //     setBottleName(value);
+  //   } else if (name === "radio") {
+  //     setBottleShape(value);
+  //   }
+  // };
 
   useEffect(() => {
     console.log(bottleName);
@@ -33,14 +52,19 @@ function BottleTitlePopup() {
   }, [bottleName, bottleShape]);
 
   const createBottleName = () => {
-    const db = getDatabase();
-    const userUid = auth.currentUser?.uid;
-    const target = bottleUid;
-    set(ref(db, `${userUid}/${target}/${getDateStringType()}`), {
-      bottleName: bottleName,
-      bottleShape: bottleShape,
-    });
-    console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
+    try {
+      const db = getDatabase();
+      const userUid = auth.currentUser?.uid;
+      const target = bottleUid;
+      set(ref(db, `${userUid}/${target}/${getDateStringType()}`), {
+        bottleName: bottleName,
+        bottleShape: bottleShape,
+      });
+      console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
+      navigate("/hbmain");
+    } catch (error) {
+      console.log(`error: ${error}`);
+    }
   };
 
   return (
@@ -64,7 +88,7 @@ function BottleTitlePopup() {
               <Item>
                 <RadioButton
                   type="radio"
-                  name="radio"
+                  name="radio2"
                   value="white"
                   checked={bottleShape === "white"}
                   onChange={onChangeShape}
@@ -75,7 +99,7 @@ function BottleTitlePopup() {
               <Item>
                 <RadioButton
                   type="radio"
-                  name="radio"
+                  name="radio2"
                   value="blue"
                   checked={bottleShape === "blue"}
                   onChange={onChangeShape}
@@ -202,6 +226,7 @@ const RadioButtonLabel = styled.label`
   background: white;
   border: 1px solid #ccc;
 `;
+
 const RadioButton = styled.input`
   opacity: 0;
   z-index: 1;
@@ -209,14 +234,7 @@ const RadioButton = styled.input`
   width: 100px;
   height: 25px;
   margin-right: 10px;
-
-  &:hover ~ ${RadioButtonLabel} {
+  &:hover + ${RadioButtonLabel} {
     background: #ff8686;
   }
-
-  ${(props) =>
-    props.checked &&
-    ` 
-    background-color:red;
-  `}
 `;
