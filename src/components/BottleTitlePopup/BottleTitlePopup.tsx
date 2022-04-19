@@ -125,7 +125,9 @@ const ModalPage = styled.div`
   border: 5px dotted white;
 `;
 
-const CreateBottleBtn = styled.div``;
+const CreateBottleBtn = styled.div`
+  cursor: pointer;
+`;
 
 const TitleBox = styled.div`
   width: 90%;
@@ -144,6 +146,7 @@ const CancelBtn = styled.div`
   width: 30px;
   height: 30px;
   background-image: url("images/main/XLogo.png");
+  cursor: pointer;
 `;
 
 const TagInputBox = styled.div`

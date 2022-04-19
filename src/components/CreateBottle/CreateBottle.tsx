@@ -81,7 +81,7 @@ const TaggedBottle = styled.div`
   min-height: 80vh;
   min-width: 312px;
   background-position: center center;
-  left: 30px;
+  left: 10px;
 `;
 
 const MobileTitleInput = styled.div`
