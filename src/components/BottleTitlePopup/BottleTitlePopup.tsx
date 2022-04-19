@@ -67,13 +67,15 @@ function BottleTitlePopup() {
     }
   };
 
-  //데이터 받아오기
-  // const getBottleData = () => {
-  //   onSnapshot(collection(db, auth.currentUser!.uid), (snapshot) => {
-  //     const bottleArray = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
+  // //데이터 받아오기
+  // const getBottleData = async (onUpdate: any) => {
+  //   const dbBottle = await getDocs(collection(db, auth.currentUser!.uid));
+  //   dbBottle.forEach((doc) => {
+  //     const bottleObj = {
   //       ...doc.data(),
-  //     }));
+  //       id: doc.id,
+  //     };
+  //     onUpdate((prev) => [...prev, bottleObj]);
   //   });
   // };
 
