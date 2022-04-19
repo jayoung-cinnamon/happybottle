@@ -43,14 +43,22 @@ function BottleTitlePopup() {
         bottleShape: bottleShape,
       });
       console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
-      navigate("/hbmain");
+      navigate("/createbottle");
     } catch (error) {
       console.log(`error: ${error}`);
     }
   };
 
   return (
-    <Popup trigger={<CreateBottleBtn>Click Me!</CreateBottleBtn>} modal nested>
+    <Popup
+      trigger={
+        <CreateBottleBtn>
+          {bottleName ? bottleName : "Click Me!"}
+        </CreateBottleBtn>
+      }
+      modal
+      nested
+    >
       {(close: any) => (
         <ModalPopupContainer>
           <TitleBox>
@@ -63,6 +71,7 @@ function BottleTitlePopup() {
                 onChange={onChangeName}
                 name="bottleName"
                 value={bottleName}
+                maxLength={15}
                 type="text"
                 placeholder="주제를 입력해주세요"
                 required
@@ -127,6 +136,9 @@ const ModalPage = styled.div`
 
 const CreateBottleBtn = styled.div`
   cursor: pointer;
+  width: 72px;
+  height: 120px;
+  word-break: break-word;
 `;
 
 const TitleBox = styled.div`

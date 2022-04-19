@@ -94,8 +94,8 @@ const MobileTitleInput = styled.div`
   line-height: 1.5;
   width: 70px;
   text-align: center;
-  left: 210px;
-  top: 240px;
+  left: 185px;
+  top: 185px;
 `;
 
 const PCTitleInput = styled(MobileTitleInput)`
