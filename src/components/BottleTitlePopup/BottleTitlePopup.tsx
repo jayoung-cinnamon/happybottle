@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType } from "utils/date";
@@ -15,7 +15,6 @@ function BottleTitlePopup() {
   const [bottleShape, setBottleShape] = useState("");
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // e.preventDefault();
     const {
       target: { value },
     } = e;
@@ -23,25 +22,11 @@ function BottleTitlePopup() {
   };
 
   const onChangeShape = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // e.preventDefault();
     const {
       target: { value },
     } = e;
     setBottleShape(value);
   };
-
-  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  //   const {
-  //     target: { name, value },
-  //   } = e;
-
-  //   if (name === "bottleName") {
-  //     setBottleName(value);
-  //   } else if (name === "radio") {
-  //     setBottleShape(value);
-  //   }
-  // };
 
   useEffect(() => {
     console.log(bottleName);

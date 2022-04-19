@@ -48,15 +48,12 @@ const MainContainer = styled.div`
   height: 100%;
   background-color: white;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  /* align-items: center; */
   padding: 10px;
 `;
 
 const Container = styled.div`
   width: 100%;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +66,6 @@ const BottleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid red; */
 `;
 
 const TaggedBottle = styled.div`
@@ -85,7 +81,6 @@ const TaggedBottle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
   position: relative;
 `;
 
