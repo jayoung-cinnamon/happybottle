@@ -21,16 +21,16 @@ function CreateBottle() {
         <Header></Header>
         <BottleContainer>
           <TaggedBottle>
-            <Mobile>
-              <MobileTitleInput>
-                <BottleTitlePopup />
-              </MobileTitleInput>
-            </Mobile>
-            <PC>
+            {/* <Mobile> */}
+            <MobileTitleInput>
+              <BottleTitlePopup />
+            </MobileTitleInput>
+            {/* </Mobile> */}
+            {/* <PC>
               <PCTitleInput>
                 <BottleTitlePopup />
               </PCTitleInput>
-            </PC>
+            </PC> */}
           </TaggedBottle>
         </BottleContainer>
       </Container>
@@ -66,25 +66,26 @@ const BottleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const TaggedBottle = styled.div`
-  min-height: 80vh;
-  min-width: 100%;
-  background-image: url("images/main/TaggedBottle.png");
-  background-position: 65% 50%;
-  background-repeat: no-repeat;
   background-color: #5d97bd;
   background-size: 300px;
   border-radius: 10px;
   font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 90vh;
+  min-width: 100%;
+`;
+
+const TaggedBottle = styled.div`
+  background-image: url("images/main/TaggedBottle.png");
+  background-repeat: no-repeat;
   position: relative;
+  min-height: 80vh;
+  min-width: 312px;
+  background-position: center center;
+  left: 30px;
 `;
 
 const MobileTitleInput = styled.div`
+  position: absolute;
   font-size: 20px;
   height: 50px;
   color: white;
@@ -93,9 +94,8 @@ const MobileTitleInput = styled.div`
   line-height: 1.5;
   width: 70px;
   text-align: center;
-  /* border: 1px solid red; */
-  margin-left: 170px;
-  margin-bottom: 30px;
+  left: 210px;
+  top: 240px;
 `;
 
 const PCTitleInput = styled(MobileTitleInput)`
