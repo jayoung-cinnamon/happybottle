@@ -85,6 +85,8 @@ const TaggedBottle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid blue;
+  position: relative;
 `;
 
 const MobileTitleInput = styled.div`
@@ -96,6 +98,7 @@ const MobileTitleInput = styled.div`
   line-height: 1.5;
   width: 70px;
   text-align: center;
+  /* border: 1px solid red; */
   margin-left: 170px;
   margin-bottom: 30px;
 `;

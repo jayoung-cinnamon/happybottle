@@ -15,21 +15,18 @@ function BottleTitlePopup() {
   const [bottleShape, setBottleShape] = useState("");
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+    // e.preventDefault();
     const {
       target: { value },
     } = e;
-    console.log(`bottleName:${bottleName}`);
-    console.log(`bottleShape:${bottleShape}`);
     setBottleName(value);
   };
 
   const onChangeShape = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+    // e.preventDefault();
     const {
       target: { value },
     } = e;
-
     setBottleShape(value);
   };
 
@@ -88,7 +85,7 @@ function BottleTitlePopup() {
               <Item>
                 <RadioButton
                   type="radio"
-                  name="radio2"
+                  name="radio"
                   value="white"
                   checked={bottleShape === "white"}
                   onChange={onChangeShape}
@@ -99,7 +96,7 @@ function BottleTitlePopup() {
               <Item>
                 <RadioButton
                   type="radio"
-                  name="radio2"
+                  name="radio"
                   value="blue"
                   checked={bottleShape === "blue"}
                   onChange={onChangeShape}
@@ -224,7 +221,7 @@ const RadioButtonLabel = styled.label`
   height: 20px;
   border-radius: 50%;
   background: white;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 `;
 
 const RadioButton = styled.input`
@@ -234,7 +231,11 @@ const RadioButton = styled.input`
   width: 100px;
   height: 25px;
   margin-right: 10px;
+  &:checked + ${RadioButtonLabel} {
+    background: #ec7b59;
+    /* z-index: 999; */
+  }
   &:hover + ${RadioButtonLabel} {
-    background: #ff8686;
+    background-color: #ec7b59;
   }
 `;
