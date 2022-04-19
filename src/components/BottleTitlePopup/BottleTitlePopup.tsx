@@ -4,13 +4,27 @@ import styled from "styled-components";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
-import { getDateStringType } from "utils/date";
+import { getDateStringType, getDate } from "utils/date";
 import { useNavigate } from "react-router-dom";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 function BottleTitlePopup() {
   const auth = getAuth();
-  const navigate = useNavigate();
+  const db = getDatabase();
+  const userUid = auth.currentUser?.uid;
   const [bottleUid, setBottleUid] = useState(randomUid(28));
+  const target = bottleUid;
+  const navigate = useNavigate();
+
   const [bottleName, setBottleName] = useState("");
   const [bottleShape, setBottleShape] = useState("");
 
@@ -35,12 +49,16 @@ function BottleTitlePopup() {
 
   const createBottleName = () => {
     try {
-      const db = getDatabase();
-      const userUid = auth.currentUser?.uid;
-      const target = bottleUid;
       set(ref(db, `${userUid}/${target}/${getDateStringType()}`), {
         bottleName: bottleName,
         bottleShape: bottleShape,
+        memo: {
+          memoColor: "",
+          title: "",
+          contents: "",
+          picture: "",
+          writtenDate: getDate(),
+        },
       });
       console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
       navigate("/createbottle");
@@ -48,6 +66,16 @@ function BottleTitlePopup() {
       console.log(`error: ${error}`);
     }
   };
+
+  //데이터 받아오기
+  // const getBottleData = () => {
+  //   onSnapshot(collection(db, auth.currentUser!.uid), (snapshot) => {
+  //     const bottleArray = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //   });
+  // };
 
   return (
     <Popup
@@ -73,7 +101,7 @@ function BottleTitlePopup() {
                 value={bottleName}
                 maxLength={15}
                 type="text"
-                placeholder="주제를 입력해주세요"
+                placeholder="보틀의 이름을 정해주세요"
                 required
               />
               <Item>
@@ -173,7 +201,7 @@ const TagInputBox = styled.div`
 const TagInput = styled.input`
   color: white;
   width: 200px;
-  font-size: 25px;
+  font-size: 20px;
   border: none;
   text-align: center;
   line-height: 2;
