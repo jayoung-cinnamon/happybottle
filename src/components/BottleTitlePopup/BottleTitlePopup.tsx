@@ -48,7 +48,7 @@ function BottleTitlePopup() {
         bottleShape: bottleShape,
       });
       console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
-      navigate("/createbottle");
+      navigate(`/hbmain`);
     } catch (error) {
       console.log(`error: ${error}`);
     }
