@@ -43,18 +43,10 @@ function BottleTitlePopup() {
 
   const createBottleName = () => {
     try {
-      set(ref(db, `${userUid}/${target}/${getDateStringType()}`), {
+      set(ref(db, `${userUid}/${target})}`), {
         bottleName: bottleName,
         bottleShape: bottleShape,
-        memo: {
-          memoColor: "",
-          title: "",
-          contents: "",
-          picture: "",
-          writtenDate: getDate(),
-        },
       });
-
       console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
       navigate("/createbottle");
     } catch (error) {
