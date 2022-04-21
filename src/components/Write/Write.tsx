@@ -10,6 +10,19 @@ import { randomUid } from "utils/common";
 function Write() {
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
+  const [content, setContent] = useState<string>("");
+  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setContent(e.target.value);
+  };
+  const [title, setTitle] = useState<string>("");
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setTitle(e.target.value);
+  };
+  useEffect(() => {
+    console.log("content: ", content);
+    console.log("title: ", title);
+  }, [content, title]);
+
   const navigate = useNavigate();
   const getDate = () => {
     const date = new Date();
@@ -29,11 +42,18 @@ function Write() {
     const memoRef = ref(db, `${userUid}/${target}`);
     onValue(memoRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("data: ", data);
-      // TODO: 데이터 읽어오는 부분 수정 필요
-      console.log(Object.values(data));
+      console.log("data:", data);
+      for (const [key, value] of Object.entries(data)) {
+        //@ts-ignore
+        setMemoData(value.memo);
+      }
     });
-  }, []);
+  });
+  let dataArr: any[] = [];
+  const setMemoData = (data: any) => {
+    dataArr.push(data);
+    console.log("dataArr: ", dataArr);
+  };
 
   const writeUserData = () =>
     // userUid: string,
@@ -46,12 +66,10 @@ function Write() {
       const db = getDatabase();
       const userUid = auth.currentUser?.uid;
       set(ref(db, `${userUid}/${target}/${getDate1()}`), {
-        bottleName: "보틀 이름",
-        bottleShape: "normal-jar",
         memo: {
           memoColor: "blue",
-          title: "hi",
-          contents: "today is a good day!",
+          title: title,
+          contents: content,
           picture: "picture.jpg",
           writtenDate: getDate(),
         },
@@ -83,9 +101,20 @@ function Write() {
         <Header></Header>
         <PaperWrapper>
           <Paper>
-            <Title type="text" placeholder="제목을 입력해주세요"></Title>
+            <Title
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                onChangeTitle(e);
+              }}
+              type="text"
+              placeholder="제목을 입력해주세요"
+            ></Title>
             <DateContainer>{getDate()}</DateContainer>
-            <Content placeholder="오늘 행복했던 순간을 적어주세요 :)"></Content>
+            <Content
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                onChangeContent(e);
+              }}
+              placeholder="오늘 행복했던 순간을 적어주세요 :)"
+            ></Content>
           </Paper>
           <BtnWrapper>
             <SubmitBtn onClick={writeUserData}>병에 담기</SubmitBtn>
