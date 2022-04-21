@@ -6,16 +6,8 @@ import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
 import { useNavigate } from "react-router-dom";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { onValue } from "firebase/database";
+import { isObjectLiteralElement } from "typescript";
 
 function BottleTitlePopup() {
   const auth = getAuth();
@@ -23,6 +15,8 @@ function BottleTitlePopup() {
   const userUid = auth.currentUser?.uid;
   const [bottleUid, setBottleUid] = useState(randomUid(28));
   const target = bottleUid;
+  const memoRef = ref(db, `${userUid}/${target}`);
+
   const navigate = useNavigate();
 
   const [bottleName, setBottleName] = useState("");
@@ -43,8 +37,8 @@ function BottleTitlePopup() {
   };
 
   useEffect(() => {
-    console.log(bottleName);
-    console.log(bottleShape);
+    console.log("bottleName", bottleName);
+    console.log("bottleShape", bottleShape);
   }, [bottleName, bottleShape]);
 
   const createBottleName = () => {
@@ -60,6 +54,7 @@ function BottleTitlePopup() {
           writtenDate: getDate(),
         },
       });
+
       console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
       navigate("/createbottle");
     } catch (error) {
@@ -67,17 +62,30 @@ function BottleTitlePopup() {
     }
   };
 
-  // //데이터 받아오기
-  // const getBottleData = async (onUpdate: any) => {
-  //   const dbBottle = await getDocs(collection(db, auth.currentUser!.uid));
-  //   dbBottle.forEach((doc) => {
-  //     const bottleObj = {
-  //       ...doc.data(),
-  //       id: doc.id,
-  //     };
-  //     onUpdate((prev) => [...prev, bottleObj]);
-  //   });
-  // };
+  useEffect(() => {
+    onValue(memoRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        try {
+          for (const [key, value] of Object.entries(data)) {
+            //@ts-ignore
+            setMemoData(value.memo);
+            //@ts-ignore
+            setBottleName(value.bottleName);
+            console.log("보틀만들기 버튼 클릭:", bottleName);
+          }
+        } catch (error: any) {
+          console.log(`error: ${error}`);
+        }
+      }
+    });
+  }, []);
+
+  let dataArr: any[] = [];
+  const setMemoData = (data: any) => {
+    dataArr.push(data);
+    console.log(`dataArr`, dataArr);
+  };
 
   return (
     <Popup
