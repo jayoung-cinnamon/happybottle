@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "components/Header";
 import styled, { css } from "styled-components";
 import WriteAndRead from "components/WriteAndRead";
@@ -6,16 +6,45 @@ import BottleContainer from "components/BottleContainer";
 import { useRecoilValue } from "recoil";
 import { modalRecoilStore } from "recoil/mainModal";
 import UpdateModal from "components/UpdateModal";
+import { useObject } from "react-firebase-hooks/database";
+
+import { getDatabase, onValue, ref } from "firebase/database";
+import { getAuth } from "firebase/auth";
 function HbMain() {
-  return (
-    <MainContainer>
-      <Container>
-        <Header></Header>
-        <WriteAndRead></WriteAndRead>
-        <BottleContainer></BottleContainer>
-      </Container>
-    </MainContainer>
-  );
+  const db = getDatabase();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+  const bottleRef = ref(db, `${userUid}/`);
+  const [snapshot, loading, error] = useObject(bottleRef);
+
+  let dataArr: any[] = [];
+  const setBottleList = (data: any) => {
+    dataArr.push(data);
+    console.log("dataArr: ", dataArr);
+  };
+  if (snapshot) {
+    console.log("snapshot.val(): ", snapshot.val());
+    const data = snapshot.val();
+    if (data !== null) {
+      for (const [key, value] of Object.entries(data)) {
+        //@ts-ignore
+        // console.log("key: ", key);
+        // console.log("value: ", value);
+        setBottleList({ [key]: value });
+      }
+    }
+    return (
+      <MainContainer>
+        <Container>
+          <Header></Header>
+          <WriteAndRead></WriteAndRead>
+          <BottleContainer bottleList={dataArr}></BottleContainer>
+        </Container>
+      </MainContainer>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default HbMain;
@@ -40,7 +69,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  /* border: 1px solid blue; */
+  min-height: 100vh;
 `;
 
 const ModalContainer = styled.div<SlideProps>`

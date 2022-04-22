@@ -1,4 +1,4 @@
-import BottlePopup from "components/BottlePopup";
+import BottleTitlePopup from "components/BottleTitlePopup";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -19,7 +19,6 @@ function WriteAndRead() {
   return (
     <Container>
       <LogoWrapper>
-        {/* <BottlePopup /> */}
         <CreateBottleBtn onClick={onClickCreate} />
         <Text>보틀을 만들자</Text>
       </LogoWrapper>
@@ -76,7 +75,6 @@ const LogoWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid green;
   width: 100%;
 `;
 
