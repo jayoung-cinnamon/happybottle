@@ -25,19 +25,21 @@ function BottleContainer({ bottleList }: any) {
   if (bottleList.length) {
     return (
       <Container>
-        {reversedBottleList.map((item: any, index: any) => (
-          <BottleWrapper>
-            <Bottle
-              key={index}
-              shape={Object.values(item)[0].bottleShape}
-              onClick={() => {
-                onCLickBottle(index);
-              }}
-            >
-              <h1>{Object.values(item)[0].bottleName}</h1>
-            </Bottle>
-          </BottleWrapper>
-        ))}
+        <BottleWrapper>
+          {reversedBottleList.map((item: any, index: any) => (
+            <BottleItemWrapper>
+              <Bottle
+                key={index}
+                shape={Object.values(item)[0].bottleShape}
+                onClick={() => {
+                  onCLickBottle(index);
+                }}
+              >
+                <h1>{Object.values(item)[0].bottleName}</h1>
+              </Bottle>
+            </BottleItemWrapper>
+          ))}
+        </BottleWrapper>
       </Container>
     );
   } else {
@@ -61,14 +63,21 @@ const BottleWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
   /* border: 1px solid blue; */
 `;
-
+const BottleItemWrapper = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+`;
 const Bottle = styled.div<BottleColorProps>`
   width: 92px;
   height: 200px;
   background-size: 100% 100%;
   position: relative;
+  background-position: 50% 50%;
   background-image: url("images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
