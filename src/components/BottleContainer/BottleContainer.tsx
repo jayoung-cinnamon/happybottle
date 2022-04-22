@@ -15,9 +15,8 @@ function BottleContainer({ bottleList }: any) {
   const reversedBottleList = bottleList.slice(0).reverse();
   console.log(reversedBottleList);
 
-  const onCLickBottle = (target: any) => {
-    // console.log("target: ", target);
-    navigate(`/bottle/${target.data}`);
+  const onCLickBottle = (index: any) => {
+    navigate(`/bottle/${Object.keys(bottleList[index])}`);
   };
 
   // TODO: 1. bottleList 받아서 동적으로 렌더링되도록 수정
@@ -31,7 +30,9 @@ function BottleContainer({ bottleList }: any) {
             <Bottle
               key={index}
               shape={Object.values(item)[0].bottleShape}
-              onClick={onCLickBottle}
+              onClick={() => {
+                onCLickBottle(index);
+              }}
             >
               <h1>{Object.values(item)[0].bottleName}</h1>
             </Bottle>
