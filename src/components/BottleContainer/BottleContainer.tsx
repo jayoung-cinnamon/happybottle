@@ -8,10 +8,12 @@ function BottleContainer({ bottleList }: any) {
 
   // console.log("bottleList: ", bottleList);
 
-  bottleList.map((item: object, index: any) => {
-    //@ts-ignore
-    // console.log(Object.values(item)[0]?.bottleName);
-  });
+  // bottleList.map((item: object, index: any) => {
+  //@ts-ignore
+  // console.log(Object.values(item)[0]?.bottleName);
+  // });
+  const reversedBottleList = bottleList.slice(0).reverse();
+  console.log(reversedBottleList);
 
   const onCLickBottle = (target: any) => {
     // console.log("target: ", target);
@@ -24,7 +26,7 @@ function BottleContainer({ bottleList }: any) {
   if (bottleList.length) {
     return (
       <Container>
-        {bottleList.map((item: any, index: any) => (
+        {reversedBottleList.map((item: any, index: any) => (
           <BottleWrapper>
             <Bottle
               key={index}
