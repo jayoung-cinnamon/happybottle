@@ -30,7 +30,7 @@ function App() {
           <Route path="/updateInfo" element={<UpdateModal />} />
           <Route path="/write" element={<Write />} />
           <Route path="/archive" element={<ArchiveRead />} />
-          <Route path="/bottle" element={<Bottle />} />
+          <Route path="/bottle/:bottleUid" element={<Bottle />} />
           <Route path="/read" element={<Read />} />
           <Route path="/createbottle" element={<CreateBottle />} />
         </Routes>

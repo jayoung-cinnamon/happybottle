@@ -22,7 +22,7 @@ function Write() {
     return formattedDate;
   };
   const [random, setRandom] = useState(randomUid(28));
-  const target = "DJ0M8Nvg77MIVfNr92btW7PYKI83";
+  const target = random;
   useEffect(() => {
     const db = getDatabase();
     const userUid = auth.currentUser?.uid;
@@ -46,7 +46,7 @@ function Write() {
       const db = getDatabase();
       const userUid = auth.currentUser?.uid;
       set(ref(db, `${userUid}/${target}/${getDate1()}`), {
-        bottleName: "보틀 이름",
+        bottleName: "이얏호!",
         bottleShape: "normal-jar",
         memo: {
           memoColor: "blue",
