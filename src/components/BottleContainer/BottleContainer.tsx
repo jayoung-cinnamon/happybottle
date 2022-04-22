@@ -1,14 +1,20 @@
+// @ts-nocheck
 import React from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 function BottleContainer({ bottleList }: any) {
-  console.log("bottleList: ", bottleList);
-  bottleList.map((item: any, index: any) => {
-    console.log("item: ", item, "index:", index);
-  });
   const navigate = useNavigate();
+
+  // console.log("bottleList: ", bottleList);
+
+  bottleList.map((item: object, index: any) => {
+    //@ts-ignore
+    // console.log(Object.values(item)[0]?.bottleName);
+  });
+
   const onCLickBottle = (target: any) => {
-    console.log("target: ", target);
+    // console.log("target: ", target);
     navigate(`/bottle/${target.data}`);
   };
 
@@ -19,9 +25,13 @@ function BottleContainer({ bottleList }: any) {
     return (
       <Container>
         {bottleList.map((item: any, index: any) => (
-          <BottleWrapper key={index}>
-            <Bottle shape={item.bottleShape} onClick={onCLickBottle}>
-              <h1>{item.bottleName}</h1>
+          <BottleWrapper>
+            <Bottle
+              key={index}
+              shape={Object.values(item)[0].bottleShape}
+              onClick={onCLickBottle}
+            >
+              <h1>{Object.values(item)[0].bottleName}</h1>
             </Bottle>
           </BottleWrapper>
         ))}
@@ -48,15 +58,14 @@ const BottleWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-bottom: 20px;
+  /* border: 1px solid blue; */
 `;
 
 const Bottle = styled.div<BottleColorProps>`
   width: 92px;
   height: 200px;
   background-size: 100% 100%;
-  & > h1 {
-    font-size: 20px;
-  }
+  position: relative;
   background-image: url("images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
@@ -73,4 +82,34 @@ const Bottle = styled.div<BottleColorProps>`
     css`
       background-image: url("images/main/Bottle_Black.png");
     `}
+    //보틀 네입 태그
+    & > h1 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    word-break: break-all;
+    position: absolute;
+    bottom: 50px;
+    padding: 10px;
+    background-color: #454d96;
+    color: white;
+    ${(props) =>
+      props.shape === "blue" &&
+      css`
+        background-color: #eeeded;
+        color: black;
+      `}
+    ${(props) =>
+      props.shape === "green" &&
+      css`
+        background-color: #da8036;
+        color: white;
+      `}
+  ${(props) =>
+      props.shape === "black" &&
+      css`
+        background-color: #754da8;
+        color: wthie;
+      `}
+  }
 `;

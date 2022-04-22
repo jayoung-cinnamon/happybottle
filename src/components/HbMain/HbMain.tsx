@@ -28,8 +28,8 @@ function HbMain() {
     if (data !== null) {
       for (const [key, value] of Object.entries(data)) {
         //@ts-ignore
-        console.log("key: ", key);
-        console.log("value: ", value);
+        // console.log("key: ", key);
+        // console.log("value: ", value);
         setBottleList({ [key]: value });
       }
     }
@@ -70,7 +70,6 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  border: 1px solid blue;
 `;
 
 const ModalContainer = styled.div<SlideProps>`
