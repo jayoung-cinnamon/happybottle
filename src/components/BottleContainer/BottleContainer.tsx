@@ -39,6 +39,7 @@ function BottleContainer({ bottleList }: any) {
               </Bottle>
             </BottleItemWrapper>
           ))}
+          {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
         </BottleWrapper>
       </Container>
     );
@@ -71,6 +72,10 @@ const BottleItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+`;
+const EmptyBottle = styled.div`
+  width: 50%;
+  height: 200px;
 `;
 const Bottle = styled.div<BottleColorProps>`
   width: 92px;
