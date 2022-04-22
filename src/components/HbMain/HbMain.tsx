@@ -69,7 +69,8 @@ const MainContainer = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  /* border: 1px solid blue; */
+  min-height: 100vh;
+  border: 1px solid blue;
 `;
 
 const ModalContainer = styled.div<SlideProps>`

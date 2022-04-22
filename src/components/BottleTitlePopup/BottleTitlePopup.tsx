@@ -128,6 +128,28 @@ function BottleTitlePopup() {
                 <RadioButtonLabel />
                 <div>파란 병</div>
               </Item>
+              <Item>
+                <RadioButton
+                  type="radio"
+                  name="radio"
+                  value="green"
+                  checked={bottleShape === "green"}
+                  onChange={onChangeShape}
+                />
+                <RadioButtonLabel />
+                <div>초록 병</div>
+              </Item>
+              <Item>
+                <RadioButton
+                  type="radio"
+                  name="radio"
+                  value="black"
+                  checked={bottleShape === "black"}
+                  onChange={onChangeShape}
+                />
+                <RadioButtonLabel />
+                <div>검은 병</div>
+              </Item>
               <SubjectSubmitBtn onClick={createBottleName}>
                 보틀만들기
               </SubjectSubmitBtn>
