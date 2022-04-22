@@ -43,7 +43,7 @@ function BottleTitlePopup() {
 
   const createBottleName = () => {
     try {
-      set(ref(db, `${userUid}/${target})}`), {
+      set(ref(db, `${userUid}/${target}`), {
         bottleName: bottleName,
         bottleShape: bottleShape,
       });
