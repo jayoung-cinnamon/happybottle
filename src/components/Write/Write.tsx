@@ -7,6 +7,9 @@ import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
+import Popup from "reactjs-popup";
+import WritePopup from "components/WritePopup";
+
 function Write() {
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
@@ -72,9 +75,9 @@ function Write() {
           contents: content,
           picture: "picture.jpg",
           writtenDate: getDate(),
+          isOpened: false,
         },
       });
-      console.log(`writeUserData!`);
     };
 
   //   const obSubmit = (e: any) => {
@@ -117,7 +120,7 @@ function Write() {
             ></Content>
           </Paper>
           <BtnWrapper>
-            <SubmitBtn onClick={writeUserData}>병에 담기</SubmitBtn>
+            <WritePopup />
           </BtnWrapper>
         </PaperWrapper>
       </Container>
