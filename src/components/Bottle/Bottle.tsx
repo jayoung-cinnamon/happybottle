@@ -1,22 +1,64 @@
-import React from "react";
+//@ts-nocheck
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useObject } from "react-firebase-hooks/database";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+
 function Bottle() {
+  const { bottleUid } = useParams();
+  console.log("{bottleUid}: ", bottleUid);
   const navigate = useNavigate();
-  const onClickMemo = () => {
+  const db = getDatabase();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+  const memoRef = ref(db, `${userUid}/${bottleUid}`);
+  const [snapshot, loading, error] = useObject(memoRef);
+  const onClickMemo = (index: any) => {
+    console.log("item: ", item);
+    console.log("memoList[index]: ", memoList[index]);
     navigate("/read");
   };
-  return (
-    <MainContainer>
-      <Container>
-        <Header></Header>
-        <BottleContainer>
-          <HappyMemo onClick={onClickMemo} />
-        </BottleContainer>
-      </Container>
-    </MainContainer>
-  );
+  let memoList: any[] = [];
+  const setMemoList = (data: any) => {
+    memoList.push(data);
+    console.log("memoList: ", memoList);
+  };
+  if (snapshot) {
+    console.log("snapshot.val(): ", snapshot.val());
+    const data = snapshot.val();
+    if (data !== null) {
+      for (const [key, value] of Object.entries(data)) {
+        //@ts-ignore
+        if (value.memo) {
+          setMemoList(value);
+          //@ts-ignore
+          console.log("value: ", value.memo);
+        }
+      }
+    }
+  }
+  if (!loading) {
+    return (
+      <MainContainer>
+        <Container>
+          <Header></Header>
+          <BottleContainer>
+            {memoList.map((item, index) => {
+              console.log("item: ", item);
+              <HappyMemo onClick={() => onClickMemo(index)}></HappyMemo>;
+            })}
+            <HappyMemo onClick={onClickMemo} />
+            <HappyMemo onClick={onClickMemo} />
+          </BottleContainer>
+        </Container>
+      </MainContainer>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default Bottle;
