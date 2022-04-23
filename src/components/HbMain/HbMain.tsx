@@ -7,7 +7,6 @@ import { useRecoilValue } from "recoil";
 import { modalRecoilStore } from "recoil/mainModal";
 import UpdateModal from "components/UpdateModal";
 import { useObject } from "react-firebase-hooks/database";
-
 import { getDatabase, onValue, ref } from "firebase/database";
 import { getAuth } from "firebase/auth";
 function HbMain() {

@@ -1,34 +1,62 @@
+// @ts-nocheck
 import React from "react";
 import styled, { css } from "styled-components";
 import Popup from "reactjs-popup";
+import { useObject } from "react-firebase-hooks/database";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
 function WritePopup() {
-  return (
-    <Popup trigger={<BtnContainer>병에 담기</BtnContainer>} modal nested>
-      {(close: any) => (
-        <ModalPopupContainer>
-          <TitleBox>
-            <CancelBtn onClick={close} />
-            <h1>메모를 담을 보틀을 골라주세요!</h1>
-          </TitleBox>
-          <ModalPage>
-            <TagInputBox>
-              <Item>
-                <RadioButton
-                  type="radio"
-                  name="radio"
-                  value="white"
-                  // checked={bottleName === ""}
-                  // onChange={onChangeShape}
-                />
-                <RadioButtonLabel />
-                <div>BottleName</div>
-              </Item>
-            </TagInputBox>
-          </ModalPage>
-        </ModalPopupContainer>
-      )}
-    </Popup>
-  );
+  const db = getDatabase();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+  const bottleRef = ref(db, `${userUid}/`);
+  const [snapshot, loading, error] = useObject(bottleRef);
+  let dataArr: any[] = [];
+  const setBottleList = (data: any) => {
+    dataArr.push(data);
+  };
+  if (snapshot) {
+    console.log("snapshot.val(): ", snapshot.val());
+    const data = snapshot.val();
+    if (data !== null) {
+      for (const [key, value] of Object.entries(data)) {
+        setBottleList({ [key]: value });
+      }
+    }
+  }
+
+  dataArr.map((item: object, index: any) => {
+    console.log("Select BOttle");
+    console.log(item);
+  });
+
+  if (dataArr.length) {
+    return (
+      <Popup trigger={<BtnContainer>병에 담기</BtnContainer>} modal nested>
+        {(close: any) => (
+          <ModalPopupContainer>
+            <TitleBox>
+              <CancelBtn onClick={close} />
+              <h1>메모를 담을 보틀을 골라주세요!</h1>
+            </TitleBox>
+            <ModalPage>
+              <TagInputBox>
+                {dataArr.map((item: any, index: any) => (
+                  <Item>
+                    <RadioButton type="radio" name="radio" value="test" />
+                    <RadioButtonLabel />
+                    <div>{Object.values(item)[0].bottleName}</div>
+                  </Item>
+                ))}
+              </TagInputBox>
+            </ModalPage>
+          </ModalPopupContainer>
+        )}
+      </Popup>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default WritePopup;
@@ -102,6 +130,7 @@ const TagInputBox = styled.div`
 `;
 
 const Item = styled.div`
+  border: 1px solid red;
   margin-top: 2px;
   display: flex;
   align-items: center;
