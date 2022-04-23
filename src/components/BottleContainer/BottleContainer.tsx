@@ -12,7 +12,7 @@ function BottleContainer({ bottleList }: any) {
   //@ts-ignore
   // console.log(Object.values(item)[0]?.bottleName);
   // });
-  const reversedBottleList = bottleList.slice(0).reverse();
+  const reversedBottleList = bottleList.reverse();
   console.log(reversedBottleList);
 
   const onCLickBottle = (index: any) => {
