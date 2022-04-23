@@ -54,6 +54,7 @@ interface BottleColorProps {
 }
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
   margin-top: 35px;
   margin-bottom: 35px;
 `;
@@ -63,15 +64,19 @@ const BottleWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 30px;
   flex-wrap: wrap;
-  /* border: 1px solid blue; */
+  margin-bottom: 20px;
+  background-image: url("images/main/Shelves.png");
+  background-size: 100% 40%;
+  background-position: 100% 45%;
+  /* background-repeat: no-repeat; */
 `;
 const BottleItemWrapper = styled.div`
   width: 50%;
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 `;
 const EmptyBottle = styled.div`
   width: 50%;
