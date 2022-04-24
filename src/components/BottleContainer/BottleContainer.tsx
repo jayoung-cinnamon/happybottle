@@ -126,7 +126,7 @@ const Bottle = styled.div<BottleColorProps>`
       props.shape === "black" &&
       css`
         background-color: #754da8;
-        color: wthie;
+        color: black;
       `}
   }
 `;
