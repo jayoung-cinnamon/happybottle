@@ -40,7 +40,7 @@ function WritePopup() {
   };
 
   // useEffect(() => {
-  //   console.log("bottleName", bottleName);
+  //   console.log("123", bottleName);
   // }, [bottleName]);
 
   if (dataArr.length) {
@@ -59,9 +59,9 @@ function WritePopup() {
                     <RadioButton
                       type="radio"
                       name="radio"
-                      value={bottleName}
+                      value={Object.values(item)[0].bottleName}
                       checked={bottleName === Object.values(item)[0].bottleName}
-                      onClick={onClickRadioButton}
+                      onChange={onClickRadioButton}
                     />
                     <RadioButtonLabel />
                     <RadioText>{Object.values(item)[0].bottleName}</RadioText>
