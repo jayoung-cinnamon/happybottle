@@ -5,7 +5,7 @@ import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref, set } from "firebase/database";
-function WritePopup({ content, title, date, date1 }) {
+function WritePopup({ content, title, date, memoUid }) {
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -38,7 +38,7 @@ function WritePopup({ content, title, date, date1 }) {
     console.log("value : ", value);
     const db = getDatabase();
     const userUid = auth.currentUser?.uid;
-    set(ref(db, `${userUid}/${uid}/${date1}`), {
+    set(ref(db, `${userUid}/${uid}/${memoUid}`), {
       memo: {
         memoColor: "blue",
         title: title,
