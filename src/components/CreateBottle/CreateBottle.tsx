@@ -75,7 +75,7 @@ const BottleContainer = styled.div`
 `;
 
 const TaggedBottle = styled.div`
-  background-image: url("images/main/TaggedBottle.png");
+  background-image: url("/images/main/TaggedBottle.png");
   background-repeat: no-repeat;
   position: relative;
   min-height: 80vh;

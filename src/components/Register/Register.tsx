@@ -106,7 +106,7 @@ const Title = styled.div`
 const Logo = styled.div`
   width: 90px;
   height: 90px;
-  background-image: url("images/main/EyeSmile.png");
+  background-image: url("/images/main/EyeSmile.png");
   background-repeat: no-repeat;
   background-size: cover;
   /* border: 1px solid red; */

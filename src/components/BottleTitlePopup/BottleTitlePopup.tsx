@@ -209,7 +209,7 @@ const TitleBox = styled.div`
 const CancelBtn = styled.div`
   width: 30px;
   height: 30px;
-  background-image: url("images/main/XLogo.png");
+  background-image: url("/images/main/XLogo.png");
   cursor: pointer;
 `;
 

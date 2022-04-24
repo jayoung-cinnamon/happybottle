@@ -62,6 +62,6 @@ const Title = styled.div`
 const SplashLogo = styled.div`
   width: 90px;
   height: 90px;
-  background-image: url("images/main/SmileLogo.png");
+  background-image: url("/images/main/SmileLogo.png");
   background-size: 100% 100%;
 `;

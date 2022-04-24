@@ -99,7 +99,7 @@ const BottleContainer = styled.div`
   margin-top: 30px;
   width: 90%;
   min-height: 80vh;
-  background-image: url("images/main/BigBottle.png");
+  background-image: url("/images/main/BigBottle.png");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #729743;
@@ -110,7 +110,7 @@ const BottleContainer = styled.div`
 const HappyMemo = styled.div<MemoPositionProps>`
   width: 86px;
   height: 104px;
-  background-image: url("images/main/HappyMemo.png");
+  background-image: url("/images/main/HappyMemo.png");
   position: absolute;
   bottom: 50px;
   left: 180px;

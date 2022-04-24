@@ -50,7 +50,7 @@ const Container = styled.div`
 const WriteLogo = styled.div`
   width: 95px;
   height: 120px;
-  background-image: url("images/main/Write.png");
+  background-image: url("/images/main/Write.png");
   background-repeat: no-repeat;
   background-size: cover;
 `;
@@ -58,7 +58,7 @@ const WriteLogo = styled.div`
 const ReadLogo = styled.div`
   width: 100px;
   height: 100px;
-  background-image: url("images/main/Read.png");
+  background-image: url("/images/main/Read.png");
 `;
 
 const Text = styled.div`
@@ -81,7 +81,7 @@ const LogoWrapper = styled.div`
 const CreateBottleBtn = styled.div`
   width: 120px;
   height: 120px;
-  background-image: url("images/main/Yummy.png");
+  background-image: url("/images/main/Yummy.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: white;
