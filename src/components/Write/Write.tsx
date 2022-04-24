@@ -7,6 +7,7 @@ import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
+import { getDateStringType, getDate } from "utils/date";
 import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
 
@@ -27,16 +28,6 @@ function Write() {
   }, [content, title]);
 
   const navigate = useNavigate();
-  const getDate = () => {
-    const date = new Date();
-    const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
-    return formattedDate;
-  };
-  const getDate1 = () => {
-    const date = new Date();
-    const formattedDate = format(date, "yyyyMMddHHmmss");
-    return formattedDate;
-  };
   const [random, setRandom] = useState(randomUid(28));
   const target = random;
   useEffect(() => {
@@ -57,28 +48,6 @@ function Write() {
     dataArr.push(data);
     console.log("dataArr: ", dataArr);
   };
-
-  const writeUserData = () =>
-    // userUid: string,
-    // writtenDate: string,
-    // memoColor: string,
-    // title: string,
-    // contents: string,
-    // picture: string
-    {
-      const db = getDatabase();
-      const userUid = auth.currentUser?.uid;
-      set(ref(db, `${userUid}/${target}/${getDate1()}`), {
-        memo: {
-          memoColor: "blue",
-          title: title,
-          contents: content,
-          picture: "picture.jpg",
-          writtenDate: getDate(),
-          isOpened: false,
-        },
-      });
-    };
 
   //   const obSubmit = (e: any) => {
   //     e.preventDefault();
@@ -124,7 +93,7 @@ function Write() {
               content={content}
               title={title}
               date={getDate()}
-              date1={getDate1()}
+              memoUid={getDateStringType()}
             />
           </BtnWrapper>
         </PaperWrapper>
