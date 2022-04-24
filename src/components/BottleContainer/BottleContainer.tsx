@@ -81,21 +81,21 @@ const Bottle = styled.div<BottleColorProps>`
   background-size: 100% 100%;
   position: relative;
   background-position: 50% 50%;
-  background-image: url("images/main/Bottle_White.png");
+  background-image: url("/images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
     css`
-      background-image: url("images/main/Bottle_Blue.png");
+      background-image: url("/images/main/Bottle_Blue.png");
     `}
   ${(props) =>
     props.shape === "green" &&
     css`
-      background-image: url("images/main/Bottle_Green.png");
+      background-image: url("/images/main/Bottle_Green.png");
     `}
   ${(props) =>
     props.shape === "black" &&
     css`
-      background-image: url("images/main/Bottle_Black.png");
+      background-image: url("/images/main/Bottle_Black.png");
     `}
     //보틀 네입 태그
     & > h1 {

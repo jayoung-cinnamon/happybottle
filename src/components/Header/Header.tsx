@@ -89,7 +89,7 @@ const UserName = styled.div`
 const Clover = styled.div`
   width: 80px;
   height: 70px;
-  background-image: url("images/main/Clover.png");
+  background-image: url("/images/main/Clover.png");
   background-size: 100% 100%;
 `;
 
