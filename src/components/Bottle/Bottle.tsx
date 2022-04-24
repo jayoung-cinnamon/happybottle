@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Header from "components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useObject } from "react-firebase-hooks/database";
@@ -17,7 +17,7 @@ function Bottle() {
   const memoRef = ref(db, `${userUid}/${bottleUid}`);
   const [snapshot, loading, error] = useObject(memoRef);
   const onClickMemo = (index: any) => {
-    console.log("item: ", item);
+    console.log("index: ", index);
     console.log("memoList[index]: ", memoList[index]);
     navigate("/read");
   };
@@ -46,12 +46,13 @@ function Bottle() {
         <Container>
           <Header></Header>
           <BottleContainer>
-            {memoList.map((item, index) => {
-              console.log("item: ", item);
-              <HappyMemo onClick={() => onClickMemo(index)}></HappyMemo>;
-            })}
-            <HappyMemo onClick={onClickMemo} />
-            <HappyMemo onClick={onClickMemo} />
+            {memoList.map((item, index) => (
+              <HappyMemo
+                position={index}
+                key={index}
+                onClick={() => onClickMemo(index)}
+              />
+            ))}
           </BottleContainer>
         </Container>
       </MainContainer>
@@ -62,7 +63,9 @@ function Bottle() {
 }
 
 export default Bottle;
-
+interface MemoPositionProps {
+  position: number;
+}
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
@@ -97,12 +100,17 @@ const BottleContainer = styled.div`
   border-radius: 10px;
   position: relative;
 `;
-
-const HappyMemo = styled.div`
+//TODO: 인덱스 받아서 위치 랜덤으로?
+const HappyMemo = styled.div<MemoPositionProps>`
   width: 86px;
   height: 104px;
   background-image: url("images/main/HappyMemo.png");
   position: absolute;
   bottom: 50px;
   left: 180px;
+  ${(props) =>
+    props.position &&
+    css`
+      left: calc(45 * position) px;
+    `}
 `;
