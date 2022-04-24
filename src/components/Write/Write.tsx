@@ -7,6 +7,10 @@ import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
+import { getDateStringType, getDate } from "utils/date";
+import Popup from "reactjs-popup";
+import WritePopup from "components/WritePopup";
+
 function Write() {
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
@@ -24,16 +28,6 @@ function Write() {
   }, [content, title]);
 
   const navigate = useNavigate();
-  const getDate = () => {
-    const date = new Date();
-    const formattedDate = format(date, "yyyy.MM.dd HH:mm:ss");
-    return formattedDate;
-  };
-  const getDate1 = () => {
-    const date = new Date();
-    const formattedDate = format(date, "yyyyMMddHHmmss");
-    return formattedDate;
-  };
   const [random, setRandom] = useState(randomUid(28));
   const target = random;
   useEffect(() => {
@@ -54,28 +48,6 @@ function Write() {
     dataArr.push(data);
     console.log("dataArr: ", dataArr);
   };
-
-  const writeUserData = () =>
-    // userUid: string,
-    // writtenDate: string,
-    // memoColor: string,
-    // title: string,
-    // contents: string,
-    // picture: string
-    {
-      const db = getDatabase();
-      const userUid = auth.currentUser?.uid;
-      set(ref(db, `${userUid}/${target}/${getDate1()}`), {
-        memo: {
-          memoColor: "blue",
-          title: title,
-          contents: content,
-          picture: "picture.jpg",
-          writtenDate: getDate(),
-        },
-      });
-      console.log(`writeUserData!`);
-    };
 
   //   const obSubmit = (e: any) => {
   //     e.preventDefault();
@@ -117,7 +89,12 @@ function Write() {
             ></Content>
           </Paper>
           <BtnWrapper>
-            <SubmitBtn onClick={writeUserData}>병에 담기</SubmitBtn>
+            <WritePopup
+              content={content}
+              title={title}
+              date={getDate()}
+              memoUid={getDateStringType()}
+            />
           </BtnWrapper>
         </PaperWrapper>
       </Container>
