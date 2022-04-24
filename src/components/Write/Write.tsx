@@ -120,7 +120,12 @@ function Write() {
             ></Content>
           </Paper>
           <BtnWrapper>
-            <WritePopup />
+            <WritePopup
+              content={content}
+              title={title}
+              date={getDate()}
+              date1={getDate1()}
+            />
           </BtnWrapper>
         </PaperWrapper>
       </Container>

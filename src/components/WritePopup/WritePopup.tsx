@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
-function WritePopup() {
+import { getDatabase, onValue, ref, set } from "firebase/database";
+function WritePopup({ content, title, date, date1 }) {
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -26,17 +26,28 @@ function WritePopup() {
   }
 
   dataArr.map((item: object, index: any) => {
-    console.log("Select BOttle");
-    console.log(item);
+    // console.log("Select BOttle");
+    // console.log(item);
   });
   const [bottleName, setBottleName] = useState("");
-  const onClickRadioButton = (e: MouseEvent) => {
+  const onClickRadioButton = (e: MouseEvent, uid: string) => {
     const {
       target: { value },
     } = e;
-
     setBottleName(value);
     console.log("value : ", value);
+    const db = getDatabase();
+    const userUid = auth.currentUser?.uid;
+    set(ref(db, `${userUid}/${uid}/${date1}`), {
+      memo: {
+        memoColor: "blue",
+        title: title,
+        contents: content,
+        picture: "picture.jpg",
+        writtenDate: date,
+        isOpened: false,
+      },
+    });
   };
 
   // useEffect(() => {
@@ -61,7 +72,10 @@ function WritePopup() {
                       name="radio"
                       value={Object.values(item)[0].bottleName}
                       checked={bottleName === Object.values(item)[0].bottleName}
-                      onChange={onClickRadioButton}
+                      onChange={(e) => {
+                        onClickRadioButton(e, Object.keys(item)[0]);
+                        close();
+                      }}
                     />
                     <RadioButtonLabel />
                     <RadioText>{Object.values(item)[0].bottleName}</RadioText>
