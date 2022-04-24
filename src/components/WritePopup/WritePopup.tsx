@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
@@ -29,6 +29,19 @@ function WritePopup() {
     console.log("Select BOttle");
     console.log(item);
   });
+  const [bottleName, setBottleName] = useState("");
+  const onClickRadioButton = (e: MouseEvent) => {
+    const {
+      target: { value },
+    } = e;
+
+    setBottleName(value);
+    console.log("value : ", value);
+  };
+
+  // useEffect(() => {
+  //   console.log("bottleName", bottleName);
+  // }, [bottleName]);
 
   if (dataArr.length) {
     return (
@@ -42,10 +55,16 @@ function WritePopup() {
             <ModalPage>
               <TagInputBox>
                 {dataArr.map((item: any, index: any) => (
-                  <Item>
-                    <RadioButton type="radio" name="radio" value="test" />
+                  <Item key={index}>
+                    <RadioButton
+                      type="radio"
+                      name="radio"
+                      value={bottleName}
+                      checked={bottleName === Object.values(item)[0].bottleName}
+                      onClick={onClickRadioButton}
+                    />
                     <RadioButtonLabel />
-                    <div>{Object.values(item)[0].bottleName}</div>
+                    <RadioText>{Object.values(item)[0].bottleName}</RadioText>
                   </Item>
                 ))}
               </TagInputBox>
@@ -67,6 +86,7 @@ const ModalPopupContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 80px;
+  height: 100%;
 `;
 
 const BtnContainer = styled.div`
@@ -92,10 +112,6 @@ const TitleBox = styled.div`
   justify-content: space-between;
   display: flex;
   align-items: center;
-  & > h1 {
-    font-size: 20px;
-    font-weight: 600;
-  }
 `;
 
 const CancelBtn = styled.div`
@@ -130,7 +146,6 @@ const TagInputBox = styled.div`
 `;
 
 const Item = styled.div`
-  border: 1px solid red;
   margin-top: 2px;
   display: flex;
   align-items: center;
@@ -139,15 +154,8 @@ const Item = styled.div`
   border-radius: 2px;
   color: white;
   font-weight: 500;
-`;
-
-const RadioButton = styled.input`
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-  width: 100px;
-  height: 25px;
-  margin-right: 10px;
+  width: 200px;
+  justify-content: space-between;
 `;
 
 const RadioButtonLabel = styled.label`
@@ -159,4 +167,26 @@ const RadioButtonLabel = styled.label`
   border-radius: 50%;
   background: white;
   border: 2px solid #ccc;
+`;
+const RadioButton = styled.input`
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+  width: 100px;
+  height: 25px;
+  margin-right: 10px;
+  &:checked + ${RadioButtonLabel} {
+    background: #ec7b59;
+    /* z-index: 999; */
+  }
+  &:hover + ${RadioButtonLabel} {
+    background-color: #ec7b59;
+  }
+`;
+
+const RadioText = styled.div`
+  font-size: 17px;
+  color: white;
+  width: 200px;
+  text-align: right;
 `;

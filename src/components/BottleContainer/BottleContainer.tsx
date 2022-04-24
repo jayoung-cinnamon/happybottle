@@ -27,9 +27,8 @@ function BottleContainer({ bottleList }: any) {
       <Container>
         <BottleWrapper>
           {reversedBottleList.map((item: any, index: any) => (
-            <BottleItemWrapper>
+            <BottleItemWrapper key={index}>
               <Bottle
-                key={index}
                 shape={Object.values(item)[0].bottleShape}
                 onClick={() => {
                   onCLickBottle(index);
@@ -65,7 +64,6 @@ const BottleWrapper = styled.div`
   align-items: center;
   margin-bottom: 20px;
   flex-wrap: wrap;
-  /* border: 1px solid blue; */
 `;
 const BottleItemWrapper = styled.div`
   width: 50%;
