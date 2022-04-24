@@ -31,7 +31,7 @@ function App() {
           <Route path="/write" element={<Write />} />
           <Route path="/archive" element={<ArchiveRead />} />
           <Route path="/bottle/:bottleUid" element={<Bottle />} />
-          <Route path="/read" element={<Read />} />
+          <Route path="/read/:bottleUid/:memoUid" element={<Read />} />
           <Route path="/createbottle" element={<CreateBottle />} />
         </Routes>
       </BrowserRouter>

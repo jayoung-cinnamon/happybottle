@@ -1,21 +1,48 @@
+//@ts-nocheck
+
 import React from "react";
 import styled from "styled-components";
 import Header from "components/Header";
+import { useNavigate, useParams } from "react-router-dom";
+import { useObject } from "react-firebase-hooks/database";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
 function Read() {
-  return (
-    <MainContainer>
-      <Container>
-        <Header></Header>
-        <PaperWrapper>
-          <Paper>
-            <Title>꺼내읽기 제목 </Title>
-            <DateContainer>날짜</DateContainer>
-            <Content>꺼내읽기 내용 </Content>
-          </Paper>
-        </PaperWrapper>
-      </Container>
-    </MainContainer>
-  );
+  const { bottleUid, memoUid } = useParams();
+  console.log("{bottleUid}: ", bottleUid);
+  console.log("{memoUid}: ", memoUid);
+  const navigate = useNavigate();
+  const db = getDatabase();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+  const memoRef = ref(db, `${userUid}/${bottleUid}/${memoUid}`);
+  const [snapshot, loading, error] = useObject(memoRef);
+  let memo;
+  if (snapshot) {
+    console.log("memo.val(): ", snapshot.val());
+    const data = snapshot.val();
+    if (data !== null) {
+      memo = Object.values(data)[0];
+    }
+  }
+  if (!loading) {
+    return (
+      <MainContainer>
+        <Container>
+          <Header></Header>
+          <PaperWrapper>
+            <Paper>
+              <Title>{memo.title} </Title>
+              <DateContainer>{memo.writtenDate}</DateContainer>
+              <Content>{memo.contents}</Content>
+            </Paper>
+          </PaperWrapper>
+        </Container>
+      </MainContainer>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default Read;

@@ -1,26 +1,77 @@
-import React from "react";
-import styled from "styled-components";
+//@ts-nocheck
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 import Header from "components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useObject } from "react-firebase-hooks/database";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+
 function Bottle() {
+  const { bottleUid } = useParams();
+  console.log("{bottleUid}: ", bottleUid);
   const navigate = useNavigate();
-  const onClickMemo = () => {
-    navigate("/read");
+  const db = getDatabase();
+  const auth = getAuth();
+  const userUid = auth.currentUser?.uid;
+  const memoRef = ref(db, `${userUid}/${bottleUid}`);
+  const [snapshot, loading, error] = useObject(memoRef);
+  const onClickMemo = (index: any) => {
+    console.log("memoList[index]: ", Object.keys(memoList[index])[0]);
+    const memoUid = Object.keys(memoList[index])[0];
+    navigate(`/read/${bottleUid}/${memoUid}`);
   };
-  return (
-    <MainContainer>
-      <Container>
-        <Header></Header>
-        <BottleContainer>
-          <HappyMemo onClick={onClickMemo} />
-        </BottleContainer>
-      </Container>
-    </MainContainer>
-  );
+  let memoList: any[] = [];
+  const setMemoList = (data: any) => {
+    memoList.push(data);
+    console.log("memoList: ", memoList);
+    memoList.map((item, index) => {
+      console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
+      console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+    });
+  };
+  if (snapshot) {
+    console.log("snapshot.val(): ", snapshot.val());
+    const data = snapshot.val();
+    if (data !== null) {
+      for (const [key, value] of Object.entries(data)) {
+        //@ts-ignore
+        if (value.memo) {
+          setMemoList({ [key]: value });
+          //@ts-ignore
+          console.log("value: ", value.memo);
+        }
+      }
+    }
+  }
+  if (!loading) {
+    return (
+      <MainContainer>
+        <Container>
+          <Header></Header>
+          <BottleContainer>
+            {memoList.map((item, index) => (
+              <HappyMemo
+                position={index}
+                isOpened={Object.values(item)[0]["memo"].isOpened}
+                key={index}
+                onClick={() => onClickMemo(index)}
+              />
+            ))}
+          </BottleContainer>
+        </Container>
+      </MainContainer>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default Bottle;
-
+interface MemoPositionProps {
+  position: number;
+  isOpened: boolean;
+}
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
@@ -55,12 +106,17 @@ const BottleContainer = styled.div`
   border-radius: 10px;
   position: relative;
 `;
-
-const HappyMemo = styled.div`
+//TODO: 인덱스 받아서 위치 랜덤으로?, isOpened 받아서 열 수 있는거랑 구분
+const HappyMemo = styled.div<MemoPositionProps>`
   width: 86px;
   height: 104px;
   background-image: url("images/main/HappyMemo.png");
   position: absolute;
   bottom: 50px;
   left: 180px;
+  ${(props) =>
+    props.position &&
+    css`
+      left: calc(45 * position) px;
+    `}
 `;
