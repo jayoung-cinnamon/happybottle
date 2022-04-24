@@ -17,14 +17,18 @@ function Bottle() {
   const memoRef = ref(db, `${userUid}/${bottleUid}`);
   const [snapshot, loading, error] = useObject(memoRef);
   const onClickMemo = (index: any) => {
-    console.log("index: ", index);
-    console.log("memoList[index]: ", memoList[index]);
-    navigate("/read");
+    console.log("memoList[index]: ", Object.keys(memoList[index])[0]);
+    const memoUid = Object.keys(memoList[index])[0];
+    navigate(`/read/${bottleUid}/${memoUid}`);
   };
   let memoList: any[] = [];
   const setMemoList = (data: any) => {
     memoList.push(data);
     console.log("memoList: ", memoList);
+    memoList.map((item, index) => {
+      console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
+      console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+    });
   };
   if (snapshot) {
     console.log("snapshot.val(): ", snapshot.val());
@@ -33,7 +37,7 @@ function Bottle() {
       for (const [key, value] of Object.entries(data)) {
         //@ts-ignore
         if (value.memo) {
-          setMemoList(value);
+          setMemoList({ [key]: value });
           //@ts-ignore
           console.log("value: ", value.memo);
         }
@@ -49,6 +53,7 @@ function Bottle() {
             {memoList.map((item, index) => (
               <HappyMemo
                 position={index}
+                isOpened={Object.values(item)[0]["memo"].isOpened}
                 key={index}
                 onClick={() => onClickMemo(index)}
               />
@@ -65,6 +70,7 @@ function Bottle() {
 export default Bottle;
 interface MemoPositionProps {
   position: number;
+  isOpened: boolean;
 }
 const MainContainer = styled.div`
   margin: 0 auto;
@@ -100,7 +106,7 @@ const BottleContainer = styled.div`
   border-radius: 10px;
   position: relative;
 `;
-//TODO: 인덱스 받아서 위치 랜덤으로?
+//TODO: 인덱스 받아서 위치 랜덤으로?, isOpened 받아서 열 수 있는거랑 구분
 const HappyMemo = styled.div<MemoPositionProps>`
   width: 86px;
   height: 104px;
