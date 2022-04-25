@@ -11,6 +11,7 @@ function UpdateModal() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const [updateInfo, setUpdateInfo] = useState(false);
+  const [nickName, setNickName] = useState("");
   const logout = () => {
     try {
       signOut(auth);
@@ -37,58 +38,76 @@ function UpdateModal() {
   const onClickHomeBtn = () => {
     navigate("/hbmain");
   };
-
-  const onClickUpdateBtn = () => {
+  const modalPopupBtn = (e: any) => {
     setUpdateInfo(!updateInfo);
   };
 
+  const onChangeNickName = (e: any) => {
+    const {
+      target: { value },
+    } = e;
+    setNickName(value);
+  };
+
   useEffect(() => {
-    console.log(`updateInfo: ${updateInfo}`);
-  }, [updateInfo]);
+    console.log(`nickName: ${nickName}`);
+  }, [nickName]);
 
-  // const updateUserNickName = (e: any) => {
-  //   try {
-  //     e.preventDefault();
-  //     let data = updateUserInfo(nickName);
-  //     console.log(data);
-  //     navigate("/hbmain");
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
-
+  const updateUserNickName = () => {
+    if (nickName.length < 3) {
+      return alert("최소 3글자 이상 입력해주세요");
+    }
+    try {
+      let data = updateUserInfo(nickName);
+      alert("닉네인 수정완료!");
+    } catch (error) {
+      alert(error);
+    }
+    setUpdateInfo(!updateInfo);
+    navigate("/hbmain");
+  };
   return (
     <SlideMenu>
       <SlideWrapper>
         <BUttonContainer>
           <HomeBtn onClick={onClickHomeBtn}>홈</HomeBtn>
           <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+          <UpdateContainer>
+            {updateInfo ? (
+              <UpdateSuccessBtn onClick={updateUserNickName}>
+                수정완료
+              </UpdateSuccessBtn>
+            ) : (
+              <UpdateBtn onClick={modalPopupBtn}>회원정보 수정</UpdateBtn>
+            )}
+
+            {updateInfo ? (
+              <>
+                <UpdateBox>
+                  {user ? (
+                    <NameContainer>
+                      <UserName>{user.displayName}</UserName>
+                      <Input
+                        onChange={onChangeNickName}
+                        name="nickname"
+                        value={nickName}
+                        maxLength={8}
+                        type="text"
+                        placeholder="변경할 닉네임을 입력하세요"
+                        required
+                      ></Input>
+                    </NameContainer>
+                  ) : (
+                    <></>
+                  )}
+                  <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
+                </UpdateBox>
+              </>
+            ) : (
+              <></>
+            )}
+          </UpdateContainer>
         </BUttonContainer>
-        <UpdateContainer>
-          <UpdateBtn onClick={onClickUpdateBtn}>회원정보 수정</UpdateBtn>
-          {updateInfo ? (
-            <>
-              <UpdateBox>
-                {user ? (
-                  <NameContainer>
-                    <UserName>{user.displayName}</UserName>
-                    <Input
-                      name="nickname"
-                      type="text"
-                      placeholder="변경할 닉네임을 입력하세요"
-                      required
-                    ></Input>
-                  </NameContainer>
-                ) : (
-                  <></>
-                )}
-                <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
-              </UpdateBox>
-            </>
-          ) : (
-            <></>
-          )}
-        </UpdateContainer>
       </SlideWrapper>
     </SlideMenu>
   );
@@ -126,8 +145,6 @@ const BUttonContainer = styled.div`
 `;
 
 const UpdateContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -160,23 +177,29 @@ const HomeBtn = styled(LogoutBtn)`
   background-color: #485edf;
 `;
 
+const UpdateSuccessBtn = styled(LogoutBtn)`
+  background: #df590b;
+`;
+
 const UpdateBox = styled.div`
-  border: 1px solid blue;
   width: 100%;
 `;
 
 const NameContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 `;
 
 const UserName = styled.div`
+  margin-top: 10px;
   font-size: 23px;
   text-align: right;
 `;
 
 const Input = styled.input`
+  margin-top: 10px;
   font-size: 13px;
   padding: 5px;
   margin-top: 10px;
@@ -185,6 +208,6 @@ const Input = styled.input`
   border: 1px solid grey;
   border-radius: 3px;
   ::placeholder {
-    color: #faaaaa;
+    color: grey;
   }
 `;
