@@ -51,16 +51,18 @@ function Bottle() {
         <Container>
           <Header></Header>
           <BottleContainer>
-            {memoList.map((item, index) => (
-              <HappyMemo
-                index={index}
-                isOpened={Object.values(item)[0]["memo"].isOpened}
-                key={index}
-                onClick={() => onClickMemo(index)}
-                // position={getRandomInteger(180, 500)}
-                degree={getRandomInteger(1, 180)}
-              />
-            ))}
+            <TempBottleBox>
+              {memoList.map((item, index) => (
+                <HappyMemo
+                  index={index}
+                  isOpened={Object.values(item)[0]["memo"].isOpened}
+                  key={index}
+                  onClick={() => onClickMemo(index)}
+                  // position={getRandomInteger(180, 500)}
+                  degree={getRandomInteger(1, 180)}
+                />
+              ))}
+            </TempBottleBox>
           </BottleContainer>
         </Container>
       </MainContainer>
@@ -93,6 +95,7 @@ const MainContainer = styled.div`
 
 const Container = styled.div`
   width: 100%;
+
   /* height: 100%; */
   display: flex;
   flex-direction: column;
@@ -104,11 +107,22 @@ const BottleContainer = styled.div`
   margin-top: 30px;
   width: 90%;
   min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url("/images/main/BigBottle.png");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #729743;
   border-radius: 10px;
+  position: relative;
+  align-items: flex-end;
+`;
+
+const TempBottleBox = styled.div`
+  border: 1px solid red;
+  min-width: 247px;
+  height: 60vh;
   position: relative;
 `;
 //TODO: 인덱스 받아서 위치 랜덤으로?, isOpened 받아서 열 수 있는거랑 구분
@@ -133,7 +147,7 @@ const HappyMemo = styled.div<MemoPositionProps>`
     css`
       bottom: 150px;
       /* background-color: blue; */
-      left: calc(30 * ${(props) => props.index}px);
+      left: calc(10 + 80 * ${(props) => props.index}px);
     `};
 
   // index: 7,8,9 구간

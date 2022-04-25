@@ -121,11 +121,15 @@ const SlideMenu = styled.div`
   display: flex;
   justify-content: center;
   z-index: 9;
+  min-width: 320px;
 `;
 
 const SlideWrapper = styled.div`
+  width: 320px;
+  min-width: 320px;
+  border: 1px solid red;
   margin: 30px;
-  width: 90%;
+  /* width: 70%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
