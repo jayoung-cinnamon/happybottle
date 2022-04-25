@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
+import subDays from "date-fns/subDays";
+import parse from "date-fns/parse";
 
 function Bottle() {
   const { bottleUid } = useParams();
@@ -28,6 +30,14 @@ function Bottle() {
     memoList.map((item, index) => {
       console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
       console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+      console.log(
+        "계산날짜",
+        parse(
+          Object.values(item)[0]["memo"].writtenDate,
+          "yyyy.MM.dd HH:mm:ss",
+          new Date()
+        )
+      );
     });
   };
   if (snapshot) {
