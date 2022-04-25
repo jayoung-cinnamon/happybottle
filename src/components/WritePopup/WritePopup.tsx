@@ -5,7 +5,10 @@ import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref, set } from "firebase/database";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function WritePopup({ content, title, date, memoUid }) {
+  const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -48,6 +51,8 @@ function WritePopup({ content, title, date, memoUid }) {
         isOpened: false,
       },
     });
+    alert(`${bottleName}에 저장되었습니다!`);
+    navigate("/hbmain");
   };
 
   // useEffect(() => {

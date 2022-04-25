@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
+import { getRandomInteger } from "utils/randomPosition";
 
 function Bottle() {
   const { bottleUid } = useParams();
@@ -52,10 +53,12 @@ function Bottle() {
           <BottleContainer>
             {memoList.map((item, index) => (
               <HappyMemo
-                position={index}
+                index={index}
                 isOpened={Object.values(item)[0]["memo"].isOpened}
                 key={index}
                 onClick={() => onClickMemo(index)}
+                // position={getRandomInteger(180, 500)}
+                degree={getRandomInteger(1, 180)}
               />
             ))}
           </BottleContainer>
@@ -69,8 +72,10 @@ function Bottle() {
 
 export default Bottle;
 interface MemoPositionProps {
+  index: number;
   position: number;
   isOpened: boolean;
+  degree: number;
 }
 const MainContainer = styled.div`
   margin: 0 auto;
@@ -114,9 +119,35 @@ const HappyMemo = styled.div<MemoPositionProps>`
   position: absolute;
   bottom: 50px;
   left: 180px;
+  // index: 1,2,3 구간
   ${(props) =>
-    props.position &&
+    (props.index === 0 || props.index === 1 || props.index === 2) &&
     css`
-      left: calc(45 * position) px;
-    `}
+      bottom: 40px;
+      /* background-color: red; */
+      left: calc(90 * ${(props) => props.index}px);
+    `};
+  // index: 4,5,6 구간
+  ${(props) =>
+    (props.index === 3 || props.index === 4 || props.index === 5) &&
+    css`
+      bottom: 150px;
+      /* background-color: blue; */
+      left: calc(30 * ${(props) => props.index}px);
+    `};
+
+  // index: 7,8,9 구간
+  ${(props) =>
+    (props.index === 6 || props.index === 7 || props.index === 8) &&
+    css`
+      bottom: 260px;
+      /* background-color: green; */
+      left: calc(20 * ${(props) => props.index}px);
+    `};
+  ${(props) =>
+    props.degree &&
+    css`
+      /* border: 2px solid black; */
+      transform: rotate(${(props) => props.degree}deg);
+    `};
 `;
