@@ -5,10 +5,11 @@ import Header from "components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
-import subDays from "date-fns/subDays";
+import { getDatabase, ref, update } from "firebase/database";
 import parse from "date-fns/parse";
 import { getRandomInteger } from "utils/randomPosition";
+import isAfter from "date-fns/isAfter";
+import add from "date-fns/add";
 
 function Bottle() {
   const { bottleUid } = useParams();
@@ -31,15 +32,38 @@ function Bottle() {
     console.log("memoList: ", memoList);
     memoList.map((item, index) => {
       console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
-      console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
-      console.log(
-        "계산날짜",
+      // console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+      const targetDate = add(
         parse(
           Object.values(item)[0]["memo"].writtenDate,
           "yyyy.MM.dd HH:mm:ss",
           new Date()
-        )
+        ),
+        {
+          //TODO: 30일로 변경
+          days: 1,
+        }
       );
+      // console.log(
+      //   "writtenDate",
+      //   parse(
+      //     Object.values(item)[0]["memo"].writtenDate,
+      //     "yyyy.MM.dd HH:mm:ss",
+      //     new Date()
+      //   )
+      // );
+      console.log("지금시간: ", new Date());
+      console.log("30일 지났어?", isAfter(new Date(), targetDate));
+
+      const isPassed30days = isAfter(new Date(), targetDate);
+      if (isPassed30days) {
+        const updates = {};
+        updates["isOpened"] = true;
+        update(
+          ref(db, `${userUid}/${bottleUid}/${Object.keys(item)[0]}/memo/`),
+          updates
+        );
+      }
     });
   };
   if (snapshot) {
@@ -69,7 +93,13 @@ function Bottle() {
                   index={index}
                   isOpened={Object.values(item)[0]["memo"].isOpened}
                   key={index}
-                  onClick={() => onClickMemo(index)}
+                  onClick={() => {
+                    if (!Object.values(item)[0]["memo"].isOpened) {
+                      alert("30일이 지나야 읽을 수 있어요");
+                      return;
+                    }
+                    onClickMemo(index);
+                  }}
                   // position={getRandomInteger(180, 500)}
                   degree={getRandomInteger(1, 360)}
                 />
@@ -167,6 +197,11 @@ const HappyMemo = styled.div<MemoPositionProps>`
   bottom: 50px;
   left: 180px;
   cursor: pointer;
+  ${(props) =>
+    props.isOpened === true &&
+    css`
+      border: 1px solid red;
+    `};
   // index: 1,2,3 구간
   ${(props) =>
     (props.index === 0 || props.index === 1 || props.index === 2) &&
