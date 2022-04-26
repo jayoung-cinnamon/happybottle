@@ -5,7 +5,10 @@ import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref, set } from "firebase/database";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function WritePopup({ content, title, date, memoUid }) {
+  const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -48,6 +51,8 @@ function WritePopup({ content, title, date, memoUid }) {
         isOpened: false,
       },
     });
+    alert(`${value}에 저장되었습니다!`);
+    navigate("/hbmain");
   };
 
   // useEffect(() => {
@@ -73,6 +78,12 @@ function WritePopup({ content, title, date, memoUid }) {
                       value={Object.values(item)[0].bottleName}
                       checked={bottleName === Object.values(item)[0].bottleName}
                       onChange={(e) => {
+                        if (Object.keys(Object.values(item)[0]).length >= 14) {
+                          alert(
+                            "이 보틀은 가득 차 있어요. 다른 보틀에 담아주세요."
+                          );
+                          return;
+                        }
                         onClickRadioButton(e, Object.keys(item)[0]);
                         close();
                       }}
