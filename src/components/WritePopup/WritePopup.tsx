@@ -51,7 +51,7 @@ function WritePopup({ content, title, date, memoUid }) {
         isOpened: false,
       },
     });
-    alert(`${bottleName}에 저장되었습니다!`);
+    alert(`${value}에 저장되었습니다!`);
     navigate("/hbmain");
   };
 

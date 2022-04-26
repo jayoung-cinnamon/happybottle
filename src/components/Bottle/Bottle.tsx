@@ -23,12 +23,14 @@ function Bottle() {
     navigate(`/read/${bottleUid}/${memoUid}`);
   };
   let memoList: any[] = [];
+
   const setMemoList = (data: any) => {
     memoList.push(data);
     console.log("memoList: ", memoList);
     memoList.map((item, index) => {
       console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
       console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+      console.log("item!!!!", Object.values(item));
     });
   };
   if (snapshot) {
@@ -50,7 +52,7 @@ function Bottle() {
       <MainContainer>
         <Container>
           <Header></Header>
-          <BottleContainer>
+          <BottleContainer shape="blue">
             <TempBottleBox>
               {memoList.map((item, index) => (
                 <HappyMemo
@@ -59,7 +61,7 @@ function Bottle() {
                   key={index}
                   onClick={() => onClickMemo(index)}
                   // position={getRandomInteger(180, 500)}
-                  degree={getRandomInteger(1, 180)}
+                  degree={getRandomInteger(1, 360)}
                 />
               ))}
             </TempBottleBox>
@@ -110,12 +112,30 @@ const BottleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/images/main/BigBottle.png");
+  background-image: url("/images/main/Big_Bottle_White.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #729743;
+  background-color: #454d96;
   border-radius: 10px;
   position: relative;
+  ${(props) =>
+    props.shape === "blue" &&
+    css`
+      background-image: url("/images/main/Big_Bottle_Blue.png");
+      background-color: #9e2b2b;
+    `}
+  ${(props) =>
+    props.shape === "green" &&
+    css`
+      background-image: url("/images/main/Big_Bottle_Green.png");
+      background-color: #d68c1e;
+    `}
+  ${(props) =>
+    props.shape === "black" &&
+    css`
+      background-image: url("/images/main/Big_Bottle_Black.png");
+      background-color: #754da8;
+    `}
 `;
 
 const TempBottleBox = styled.div`
@@ -156,6 +176,15 @@ const HappyMemo = styled.div<MemoPositionProps>`
     (props.index === 6 || props.index === 7 || props.index === 8) &&
     css`
       bottom: 10.5em;
+      /* background-color: green; */
+      left: calc(65 * ${(props) => props.index % 3}px);
+    `};
+
+  // index: 10,11,12 구간
+  ${(props) =>
+    (props.index === 9 || props.index === 10 || props.index === 11) &&
+    css`
+      bottom: 15.5em;
       /* background-color: green; */
       left: calc(65 * ${(props) => props.index % 3}px);
     `};
