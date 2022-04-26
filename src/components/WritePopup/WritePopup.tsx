@@ -78,6 +78,12 @@ function WritePopup({ content, title, date, memoUid }) {
                       value={Object.values(item)[0].bottleName}
                       checked={bottleName === Object.values(item)[0].bottleName}
                       onChange={(e) => {
+                        if (Object.keys(Object.values(item)[0]).length >= 14) {
+                          alert(
+                            "이 보틀은 가득 차 있어요. 다른 보틀에 담아주세요."
+                          );
+                          return;
+                        }
                         onClickRadioButton(e, Object.keys(item)[0]);
                         close();
                       }}
