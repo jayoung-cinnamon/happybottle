@@ -23,7 +23,7 @@ function Bottle() {
     navigate(`/read/${bottleUid}/${memoUid}`);
   };
   let memoList: any[] = [];
-
+  let bottleColor: string = "";
   const setMemoList = (data: any) => {
     memoList.push(data);
     console.log("memoList: ", memoList);
@@ -37,6 +37,7 @@ function Bottle() {
     console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
+      bottleColor = data.bottleShape;
       for (const [key, value] of Object.entries(data)) {
         //@ts-ignore
         if (value.memo) {
@@ -52,7 +53,7 @@ function Bottle() {
       <MainContainer>
         <Container>
           <Header></Header>
-          <BottleContainer shape="blue">
+          <BottleContainer shape={bottleColor}>
             <TempBottleBox>
               {memoList.map((item, index) => (
                 <HappyMemo
@@ -81,6 +82,9 @@ interface MemoPositionProps {
   isOpened: boolean;
   degree: number;
 }
+interface BottleProps {
+  bottleColor: string;
+}
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
@@ -105,7 +109,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const BottleContainer = styled.div`
+const BottleContainer = styled.div<BottleProps>`
   margin-top: 30px;
   width: 90%;
   min-height: 580px;
