@@ -69,17 +69,20 @@ function Read() {
         <Container>
           <Header></Header>
           <PaperWrapper>
-            <Paper>
-              <Title>
-                {isOpened ? memo.title : "한달 뒤에 읽을 수 있습니다"}{" "}
-              </Title>
-              <DateContainer>
-                {isOpened ? memo.writtenDate : getETA(memo.writtenDate)}
-              </DateContainer>
-              <Content>
-                {isOpened ? memo.contents : "30일 뒤에 꺼내 볼 행복"}
-              </Content>
-            </Paper>
+            {isOpened && (
+              <Paper>
+                <Title>{memo.title}</Title>
+                <DateContainer>{memo.writtenDate}</DateContainer>
+                <Content>{memo.contents}</Content>
+              </Paper>
+            )}
+            {!isOpened && (
+              <Paper>
+                <Title>{"한달 뒤에 읽을 수 있습니다"}</Title>
+                <DateContainer>{getETA(memo.writtenDate)}</DateContainer>
+                <Content>{"30일 뒤에 꺼내 볼 행복"}</Content>
+              </Paper>
+            )}
           </PaperWrapper>
         </Container>
       </MainContainer>
