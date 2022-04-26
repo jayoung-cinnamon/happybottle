@@ -3,15 +3,18 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "components/Header";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, ref } from "firebase/database";
+import parse from "date-fns/parse";
+import add from "date-fns/add";
+import differenceInDays from "date-fns/differenceInDays";
+import differenceInHours from "date-fns/differenceInHours";
+import differenceInMinutes from "date-fns/differenceInMinutes";
+
 function Read() {
   const { bottleUid, memoUid } = useParams();
-  console.log("{bottleUid}: ", bottleUid);
-  console.log("{memoUid}: ", memoUid);
-  const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -19,22 +22,63 @@ function Read() {
   const [snapshot, loading, error] = useObject(memoRef);
   let memo;
   if (snapshot) {
-    console.log("memo.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
       memo = Object.values(data)[0];
     }
   }
+  const getETA = (memoDate) => {
+    const targetDate = add(parse(memoDate, "yyyy.MM.dd HH:mm:ss", new Date()), {
+      //TODO: 30일로 변경
+      days: 1,
+    });
+    const diffrenceInDay = differenceInDays(new Date(), targetDate);
+    let result = "";
+    let differenceInHour = 0;
+    let differenceInMinute = 0;
+
+    if (diffrenceInDay === 0) {
+      differenceInHour = differenceInHours(new Date(), targetDate);
+    }
+    if (differenceInHour === 0) {
+      differenceInMinute = differenceInMinutes(new Date(), targetDate);
+    }
+    if (diffrenceInDay) {
+      result = `${differenceInDays(
+        new Date(),
+        targetDate
+      )}일 뒤에 읽을 수 있습니다.`;
+    } else if (differenceInHour) {
+      result = `${differenceInHours(
+        new Date(),
+        targetDate
+      )}시간 뒤에 읽을 수 있습니다.`.substring(1);
+    } else if (differenceInMinute) {
+      result = `${differenceInMinutes(
+        new Date(),
+        targetDate
+      )}분 뒤에 읽을 수 있습니다.`.substring(1);
+    }
+
+    return result;
+  };
   if (!loading) {
+    const isOpened = memo.isOpened;
     return (
       <MainContainer>
         <Container>
           <Header></Header>
           <PaperWrapper>
             <Paper>
-              <Title>{memo.title} </Title>
-              <DateContainer>{memo.writtenDate}</DateContainer>
-              <Content>{memo.contents}</Content>
+              <Title>
+                {isOpened ? memo.title : "한달 뒤에 읽을 수 있습니다"}{" "}
+              </Title>
+              <DateContainer>
+                {isOpened ? memo.writtenDate : getETA(memo.writtenDate)}
+              </DateContainer>
+              <Content>
+                {isOpened ? memo.contents : "30일 뒤에 꺼내 볼 행복"}
+              </Content>
             </Paper>
           </PaperWrapper>
         </Container>

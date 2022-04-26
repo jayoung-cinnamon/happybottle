@@ -93,13 +93,7 @@ function Bottle() {
                   index={index}
                   isOpened={Object.values(item)[0]["memo"].isOpened}
                   key={index}
-                  onClick={() => {
-                    if (!Object.values(item)[0]["memo"].isOpened) {
-                      alert("30일이 지나야 읽을 수 있어요");
-                      return;
-                    }
-                    onClickMemo(index);
-                  }}
+                  onClick={() => onClickMemo(index)}
                   // position={getRandomInteger(180, 500)}
                   degree={getRandomInteger(1, 360)}
                 />
