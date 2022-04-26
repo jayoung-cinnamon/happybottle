@@ -106,7 +106,7 @@ const Container = styled.div`
 const BottleContainer = styled.div`
   margin-top: 30px;
   width: 90%;
-  min-height: 80vh;
+  min-height: 580px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,47 +116,48 @@ const BottleContainer = styled.div`
   background-color: #729743;
   border-radius: 10px;
   position: relative;
-  align-items: flex-end;
 `;
 
 const TempBottleBox = styled.div`
-  border: 1px solid red;
-  min-width: 247px;
-  height: 60vh;
+  min-width: 210px;
+  min-height: 537px;
   position: relative;
 `;
+
 //TODO: 인덱스 받아서 위치 랜덤으로?, isOpened 받아서 열 수 있는거랑 구분
 const HappyMemo = styled.div<MemoPositionProps>`
-  width: 86px;
-  height: 104px;
+  width: 70px;
+  height: 90px;
   background-image: url("/images/main/HappyMemo.png");
+  background-size: cover;
   position: absolute;
   bottom: 50px;
   left: 180px;
+  cursor: pointer;
   // index: 1,2,3 구간
   ${(props) =>
     (props.index === 0 || props.index === 1 || props.index === 2) &&
     css`
-      bottom: 40px;
+      bottom: 0.5em;
       /* background-color: red; */
-      left: calc(90 * ${(props) => props.index}px);
+      left: calc(65 * ${(props) => props.index}px);
     `};
   // index: 4,5,6 구간
   ${(props) =>
     (props.index === 3 || props.index === 4 || props.index === 5) &&
     css`
-      bottom: 150px;
+      bottom: 5.5em;
       /* background-color: blue; */
-      left: calc(10 + 80 * ${(props) => props.index}px);
+      left: calc(65 * ${(props) => props.index % 3}px);
     `};
 
   // index: 7,8,9 구간
   ${(props) =>
     (props.index === 6 || props.index === 7 || props.index === 8) &&
     css`
-      bottom: 260px;
+      bottom: 10.5em;
       /* background-color: green; */
-      left: calc(20 * ${(props) => props.index}px);
+      left: calc(65 * ${(props) => props.index % 3}px);
     `};
   ${(props) =>
     props.degree &&
