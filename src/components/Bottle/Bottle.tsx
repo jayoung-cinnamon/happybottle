@@ -126,7 +126,7 @@ const BottleContainer = styled.div<BottleProps>`
     props.shape === "blue" &&
     css`
       background-image: url("/images/main/Big_Bottle_Blue.png");
-      background-color: #9e2b2b;
+      background-color: #648875;
     `}
   ${(props) =>
     props.shape === "green" &&
