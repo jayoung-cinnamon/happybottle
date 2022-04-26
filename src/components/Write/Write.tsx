@@ -49,24 +49,6 @@ function Write() {
     console.log("dataArr: ", dataArr);
   };
 
-  //   const obSubmit = (e: any) => {
-  //     e.preventDefault();
-  //     console.log("onSubmit!");
-  //     return writeUserData;
-  //   };
-
-  //   const onClickSave = (e: any) => {
-  //     if (
-  //       window.confirm(`저장 후엔 수정할 수 없어요🥲
-  // 계속 저장할까요?`)
-  //     ) {
-  //       obSubmit(e);
-  //       alert("저장되었어요! 한 달 뒤에 만나요!😙");
-  //     } else {
-  //       console.log("취소");
-  //     }
-  //   };
-
   return (
     <MainContainer>
       <Container>
