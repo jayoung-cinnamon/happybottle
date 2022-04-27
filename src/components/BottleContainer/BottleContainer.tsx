@@ -27,25 +27,23 @@ function BottleContainer({ bottleList }: any) {
       <Container>
         <BottleWrapper>
           <ShelveBackGround>
-            <ShelveBack>
-              {reversedBottleList.map((item: any, index: any) => (
-                <>
-                  <BottleItemWrapper key={index}>
-                    <Bottle
-                      shape={Object.values(item)[0].bottleShape}
-                      onClick={() => {
-                        onCLickBottle(index);
-                      }}
-                    >
-                      <h1>{Object.values(item)[0].bottleName}</h1>
-                    </Bottle>
-                  </BottleItemWrapper>
-                  <ShelveDark />
-                  <ShelveBottom />
-                </>
-              ))}
-              {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
-            </ShelveBack>
+            {reversedBottleList.map((item: any, index: any) => (
+              <ShelveBack>
+                <BottleItemWrapper key={index}>
+                  <Bottle
+                    shape={Object.values(item)[0].bottleShape}
+                    onClick={() => {
+                      onCLickBottle(index);
+                    }}
+                  >
+                    <h1>{Object.values(item)[0].bottleName}</h1>
+                  </Bottle>
+                </BottleItemWrapper>
+                <ShelveDark />
+                <ShelveBottom />
+              </ShelveBack>
+            ))}
+            {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
           </ShelveBackGround>
         </BottleWrapper>
       </Container>
@@ -77,8 +75,8 @@ const BottleItemWrapper = styled.div`
   justify-content: space-around;
   margin-bottom: 30px;
   flex-wrap: auto;
-  border: 1px solid red;
-  width: 100%;
+  /* border: 1px solid red; */
+  width: 40%;
 `;
 
 const ShelveBackGround = styled.div`
@@ -89,12 +87,14 @@ const ShelveBackGround = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 const ShelveBack = styled.div`
-  width: 100%;
-  border: 1px solid green;
-  /* display: flex; */
+  width: 49%;
+  /* border: 2px solid green; */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   background-color: #947551;
 `;
 
@@ -102,14 +102,17 @@ const ShelveBottom = styled.div`
   width: 100%;
   height: 20px;
   background-color: #cdac79;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+  /* position: absolute; */
+  /* bottom: -60px; */
 `;
 const ShelveDark = styled.div`
   width: 100%;
   height: 52px;
   background-color: #755f45;
   /* border: 1px solid blue; */
-  position: relative;
+  /* bottom: -40px; */
+  /* position: absolute; */
 `;
 
 const EmptyBottle = styled.div`
@@ -118,8 +121,8 @@ const EmptyBottle = styled.div`
   margin-top: 45px;
 `;
 const Bottle = styled.div<BottleColorProps>`
-  border: 1px solid yellow;
-  position: absolute;
+  /* border: 1px solid yellow; */
+  /* position: absolute; */
   bottom: -60px;
   width: 92px;
   height: 200px;
