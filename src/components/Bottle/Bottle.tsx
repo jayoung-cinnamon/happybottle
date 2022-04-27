@@ -194,8 +194,21 @@ const HappyMemo = styled.div<MemoPositionProps>`
   ${(props) =>
     props.isOpened === true &&
     css`
-      border: 1px solid red;
+      animation: fade-out-down 2s ease-in infinite;
     `};
+
+  @keyframes fade-out-down {
+    0% {
+      filter: brightness(1.1);
+    }
+    50% {
+      filter: brightness(1.2);
+    }
+    100% {
+      filter: brightness(1.25);
+    }
+  }
+
   // index: 1,2,3 구간
   ${(props) =>
     (props.index === 0 || props.index === 1 || props.index === 2) &&
