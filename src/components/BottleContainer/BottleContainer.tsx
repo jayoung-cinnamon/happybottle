@@ -43,7 +43,17 @@ function BottleContainer({ bottleList }: any) {
                 <ShelveBottom />
               </ShelveBack>
             ))}
-            {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
+            {reversedBottleList.length % 2 !== 0 && (
+              <>
+                <ShelveBack>
+                  <BottleItemWrapper>
+                    <EmptyBottle />
+                  </BottleItemWrapper>
+                  <ShelveDark />
+                  <ShelveBottom />
+                </ShelveBack>
+              </>
+            )}
           </ShelveBackGround>
         </BottleWrapper>
       </Container>
@@ -118,7 +128,7 @@ const ShelveDark = styled.div`
 const EmptyBottle = styled.div`
   width: 40%;
   height: 200px;
-  margin-top: 45px;
+  margin-top: 40px;
 `;
 const Bottle = styled.div<BottleColorProps>`
   /* border: 1px solid yellow; */
