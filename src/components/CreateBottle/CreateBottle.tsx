@@ -7,30 +7,16 @@ import BottleTitlePopup from "components/BottleTitlePopup";
 
 function CreateBottle() {
   const navigate = useNavigate();
-  const onClickTitle = () => {
-    console.log("createBottle");
-    return (
-      <>
-        <BottleTitlePopup />
-      </>
-    );
-  };
   return (
     <MainContainer>
       <Container>
         <Header></Header>
         <BottleContainer>
           <TaggedBottle>
-            {/* <Mobile> */}
-            <MobileTitleInput>
+            <TitleInput>
               <BottleTitlePopup />
-            </MobileTitleInput>
-            {/* </Mobile> */}
-            {/* <PC>
-              <PCTitleInput>
-                <BottleTitlePopup />
-              </PCTitleInput>
-            </PC> */}
+            </TitleInput>
+            <TempBottleBox />
           </TaggedBottle>
         </BottleContainer>
       </Container>
@@ -77,15 +63,23 @@ const BottleContainer = styled.div`
 const TaggedBottle = styled.div`
   background-image: url("/images/main/TaggedBottle.png");
   background-repeat: no-repeat;
-  position: relative;
   min-height: 80vh;
   min-width: 312px;
   background-position: center center;
   left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const MobileTitleInput = styled.div`
+const TempBottleBox = styled.div`
+  width: 100%;
+  min-height: 80vh;
   position: absolute;
+`;
+
+const TitleInput = styled.div`
+  position: relative;
   font-size: 20px;
   height: 50px;
   color: white;
@@ -94,10 +88,7 @@ const MobileTitleInput = styled.div`
   line-height: 1.5;
   width: 70px;
   text-align: center;
-  left: 185px;
-  top: 185px;
-`;
-
-const PCTitleInput = styled(MobileTitleInput)`
-  margin-left: 240px;
+  left: 60px;
+  top: -60px;
+  z-index: 999;
 `;
