@@ -26,19 +26,27 @@ function BottleContainer({ bottleList }: any) {
     return (
       <Container>
         <BottleWrapper>
-          {reversedBottleList.map((item: any, index: any) => (
-            <BottleItemWrapper key={index}>
-              <Bottle
-                shape={Object.values(item)[0].bottleShape}
-                onClick={() => {
-                  onCLickBottle(index);
-                }}
-              >
-                <h1>{Object.values(item)[0].bottleName}</h1>
-              </Bottle>
-            </BottleItemWrapper>
-          ))}
-          {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
+          <ShelveBackGround>
+            <ShelveBackGround2>
+              {reversedBottleList.map((item: any, index: any) => (
+                <>
+                  <BottleItemWrapper key={index}>
+                    <Bottle
+                      shape={Object.values(item)[0].bottleShape}
+                      onClick={() => {
+                        onCLickBottle(index);
+                      }}
+                    >
+                      <h1>{Object.values(item)[0].bottleName}</h1>
+                    </Bottle>
+                  </BottleItemWrapper>
+                  <ShelveBackGround4 />
+                  <ShelveBackGround3 />
+                </>
+              ))}
+              {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
+            </ShelveBackGround2>
+          </ShelveBackGround>
         </BottleWrapper>
       </Container>
     );
@@ -62,18 +70,46 @@ const BottleWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
   flex-wrap: wrap;
 `;
 const BottleItemWrapper = styled.div`
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+  border: 1px solid red;
 `;
+
+const ShelveBackGround = styled.div`
+  width: 80%;
+  height: 100%;
+  background-color: #cdac79;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+`;
+const ShelveBackGround2 = styled.div`
+  width: 100%;
+  /* height: 70%; */
+  background-color: #947551;
+`;
+
+const ShelveBackGround3 = styled.div`
+  width: 100%;
+  height: 20px;
+  background-color: #cdac79;
+`;
+const ShelveBackGround4 = styled.div`
+  width: 100%;
+  height: 52px;
+  z-index: 999;
+  background-color: #755f45;
+`;
+
 const EmptyBottle = styled.div`
   width: 50%;
   height: 200px;
+  margin-top: 45px;
 `;
 const Bottle = styled.div<BottleColorProps>`
   width: 92px;
@@ -81,6 +117,7 @@ const Bottle = styled.div<BottleColorProps>`
   background-size: 100% 100%;
   position: relative;
   background-position: 50% 50%;
+  margin-top: 40px;
   background-image: url("/images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
