@@ -27,7 +27,7 @@ function BottleContainer({ bottleList }: any) {
       <Container>
         <BottleWrapper>
           <ShelveBackGround>
-            <ShelveBackGround2>
+            <ShelveBack>
               {reversedBottleList.map((item: any, index: any) => (
                 <>
                   <BottleItemWrapper key={index}>
@@ -40,12 +40,12 @@ function BottleContainer({ bottleList }: any) {
                       <h1>{Object.values(item)[0].bottleName}</h1>
                     </Bottle>
                   </BottleItemWrapper>
-                  <ShelveBackGround4 />
-                  <ShelveBackGround3 />
+                  <ShelveDark />
+                  <ShelveBottom />
                 </>
               ))}
               {reversedBottleList.length % 2 !== 0 && <EmptyBottle />}
-            </ShelveBackGround2>
+            </ShelveBack>
           </ShelveBackGround>
         </BottleWrapper>
       </Container>
@@ -70,14 +70,15 @@ const BottleWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
 `;
 const BottleItemWrapper = styled.div`
-  width: 40%;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin-bottom: 30px;
+  flex-wrap: auto;
   border: 1px solid red;
+  width: 100%;
 `;
 
 const ShelveBackGround = styled.div`
@@ -86,33 +87,38 @@ const ShelveBackGround = styled.div`
   background-color: #cdac79;
   padding: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  border: 1px solid black;
 `;
-const ShelveBackGround2 = styled.div`
+const ShelveBack = styled.div`
   width: 100%;
-
+  border: 1px solid green;
+  /* display: flex; */
   background-color: #947551;
 `;
 
-const ShelveBackGround3 = styled.div`
+const ShelveBottom = styled.div`
   width: 100%;
   height: 20px;
   background-color: #cdac79;
+  border: 1px solid blue;
 `;
-const ShelveBackGround4 = styled.div`
+const ShelveDark = styled.div`
   width: 100%;
   height: 52px;
   background-color: #755f45;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   position: relative;
 `;
 
 const EmptyBottle = styled.div`
-  width: 50%;
+  width: 40%;
   height: 200px;
   margin-top: 45px;
 `;
 const Bottle = styled.div<BottleColorProps>`
+  border: 1px solid yellow;
   position: absolute;
   bottom: -60px;
   width: 92px;
