@@ -90,7 +90,7 @@ const ShelveBackGround = styled.div`
 `;
 const ShelveBackGround2 = styled.div`
   width: 100%;
-  /* height: 70%; */
+
   background-color: #947551;
 `;
 
@@ -102,8 +102,9 @@ const ShelveBackGround3 = styled.div`
 const ShelveBackGround4 = styled.div`
   width: 100%;
   height: 52px;
-  z-index: 999;
   background-color: #755f45;
+  border: 1px solid blue;
+  position: relative;
 `;
 
 const EmptyBottle = styled.div`
@@ -112,12 +113,15 @@ const EmptyBottle = styled.div`
   margin-top: 45px;
 `;
 const Bottle = styled.div<BottleColorProps>`
+  position: absolute;
+  bottom: -60px;
   width: 92px;
   height: 200px;
   background-size: 100% 100%;
   position: relative;
   background-position: 50% 50%;
   margin-top: 40px;
+  z-index: 999;
   background-image: url("/images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
