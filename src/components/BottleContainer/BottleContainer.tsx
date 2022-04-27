@@ -135,12 +135,12 @@ const Bottle = styled.div<BottleColorProps>`
   /* position: absolute; */
   bottom: -60px;
   width: 92px;
+  min-width: 92px;
   height: 200px;
   background-size: 100% 100%;
   position: relative;
   background-position: 50% 50%;
   margin-top: 40px;
-  z-index: 999;
   background-image: url("/images/main/Bottle_White.png");
   ${(props) =>
     props.shape === "blue" &&
