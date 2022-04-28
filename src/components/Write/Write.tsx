@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, KeyboardEvent } from "react";
 import Header from "components/Header";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "service/firebase";
@@ -10,11 +10,19 @@ import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
 import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
+import { createIf } from "typescript";
 
 function Write() {
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
+
   const [content, setContent] = useState<string>("");
+  const limitTextArea = (e: KeyboardEvent): void => {
+    if (content.length > 9) {
+      alert("글자수는 200자 이상 입력 할 수 없습니다.");
+      return;
+    }
+  };
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value);
   };
@@ -61,6 +69,7 @@ function Write() {
               }}
               type="text"
               placeholder="제목을 입력해주세요"
+              maxLength={20}
             ></Title>
             <DateContainer>{getDate()}</DateContainer>
             <Content
@@ -68,7 +77,18 @@ function Write() {
                 onChangeContent(e);
               }}
               placeholder="오늘 행복했던 순간을 적어주세요 :)"
+              onKeyUp={limitTextArea}
             ></Content>
+            <TextLimit>
+              <span
+                style={
+                  content.length > 10 ? { color: "red" } : { color: "black" }
+                }
+              >
+                {content.length}
+              </span>
+              / 10
+            </TextLimit>
           </Paper>
           <BtnWrapper>
             <WritePopup
@@ -166,17 +186,11 @@ const BtnWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const SubmitBtn = styled.button`
-  width: 100px;
-  height: 45px;
-  background-color: #a5aac7;
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 600;
+const TextLimit = styled.div`
+  width: 90%;
+  height: 20px;
+  text-align: right;
+  font-size: 18px;
+  color: grey;
+  margin-bottom: 10px;
 `;
