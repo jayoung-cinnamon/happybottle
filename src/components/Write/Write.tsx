@@ -17,13 +17,13 @@ function Write() {
   console.log(auth.currentUser?.uid);
 
   const [content, setContent] = useState<string>("");
-  const limitTextArea = (e: KeyboardEvent): void => {
-    if (content.length > 200) {
+  const limitTextArea = (e: KeyboardEvent): void => {};
+  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    if (content.length > 10) {
       alert("글자수는 200자 이상 입력 할 수 없습니다.");
+      console.log(content);
       return;
     }
-  };
-  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setContent(e.target.value);
   };
   const [title, setTitle] = useState<string>("");
@@ -78,6 +78,7 @@ function Write() {
               }}
               placeholder="오늘 행복했던 순간을 적어주세요 :)"
               onKeyUp={limitTextArea}
+              value={content}
             ></Content>
             <TextLimit>
               <span

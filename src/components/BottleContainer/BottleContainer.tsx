@@ -120,9 +120,6 @@ const ShelveDark = styled.div`
   width: 100%;
   height: 52px;
   background-color: #755f45;
-  /* border: 1px solid blue; */
-  /* bottom: -40px; */
-  /* position: absolute; */
 `;
 
 const EmptyBottle = styled.div`
@@ -131,8 +128,7 @@ const EmptyBottle = styled.div`
   margin-top: 40px;
 `;
 const Bottle = styled.div<BottleColorProps>`
-  /* border: 1px solid yellow; */
-  /* position: absolute; */
+  /* border: 1px solid blue; */
   bottom: -60px;
   width: 92px;
   min-width: 92px;
@@ -168,6 +164,8 @@ const Bottle = styled.div<BottleColorProps>`
     padding: 10px;
     background-color: #454d96;
     color: white;
+    /* border: 1px solid red; */
+    min-width: 72px;
     ${(props) =>
       props.shape === "blue" &&
       css`
