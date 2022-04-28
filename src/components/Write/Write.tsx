@@ -94,9 +94,7 @@ const MainContainer = styled.div`
   height: 100%;
   background-color: white;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  /* align-items: center; */
   padding: 10px;
 `;
 
@@ -152,12 +150,13 @@ const DateContainer = styled.div`
 const Content = styled.textarea`
   margin-top: 10px;
   background-color: #ededed;
-  min-height: 100vh;
+  min-height: 40vh;
   height: 100%;
   font-size: 15px;
   resize: none;
   border: none;
   width: 90%;
+  margin-bottom: 30px;
 `;
 
 const BtnWrapper = styled.div`
