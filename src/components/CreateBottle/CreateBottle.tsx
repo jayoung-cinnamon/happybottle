@@ -30,7 +30,7 @@ const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 60vh;
   height: 100%;
   background-color: white;
   display: flex;
@@ -52,20 +52,20 @@ const BottleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   background-color: #5d97bd;
   background-size: 300px;
   border-radius: 10px;
   font-weight: 600;
-  min-height: 90vh;
-  min-width: 100%;
 `;
 
 const TaggedBottle = styled.div`
   background-image: url("/images/main/TaggedBottle.png");
   background-repeat: no-repeat;
-  min-height: 80vh;
-  min-width: 312px;
   background-position: center center;
+  background-size: contain;
+  min-height: 80vh;
+  min-width: 295px;
   left: 10px;
   display: flex;
   justify-content: center;
