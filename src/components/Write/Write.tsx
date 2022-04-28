@@ -82,12 +82,12 @@ function Write() {
             <TextLimit>
               <span
                 style={
-                  content.length > 10 ? { color: "red" } : { color: "black" }
+                  content.length > 100 ? { color: "red" } : { color: "black" }
                 }
               >
                 {content.length}
               </span>
-              / 10
+              / 100
             </TextLimit>
           </Paper>
           <BtnWrapper>
