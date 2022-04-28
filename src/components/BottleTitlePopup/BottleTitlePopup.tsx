@@ -191,6 +191,7 @@ const CreateBottleBtn = styled.div`
   width: 72px;
   height: 120px;
   word-break: break-word;
+  z-index: -10;
 `;
 
 const TitleBox = styled.div`

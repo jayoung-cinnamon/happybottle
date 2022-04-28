@@ -90,5 +90,4 @@ const TitleInput = styled.div`
   text-align: center;
   left: 60px;
   top: -60px;
-  z-index: 999;
 `;
