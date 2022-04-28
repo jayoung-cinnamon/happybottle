@@ -18,7 +18,7 @@ function Write() {
 
   const [content, setContent] = useState<string>("");
   const limitTextArea = (e: KeyboardEvent): void => {
-    if (content.length > 9) {
+    if (content.length > 200) {
       alert("글자수는 200자 이상 입력 할 수 없습니다.");
       return;
     }
@@ -82,12 +82,12 @@ function Write() {
             <TextLimit>
               <span
                 style={
-                  content.length > 100 ? { color: "red" } : { color: "black" }
+                  content.length > 200 ? { color: "red" } : { color: "black" }
                 }
               >
                 {content.length}
               </span>
-              / 100
+              / 200
             </TextLimit>
           </Paper>
           <BtnWrapper>
