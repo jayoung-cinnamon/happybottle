@@ -76,6 +76,7 @@ const TempBottleBox = styled.div`
   width: 100%;
   min-height: 80vh;
   position: absolute;
+  z-index: -1;
 `;
 
 const TitleInput = styled.div`
