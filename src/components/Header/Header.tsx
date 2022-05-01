@@ -91,6 +91,7 @@ const Clover = styled.div`
   height: 70px;
   background-image: url("/images/main/Clover.png");
   background-size: 100% 100%;
+  cursor: pointer;
 `;
 
 const LogoutBtn = styled.button`

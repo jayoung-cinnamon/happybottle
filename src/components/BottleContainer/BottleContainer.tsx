@@ -129,6 +129,7 @@ const EmptyBottle = styled.div`
 `;
 const Bottle = styled.div<BottleColorProps>`
   /* border: 1px solid blue; */
+  cursor: pointer;
   bottom: -60px;
   width: 92px;
   min-width: 92px;
