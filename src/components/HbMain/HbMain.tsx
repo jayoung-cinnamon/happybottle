@@ -63,7 +63,6 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  position: absolute;
   z-index: 999;
 `;
 
