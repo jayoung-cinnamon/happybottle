@@ -103,11 +103,12 @@ const LogoutBtn = styled.button`
 const ModalContainer = styled.div<SlideProps>`
   width: 100%;
   /* border: 1px solid blue; */
-  height: 50%;
+  height: 100vh;
   /* transition: transform 1s linear;
   transform: translateX(-100%);
   position: fixed; */
   /* left: 0; */
+  border: 1px solid blue;
   z-index: 1;
   position: absolute;
   top: 50%;

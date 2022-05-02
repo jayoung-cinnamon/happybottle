@@ -15,6 +15,7 @@ import ArchiveRead from "components/ArchiveRead";
 import Bottle from "components/Bottle";
 import Read from "components/Read/Read";
 import CreateBottle from "components/CreateBottle";
+import AlertModal from "components/AlertModal";
 function App() {
   console.log(initializeApp);
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/bottle/:bottleUid" element={<Bottle />} />
           <Route path="/read/:bottleUid/:memoUid" element={<Read />} />
           <Route path="/createbottle" element={<CreateBottle />} />
+          <Route path="/alertmodal" element={<AlertModal />} />
         </Routes>
       </BrowserRouter>
     </>

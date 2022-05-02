@@ -10,9 +10,10 @@ import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
 import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
-import { createIf } from "typescript";
+import AlertModal from "components/AlertModal";
 
 function Write() {
+  const [visible, setVisible] = useState(false);
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
 
@@ -20,12 +21,17 @@ function Write() {
   const limitTextArea = (e: KeyboardEvent): void => {};
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     if (content.length > 10) {
-      alert("글자수는 200자 이상 입력 할 수 없습니다.");
-      console.log(content);
+      setVisible(true);
+      console.log("모달 열려라");
       return;
     }
     setContent(e.target.value);
   };
+
+  useEffect(() => {
+    console.log("visible:", visible);
+  }, [visible]);
+
   const [title, setTitle] = useState<string>("");
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
@@ -101,6 +107,9 @@ function Write() {
           </BtnWrapper>
         </PaperWrapper>
       </Container>
+      <AlertModal visible={visible}>
+        글자수는 200자 이상 입력 할 수 없습니다
+      </AlertModal>
     </MainContainer>
   );
 }
