@@ -2,37 +2,42 @@ import React from "react";
 import Header from "components/Header";
 import styled from "styled-components";
 import Popup from "reactjs-popup";
+import { alertRecoilStore } from "recoil/mainModal";
+import { useRecoilState } from "recoil";
 
 function AlertModal({
-  visible,
   children,
+  title,
 }: {
-  visible: boolean;
+  alertOpen: boolean;
   children: any;
+  title: string;
 }) {
+  const [alertOpen, setAlertOpen] = useRecoilState(alertRecoilStore);
+  const onClickClose = () => {
+    setAlertOpen(false);
+  };
   return (
-    <Popup modal nested>
-      {(close: any) => (
-        <>
-          <TitleBox>
-            <CancelBtn onClick={close} />
-            <h1>경고</h1>
-          </TitleBox>
-
-          <ModalOverlay visible={visible} />
-          <ModalWrapper>
-            <ModalInner>{children}</ModalInner>
-          </ModalWrapper>
-        </>
-      )}
-    </Popup>
+    <>
+      <ModalOverlay onClick={onClickClose} alertOpen={alertOpen}>
+        <ModalWrapper>
+          <ModalInner>
+            <TitleBox>
+              <CancelBtn />
+              <h1>{title}</h1>
+            </TitleBox>
+            <h1>{children}</h1>
+          </ModalInner>
+        </ModalWrapper>
+      </ModalOverlay>
+    </>
   );
 }
 
 export default AlertModal;
 
 interface ModalProps {
-  visible: boolean;
+  alertOpen: boolean;
 }
 
 const ModalWrapper = styled.div`
@@ -43,20 +48,25 @@ const ModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   z-index: 1000;
-  overflow: auto;
-  outline: 0;
+  /* overflow: auto; */
+  /* outline: 0; */
+  /* border: 1px solid red; */
 `;
 
 const ModalOverlay = styled.div<ModalProps>`
   box-sizing: border-box;
   position: fixed;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; */
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
-  display: ${(props) => (props.visible ? "block" : "none")};
+  display: ${(props) => (props.alertOpen ? "block" : "none")};
 `;
 
 const ModalInner = styled.div`
@@ -66,13 +76,37 @@ const ModalInner = styled.div`
   border: 5px dotted #729743;
   background-color: #fff;
   border-radius: 10px;
+  width: 200px;
   max-width: 640px;
   min-width: 320px;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px 20px;
   height: 200px;
+  & > h1 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    /* position: absolute; */
+    /* bottom: 50px; */
+    /* padding: 10px; */
+    margin-top: 30px;
+    min-width: 72px;
+  }
+`;
+
+const TitleBox = styled.div`
+  width: 100%;
+  display: flex;
+  display: flex;
+  top: 0;
+  justify-content: space-between;
+  & > h1 {
+    font-size: 20px;
+    font-weight: 600;
+    word-break: break-all;
+  }
 `;
 
 const CancelBtn = styled.div`
@@ -80,17 +114,4 @@ const CancelBtn = styled.div`
   height: 30px;
   background-image: url("/images/main/XLogo.png");
   cursor: pointer;
-`;
-
-const TitleBox = styled.div`
-  width: 90%;
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: space-around;
-  display: flex;
-  align-items: center;
-  & > h1 {
-    font-size: 20px;
-    font-weight: 600;
-  }
 `;
