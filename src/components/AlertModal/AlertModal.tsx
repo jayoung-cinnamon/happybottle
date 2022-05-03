@@ -73,26 +73,32 @@ const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  border: 5px dotted #729743;
+  border: 5px dotted #a31414;
   background-color: #fff;
   border-radius: 10px;
-  width: 200px;
+  width: 250px;
   max-width: 640px;
   min-width: 320px;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 auto;
-  padding: 20px 20px;
+  padding: 0px 20px;
   height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   & > h1 {
     text-align: center;
     font-weight: 600;
     font-size: 20px;
+    width: 190px;
     /* position: absolute; */
     /* bottom: 50px; */
     /* padding: 10px; */
-    margin-top: 30px;
+    /* margin-top: 30px; */
     min-width: 72px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -103,7 +109,7 @@ const TitleBox = styled.div`
   top: 0;
   justify-content: space-between;
   & > h1 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
     word-break: break-all;
   }
