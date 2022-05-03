@@ -66,7 +66,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 
 const NickNameContainer = styled.div`

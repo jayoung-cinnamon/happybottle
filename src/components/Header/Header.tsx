@@ -91,6 +91,7 @@ const Clover = styled.div`
   height: 70px;
   background-image: url("/images/main/Clover.png");
   background-size: 100% 100%;
+  cursor: pointer;
 `;
 
 const LogoutBtn = styled.button`
@@ -102,7 +103,7 @@ const LogoutBtn = styled.button`
 const ModalContainer = styled.div<SlideProps>`
   width: 100%;
   /* border: 1px solid blue; */
-  height: 50%;
+  height: 100vh;
   /* transition: transform 1s linear;
   transform: translateX(-100%);
   position: fixed; */

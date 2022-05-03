@@ -53,6 +53,7 @@ const WriteLogo = styled.div`
   background-image: url("/images/main/Write.png");
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
 `;
 
 const ReadLogo = styled.div`
@@ -85,4 +86,5 @@ const CreateBottleBtn = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-color: white;
+  cursor: pointer;
 `;

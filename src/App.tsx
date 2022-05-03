@@ -15,6 +15,7 @@ import ArchiveRead from "components/ArchiveRead";
 import Bottle from "components/Bottle";
 import Read from "components/Read/Read";
 import CreateBottle from "components/CreateBottle";
+import AlertModal from "components/AlertModal";
 function App() {
   console.log(initializeApp);
   return (

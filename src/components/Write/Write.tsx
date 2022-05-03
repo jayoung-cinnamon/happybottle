@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, KeyboardEvent } from "react";
 import Header from "components/Header";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "service/firebase";
@@ -10,14 +10,28 @@ import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
 import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
+import AlertModal from "components/AlertModal";
 
 function Write() {
+  const [visible, setVisible] = useState(false);
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
+
   const [content, setContent] = useState<string>("");
+  const limitTextArea = (e: KeyboardEvent): void => {};
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    if (content.length > 10) {
+      setVisible(true);
+      console.log("모달 열려라");
+      return;
+    }
     setContent(e.target.value);
   };
+
+  useEffect(() => {
+    console.log("visible:", visible);
+  }, [visible]);
+
   const [title, setTitle] = useState<string>("");
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
@@ -61,6 +75,7 @@ function Write() {
               }}
               type="text"
               placeholder="제목을 입력해주세요"
+              maxLength={20}
             ></Title>
             <DateContainer>{getDate()}</DateContainer>
             <Content
@@ -68,7 +83,19 @@ function Write() {
                 onChangeContent(e);
               }}
               placeholder="오늘 행복했던 순간을 적어주세요 :)"
+              onKeyUp={limitTextArea}
+              value={content}
             ></Content>
+            <TextLimit>
+              <span
+                style={
+                  content.length > 200 ? { color: "red" } : { color: "black" }
+                }
+              >
+                {content.length}
+              </span>
+              / 200
+            </TextLimit>
           </Paper>
           <BtnWrapper>
             <WritePopup
@@ -80,6 +107,9 @@ function Write() {
           </BtnWrapper>
         </PaperWrapper>
       </Container>
+      <AlertModal visible={visible}>
+        글자수는 200자 이상 입력 할 수 없습니다
+      </AlertModal>
     </MainContainer>
   );
 }
@@ -94,10 +124,8 @@ const MainContainer = styled.div`
   height: 100%;
   background-color: white;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  /* align-items: center; */
-  padding: 10px;
+  /* padding: 10px; */
 `;
 
 const Container = styled.div`
@@ -152,12 +180,13 @@ const DateContainer = styled.div`
 const Content = styled.textarea`
   margin-top: 10px;
   background-color: #ededed;
-  min-height: 100vh;
+  min-height: 40vh;
   height: 100%;
   font-size: 15px;
   resize: none;
   border: none;
   width: 90%;
+  margin-bottom: 30px;
 `;
 
 const BtnWrapper = styled.div`
@@ -167,17 +196,11 @@ const BtnWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const SubmitBtn = styled.button`
-  width: 100px;
-  height: 45px;
-  background-color: #a5aac7;
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 600;
+const TextLimit = styled.div`
+  width: 90%;
+  height: 20px;
+  text-align: right;
+  font-size: 18px;
+  color: grey;
+  margin-bottom: 10px;
 `;

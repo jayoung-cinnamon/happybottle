@@ -7,30 +7,16 @@ import BottleTitlePopup from "components/BottleTitlePopup";
 
 function CreateBottle() {
   const navigate = useNavigate();
-  const onClickTitle = () => {
-    console.log("createBottle");
-    return (
-      <>
-        <BottleTitlePopup />
-      </>
-    );
-  };
   return (
     <MainContainer>
       <Container>
         <Header></Header>
         <BottleContainer>
           <TaggedBottle>
-            {/* <Mobile> */}
-            <MobileTitleInput>
+            <TitleInput>
               <BottleTitlePopup />
-            </MobileTitleInput>
-            {/* </Mobile> */}
-            {/* <PC>
-              <PCTitleInput>
-                <BottleTitlePopup />
-              </PCTitleInput>
-            </PC> */}
+            </TitleInput>
+            <TempBottleBox />
           </TaggedBottle>
         </BottleContainer>
       </Container>
@@ -44,12 +30,12 @@ const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 60vh;
   height: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 
 const Container = styled.div`
@@ -66,26 +52,35 @@ const BottleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   background-color: #5d97bd;
   background-size: 300px;
   border-radius: 10px;
   font-weight: 600;
-  min-height: 90vh;
-  min-width: 100%;
 `;
 
 const TaggedBottle = styled.div`
   background-image: url("/images/main/TaggedBottle.png");
   background-repeat: no-repeat;
-  position: relative;
-  min-height: 80vh;
-  min-width: 312px;
   background-position: center center;
+  background-size: contain;
+  min-height: 80vh;
+  min-width: 295px;
   left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const MobileTitleInput = styled.div`
+const TempBottleBox = styled.div`
+  width: 100%;
+  min-height: 80vh;
   position: absolute;
+  z-index: -1;
+`;
+
+const TitleInput = styled.div`
+  position: relative;
   font-size: 20px;
   height: 50px;
   color: white;
@@ -94,10 +89,6 @@ const MobileTitleInput = styled.div`
   line-height: 1.5;
   width: 70px;
   text-align: center;
-  left: 185px;
-  top: 185px;
-`;
-
-const PCTitleInput = styled(MobileTitleInput)`
-  margin-left: 240px;
+  left: 60px;
+  top: -60px;
 `;

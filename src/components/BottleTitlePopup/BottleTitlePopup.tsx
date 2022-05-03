@@ -191,6 +191,7 @@ const CreateBottleBtn = styled.div`
   width: 72px;
   height: 120px;
   word-break: break-word;
+  z-index: -10;
 `;
 
 const TitleBox = styled.div`
@@ -285,7 +286,6 @@ const RadioButton = styled.input`
   margin-right: 10px;
   &:checked + ${RadioButtonLabel} {
     background: #ec7b59;
-    /* z-index: 999; */
   }
   &:hover + ${RadioButtonLabel} {
     background-color: #ec7b59;
