@@ -34,7 +34,6 @@ function App() {
           <Route path="/bottle/:bottleUid" element={<Bottle />} />
           <Route path="/read/:bottleUid/:memoUid" element={<Read />} />
           <Route path="/createbottle" element={<CreateBottle />} />
-          <Route path="/alertmodal" element={<AlertModal />} />
         </Routes>
       </BrowserRouter>
     </>

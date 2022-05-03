@@ -108,7 +108,6 @@ const ModalContainer = styled.div<SlideProps>`
   transform: translateX(-100%);
   position: fixed; */
   /* left: 0; */
-  border: 1px solid blue;
   z-index: 1;
   position: absolute;
   top: 50%;

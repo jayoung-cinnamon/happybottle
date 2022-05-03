@@ -9,7 +9,9 @@ import UpdateModal from "components/UpdateModal";
 import { useObject } from "react-firebase-hooks/database";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { useRecoilState } from "recoil";
 function HbMain() {
+  const [open, setOpen] = useRecoilState(modalRecoilStore);
   const db = getDatabase();
   const auth = getAuth();
   const userUid = auth.currentUser?.uid;
@@ -21,6 +23,9 @@ function HbMain() {
     dataArr.push(data);
     console.log("dataArr: ", dataArr);
   };
+  useEffect(() => {
+    console.log("hbMain open value: ", open);
+  }, [open]);
   if (snapshot) {
     console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
@@ -32,14 +37,23 @@ function HbMain() {
         setBottleList({ [key]: value });
       }
     }
+
     return (
-      <MainContainer>
-        <Container>
-          <Header></Header>
-          <WriteAndRead></WriteAndRead>
-          <BottleContainer bottleList={dataArr}></BottleContainer>
-        </Container>
-      </MainContainer>
+      <Main>
+        <MainContainer
+          style={
+            open
+              ? { position: "fixed", margin: "0 auto", left: "0", right: "0" }
+              : {}
+          }
+        >
+          <Container>
+            <Header></Header>
+            <WriteAndRead></WriteAndRead>
+            <BottleContainer bottleList={dataArr}></BottleContainer>
+          </Container>
+        </MainContainer>
+      </Main>
     );
   } else {
     return <></>;
@@ -52,8 +66,13 @@ interface SlideProps {
   modalOpen: boolean;
 }
 
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
 const MainContainer = styled.div`
-  margin: 0 auto;
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
@@ -62,8 +81,11 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
   z-index: 999;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
 `;
 
 const Container = styled.div`

@@ -75,50 +75,51 @@ function UpdateModal() {
   };
   return (
     <>
-      <ModalOverlay onClick={onClose} />
-      <SlideMenu>
-        <SlideWrapper>
-          <BUttonContainer>
-            <HomeBtn onClick={onClickHomeBtn}>홈</HomeBtn>
-            <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-            <UpdateContainer>
-              {updateInfo ? (
-                <UpdateSuccessBtn onClick={updateUserNickName}>
-                  수정완료
-                </UpdateSuccessBtn>
-              ) : (
-                <UpdateBtn onClick={modalPopupBtn}>회원정보 수정</UpdateBtn>
-              )}
+      <ModalOverlay onClick={onClose}>
+        <SlideMenu>
+          <SlideWrapper>
+            <BUttonContainer>
+              <HomeBtn onClick={onClickHomeBtn}>홈</HomeBtn>
+              <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
+              <UpdateContainer>
+                {updateInfo ? (
+                  <UpdateSuccessBtn onClick={updateUserNickName}>
+                    수정완료
+                  </UpdateSuccessBtn>
+                ) : (
+                  <UpdateBtn onClick={modalPopupBtn}>회원정보 수정</UpdateBtn>
+                )}
 
-              {updateInfo ? (
-                <>
-                  <UpdateBox>
-                    {user ? (
-                      <NameContainer>
-                        <UserName>{user.displayName}</UserName>
-                        <Input
-                          onChange={onChangeNickName}
-                          name="nickname"
-                          value={nickName}
-                          maxLength={8}
-                          type="text"
-                          placeholder="변경할 닉네임을 입력하세요"
-                          required
-                        ></Input>
-                      </NameContainer>
-                    ) : (
-                      <></>
-                    )}
-                    <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
-                  </UpdateBox>
-                </>
-              ) : (
-                <></>
-              )}
-            </UpdateContainer>
-          </BUttonContainer>
-        </SlideWrapper>
-      </SlideMenu>
+                {updateInfo ? (
+                  <>
+                    <UpdateBox>
+                      {user ? (
+                        <NameContainer>
+                          <UserName>{user.displayName}</UserName>
+                          <Input
+                            onChange={onChangeNickName}
+                            name="nickname"
+                            value={nickName}
+                            maxLength={8}
+                            type="text"
+                            placeholder="변경할 닉네임을 입력하세요"
+                            required
+                          ></Input>
+                        </NameContainer>
+                      ) : (
+                        <></>
+                      )}
+                      <DeleteBtn onClick={onClickDeleteUser}>탈퇴</DeleteBtn>
+                    </UpdateBox>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </UpdateContainer>
+            </BUttonContainer>
+          </SlideWrapper>
+        </SlideMenu>
+      </ModalOverlay>
     </>
   );
 }
@@ -126,13 +127,13 @@ function UpdateModal() {
 export default UpdateModal;
 
 const SlideMenu = styled.div`
-  width: 100vw;
+  /* width: 100%; */
   height: 100vh;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 320px;
-  border: 1px solid red;
 `;
 
 const SlideWrapper = styled.div`
@@ -148,6 +149,11 @@ const SlideWrapper = styled.div`
   background-color: white;
   border: 5px dotted #729743;
   border-radius: 10px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 `;
 
 const BUttonContainer = styled.div`
@@ -219,7 +225,6 @@ const Input = styled.input`
   padding: 5px;
   margin-top: 10px;
   height: 25px;
-  /* width: 200px; */
   border: 1px solid grey;
   border-radius: 3px;
   ::placeholder {
@@ -230,12 +235,13 @@ const Input = styled.input`
 const ModalOverlay = styled.div`
   box-sizing: border-box;
   position: fixed;
-  top: 0;
+  overflow: hidden;
+  /* top: 0; */
   left: 0;
-  bottom: 0;
+  /* bottom: 0; */
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
-  width: 100vw;
+  /* width: 100%; */
   height: 100vh;
 `;

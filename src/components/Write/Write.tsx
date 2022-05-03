@@ -125,7 +125,7 @@ const MainContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 
 const Container = styled.div`

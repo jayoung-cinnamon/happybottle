@@ -82,7 +82,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 
 // TODO: 컨테이너 위치 조정 필요 - 세로 중앙 정렬
