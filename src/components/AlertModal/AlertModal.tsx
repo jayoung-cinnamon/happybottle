@@ -22,10 +22,10 @@ function AlertModal({
       <ModalOverlay onClick={onClickClose} alertOpen={alertOpen}>
         <ModalWrapper>
           <ModalInner>
-            <TitleBox>
+            {/* <TitleBox>
               <CancelBtn />
               <h1>{title}</h1>
-            </TitleBox>
+            </TitleBox> */}
             <h1>{children}</h1>
           </ModalInner>
         </ModalWrapper>
