@@ -20,10 +20,13 @@ function Write() {
   const [content, setContent] = useState<string>("");
   const limitTextArea = (e: KeyboardEvent): void => {};
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    if (content.length > 10) {
-      setVisible(true);
-      console.log("모달 열려라");
-      return;
+    //@ts-ignore
+    if (e.nativeEvent.inputType !== "deleteContentBackward") {
+      if (content.length > 10) {
+        setVisible(true);
+        console.log("모달 열려라");
+        return;
+      }
     }
     setContent(e.target.value);
   };
