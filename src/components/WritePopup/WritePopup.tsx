@@ -165,7 +165,7 @@ const TagInputBox = styled.div`
   height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border: 2px solid yellow;
   overflow-y: auto;
