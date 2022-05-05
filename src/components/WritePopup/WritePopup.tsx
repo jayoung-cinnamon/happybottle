@@ -167,7 +167,6 @@ const TagInputBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 2px solid yellow;
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -183,7 +182,6 @@ const Item = styled.div`
   /* font-weight: 500; */
   width: 100%;
   justify-content: space-between;
-  border: 2px solid blue;
 `;
 
 const RadioButtonLabel = styled.label`
