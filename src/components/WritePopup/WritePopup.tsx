@@ -147,11 +147,10 @@ const CancelBtn = styled.div`
 `;
 
 const ModalPage = styled.div`
-  height: 100%;
-  min-width: 320px;
-  min-height: 300px;
   width: 80%;
-  height: 100%;
+  min-width: 320px;
+  height: 320px;
+  min-height: 200px;
   background-color: #454d96;
   border-radius: 10px;
   box-shadow: 0px 0px 37px 6px rgba(91, 91, 91, 0.81);
@@ -163,41 +162,46 @@ const ModalPage = styled.div`
 
 const TagInputBox = styled.div`
   width: 280px;
-  height: 260px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 2px solid yellow;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Item = styled.div`
-  margin-top: 2px;
+  /* margin-top: 3px; */
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   height: 48px;
   position: relative;
   border-radius: 2px;
   color: white;
-  font-weight: 500;
-  width: 200px;
+  /* font-weight: 500; */
+  width: 100%;
   justify-content: space-between;
+  border: 2px solid blue;
 `;
 
 const RadioButtonLabel = styled.label`
   position: absolute;
   top: 25%;
   left: 4px;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: white;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
 `;
 const RadioButton = styled.input`
   opacity: 0;
   z-index: 1;
   cursor: pointer;
-  width: 100px;
+  width: 20px;
+  border: 1px solid white;
   height: 25px;
   margin-right: 10px;
   &:checked + ${RadioButtonLabel} {
@@ -210,8 +214,9 @@ const RadioButton = styled.input`
 `;
 
 const RadioText = styled.div`
-  font-size: 17px;
+  padding: 10px;
+  font-size: 15px;
   color: white;
-  width: 200px;
+  width: 100%;
   text-align: right;
 `;
