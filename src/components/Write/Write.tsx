@@ -67,12 +67,12 @@ function Write() {
   };
 
   const CheckBlank = () => {
-    if (title.length === 0) {
+    if (title.length === 0 && content.length === 0) {
+      alert("제목과 내용을 입력하세요");
+    } else if (title.length === 0) {
       alert("제목을 한글자 이상 입력하세요");
     } else if (content.length === 0) {
       alert("내용을 한글자 이상 입력하세요");
-    } else if (title.length === 0 && content.length === 0) {
-      alert("제목과 내용을 입력하세요");
     }
   };
 
