@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 function BottleContainer({ bottleList }: any) {
   const navigate = useNavigate();
   const reversedBottleList = bottleList.reverse();
+  const {a,b,c,d,....} = reversedBottleList;
+  console.log('a',a);
   console.log("reversedBottleList >> ", reversedBottleList);
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
@@ -29,7 +31,7 @@ function BottleContainer({ bottleList }: any) {
                     }}
                   >
                     <h1>{Object.values(item)[0].bottleName}</h1>
-                    {/* <h2>{Object.keys(item)[0]}</h2> */}
+                    {/* <h2>{Object.values(item)[0]}</h2> */}
                   </Bottle>
                 </BottleItemWrapper>
                 <ShelveDark />
@@ -123,7 +125,7 @@ const EmptyBottle = styled.div`
   margin-top: 40px;
 `;
 const Bottle = styled.div<BottleColorProps>`
-  /* border: 1px solid blue; */
+  border: 2px solid blue;
   display: flex;
   flex-direction: column-reverse;
   cursor: pointer;
