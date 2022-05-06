@@ -1,14 +1,11 @@
 import React, { useState, useEffect, KeyboardEvent } from "react";
 import Header from "components/Header";
 import styled, { css } from "styled-components";
-import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
-import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
 import AlertModal from "components/AlertModal";
 import { useRecoilState } from "recoil";
@@ -71,6 +68,16 @@ function Write() {
     console.log("dataArr: ", dataArr);
   };
 
+  const CheckBlank = () => {
+    if (title.length === 0 && content.length === 0) {
+      alert("제목과 내용을 입력하세요");
+    } else if (title.length === 0) {
+      alert("제목을 한글자 이상 입력하세요");
+    } else if (content.length === 0) {
+      alert("내용을 한글자 이상 입력하세요");
+    }
+  };
+
   return (
     <MainContainer>
       <Container>
@@ -106,12 +113,16 @@ function Write() {
             </TextLimit>
           </Paper>
           <BtnWrapper>
-            <WritePopup
-              content={content}
-              title={title}
-              date={getDate()}
-              memoUid={getDateStringType()}
-            />
+            {content.length > 0 && title.length > 0 ? (
+              <WritePopup
+                content={content}
+                title={title}
+                date={getDate()}
+                memoUid={getDateStringType()}
+              />
+            ) : (
+              <BtnContainer onClick={CheckBlank}>병에 담기</BtnContainer>
+            )}
           </BtnWrapper>
         </PaperWrapper>
       </Container>
@@ -211,4 +222,20 @@ const TextLimit = styled.div`
   font-size: 18px;
   color: grey;
   margin-bottom: 10px;
+`;
+
+const BtnContainer = styled.div`
+  width: 100px;
+  height: 45px;
+  background-color: #a5aac7;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 `;

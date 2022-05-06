@@ -7,7 +7,8 @@ import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-function WritePopup({ content, title, date, memoUid }) {
+
+function WritePopup({ content, title, date, memoUid }): JSX.Element {
   const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
