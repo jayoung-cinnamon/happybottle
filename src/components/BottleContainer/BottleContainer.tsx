@@ -6,38 +6,53 @@ import { useNavigate } from "react-router-dom";
 function BottleContainer({ bottleList }: any) {
   const navigate = useNavigate();
   const reversedBottleList = bottleList.reverse();
-  const {a,b,c,d,....} = reversedBottleList;
-  console.log('a',a);
-  console.log("reversedBottleList >> ", reversedBottleList);
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
   };
 
-  // TODO: 1. bottleList 받아서 동적으로 렌더링되도록 수정
-  // TODO: 1-1. bottleShape랑 bottleUid가 반영되어야함
+  const renderBottle = (reversedBottleList) => {
+    let bottleMemo = [];
+    const isOpenedCount = (item) => {
+      let isOpened = [];
+      for (const [key, value] of Object.entries(item)) {
+        //@ts-ignore
+        bottleMemo = [...Object.values(value)];
+      }
+      isOpened = bottleMemo.filter((item, index) => {
+        if (item.memo) return item.memo.isOpened === true;
+        return [];
+      });
+      return isOpened.length - 2;
+    };
+
+    return reversedBottleList.map((item: any, index: any) => (
+      <ShelveBack>
+        <BottleItemWrapper key={index}>
+          <Bottle
+            shape={Object.values(item)[0].bottleShape}
+            onClick={() => {
+              onCLickBottle(index);
+            }}
+          >
+            {/* <h1>{isOpenedCount(item)}</h1> */}
+            <h1>{`${isOpenedCount(item)}/${
+              Object.keys(Object.values(item)[0]).length - 2
+            }`}</h1>
+            {/* <h1>{Object.values(item)[0].bottleName}</h1> */}
+          </Bottle>
+        </BottleItemWrapper>
+        <ShelveDark />
+        <ShelveBottom />
+      </ShelveBack>
+    ));
+  };
 
   if (bottleList.length) {
     return (
       <Container>
         <BottleWrapper>
           <ShelveBackGround>
-            {reversedBottleList.map((item: any, index: any) => (
-              <ShelveBack>
-                <BottleItemWrapper key={index}>
-                  <Bottle
-                    shape={Object.values(item)[0].bottleShape}
-                    onClick={() => {
-                      onCLickBottle(index);
-                    }}
-                  >
-                    <h1>{Object.values(item)[0].bottleName}</h1>
-                    {/* <h2>{Object.values(item)[0]}</h2> */}
-                  </Bottle>
-                </BottleItemWrapper>
-                <ShelveDark />
-                <ShelveBottom />
-              </ShelveBack>
-            ))}
+            {renderBottle(reversedBottleList)}
             {reversedBottleList.length % 2 !== 0 && (
               <>
                 <ShelveBack>
