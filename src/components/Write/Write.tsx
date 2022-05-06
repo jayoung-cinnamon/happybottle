@@ -11,9 +11,11 @@ import { getDateStringType, getDate } from "utils/date";
 import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
 import AlertModal from "components/AlertModal";
+import { useRecoilState } from "recoil";
+import { alertRecoilStore } from "recoil/mainModal";
 
 function Write() {
-  const [visible, setVisible] = useState(false);
+  const [alertOpen, setAlertOpen] = useRecoilState(alertRecoilStore);
   const auth = getAuth();
   console.log(auth.currentUser?.uid);
 
@@ -26,7 +28,7 @@ function Write() {
     const input = e.nativeEvent as any as WriteFunction;
     if (input.inputType !== "deleteContentBackward") {
       if (content.length > 10) {
-        setVisible(true);
+        setAlertOpen(true);
         console.log("모달 열려라");
         return;
       }
@@ -35,8 +37,8 @@ function Write() {
   };
 
   useEffect(() => {
-    console.log("visible:", visible);
-  }, [visible]);
+    console.log("alertOpen:", alertOpen);
+  }, [alertOpen]);
 
   const [title, setTitle] = useState<string>("");
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -113,7 +115,7 @@ function Write() {
           </BtnWrapper>
         </PaperWrapper>
       </Container>
-      <AlertModal visible={visible}>
+      <AlertModal alertOpen={alertOpen} title={"글자수제한"}>
         글자수는 200자 이상 입력 할 수 없습니다
       </AlertModal>
     </MainContainer>
