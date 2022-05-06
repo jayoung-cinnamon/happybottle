@@ -99,6 +99,9 @@ function UpdateModal() {
                           <UserName>{user.displayName}</UserName>
                           <Input
                             onChange={onChangeNickName}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }}
                             name="nickname"
                             value={nickName}
                             maxLength={8}
