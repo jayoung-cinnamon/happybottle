@@ -7,11 +7,6 @@ function BottleContainer({ bottleList }: any) {
   const navigate = useNavigate();
   const reversedBottleList = bottleList.reverse();
   console.log("reversedBottleList >> ", reversedBottleList);
-  console.log("보틀 총 갯수", Object.keys(reversedBottleList).length);
-  Object.keys(reversedBottleList[0]).forEach((item) =>
-    console.log("test", item)
-  );
-
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
   };
@@ -57,7 +52,7 @@ function BottleContainer({ bottleList }: any) {
       </Container>
     );
   } else {
-    return <></>;
+    return <Container></Container>;
   }
 }
 
@@ -66,9 +61,11 @@ interface BottleColorProps {
   shape: string;
 }
 const Container = styled.div`
-  width: 100%;
+  max-width: 640px;
+  min-width: 320px;
   margin-top: 35px;
   margin-bottom: 35px;
+  /* border: 1px solid red; */
 `;
 
 const BottleWrapper = styled.div`
@@ -139,7 +136,7 @@ const Bottle = styled.div<BottleColorProps>`
   background-position: 50% 50%;
   margin-top: 40px;
   background-image: url("/images/main/Bottle_White.png");
-  border: 1px solid red;
+  /* border: 1px solid red; */
   ${(props) =>
     props.shape === "blue" &&
     css`

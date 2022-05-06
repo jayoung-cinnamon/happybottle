@@ -73,6 +73,7 @@ const Main = styled.div`
   position: relative;
 `;
 const MainContainer = styled.div`
+  width: 640px;
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
