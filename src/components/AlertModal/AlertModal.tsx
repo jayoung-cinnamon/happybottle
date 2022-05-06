@@ -18,7 +18,6 @@ function AlertModal({
             <CancelBtn onClick={close} />
             <h1>경고</h1>
           </TitleBox>
-
           <ModalOverlay visible={visible} />
           <ModalWrapper>
             <ModalInner>{children}</ModalInner>

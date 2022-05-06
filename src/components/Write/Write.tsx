@@ -1,14 +1,11 @@
 import React, { useState, useEffect, KeyboardEvent } from "react";
 import Header from "components/Header";
 import styled, { css } from "styled-components";
-import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { initializeApp } from "service/firebase";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
-import Popup from "reactjs-popup";
 import WritePopup from "components/WritePopup";
 import AlertModal from "components/AlertModal";
 
