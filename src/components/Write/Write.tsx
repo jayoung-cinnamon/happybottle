@@ -70,16 +70,13 @@ function Write() {
   };
 
   const CheckBlank = () => {
-    // e.preventDefault();
-    // console.log("보틀에 담기 클릭");
-    // if (title.length === 0) {
-    //   alert("제목을 입력하세요");
-    // } else if (content.length === 0) {
-    //   alert("내용을 입력하세요");
-    // } else if (title.length === 0 && content.length === 0) {
-    //   alert("제목과 내용을 입력해주세요");
-    // }
-    console.log("click >> ");
+    if (title.length === 0) {
+      alert("제목을 한글자 이상 입력하세요");
+    } else if (content.length === 0) {
+      alert("내용을 한글자 이상 입력하세요");
+    } else if (title.length === 0 && content.length === 0) {
+      alert("제목과 내용을 입력하세요");
+    }
   };
 
   return (
@@ -117,13 +114,16 @@ function Write() {
             </TextLimit>
           </Paper>
           <BtnWrapper>
-            <WritePopup
-              onClick={CheckBlank}
-              content={content}
-              title={title}
-              date={getDate()}
-              memoUid={getDateStringType()}
-            />
+            {content.length > 0 && title.length > 0 ? (
+              <WritePopup
+                content={content}
+                title={title}
+                date={getDate()}
+                memoUid={getDateStringType()}
+              />
+            ) : (
+              <BtnContainer onClick={CheckBlank}>병에 담기</BtnContainer>
+            )}
           </BtnWrapper>
         </PaperWrapper>
       </Container>
@@ -224,4 +224,20 @@ const TextLimit = styled.div`
   font-size: 18px;
   color: grey;
   margin-bottom: 10px;
+`;
+
+const BtnContainer = styled.div`
+  width: 100px;
+  height: 45px;
+  background-color: #a5aac7;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 `;
