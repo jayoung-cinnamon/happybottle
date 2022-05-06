@@ -42,6 +42,16 @@ function BottleTitlePopup() {
   }, [bottleName, bottleShape]);
 
   const createBottleName = () => {
+    if (bottleName.length === 0 && bottleShape.length === 0) {
+      alert("병 색을 선택하고 , 한글자 이상 이름을 입력해주세요");
+      return;
+    } else if (bottleName.length === 0) {
+      alert("보틀이름을 한글자 이상 입력해주세요");
+      return;
+    } else if (bottleShape.length === 0) {
+      alert("보틀 컬러를 선택해주세요");
+      return;
+    }
     try {
       set(ref(db, `${userUid}/${target}`), {
         bottleName: bottleName,

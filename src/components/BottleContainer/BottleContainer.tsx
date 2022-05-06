@@ -1,19 +1,16 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function BottleContainer({ bottleList }: any) {
   const navigate = useNavigate();
-
-  // console.log("bottleList: ", bottleList);
-
-  // bottleList.map((item: object, index: any) => {
-  //@ts-ignore
-  // console.log(Object.values(item)[0]?.bottleName);
-  // });
   const reversedBottleList = bottleList.reverse();
-  console.log(reversedBottleList);
+  console.log("reversedBottleList >> ", reversedBottleList);
+  console.log("보틀 총 갯수", Object.keys(reversedBottleList).length);
+  Object.keys(reversedBottleList[0]).forEach((item) =>
+    console.log("test", item)
+  );
 
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
@@ -37,6 +34,7 @@ function BottleContainer({ bottleList }: any) {
                     }}
                   >
                     <h1>{Object.values(item)[0].bottleName}</h1>
+                    {/* <h2>{Object.keys(item)[0]}</h2> */}
                   </Bottle>
                 </BottleItemWrapper>
                 <ShelveDark />
@@ -129,6 +127,8 @@ const EmptyBottle = styled.div`
 `;
 const Bottle = styled.div<BottleColorProps>`
   /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column-reverse;
   cursor: pointer;
   bottom: -60px;
   width: 92px;
@@ -139,6 +139,7 @@ const Bottle = styled.div<BottleColorProps>`
   background-position: 50% 50%;
   margin-top: 40px;
   background-image: url("/images/main/Bottle_White.png");
+  border: 1px solid red;
   ${(props) =>
     props.shape === "blue" &&
     css`
@@ -185,5 +186,13 @@ const Bottle = styled.div<BottleColorProps>`
         background-color: #754da8;
         color: black;
       `}
+  }
+  //오픈된 갯수/ 쪽지 총개수
+  & > h2 {
+    width: 50%;
+    height: 30px;
+    font-size: 15px;
+    z-index: 3;
+    border: 2px solid blue;
   }
 `;
