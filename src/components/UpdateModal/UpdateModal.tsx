@@ -43,6 +43,7 @@ function UpdateModal() {
   };
   const modalPopupBtn = (e: any) => {
     setUpdateInfo(!updateInfo);
+    e.stopPropagation();
   };
 
   const onChangeNickName = (e: any) => {
