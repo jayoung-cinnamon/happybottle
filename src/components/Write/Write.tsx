@@ -69,6 +69,19 @@ function Write() {
     console.log("dataArr: ", dataArr);
   };
 
+  const CheckBlank = () => {
+    // e.preventDefault();
+    // console.log("보틀에 담기 클릭");
+    // if (title.length === 0) {
+    //   alert("제목을 입력하세요");
+    // } else if (content.length === 0) {
+    //   alert("내용을 입력하세요");
+    // } else if (title.length === 0 && content.length === 0) {
+    //   alert("제목과 내용을 입력해주세요");
+    // }
+    console.log("click >> ");
+  };
+
   return (
     <MainContainer>
       <Container>
@@ -105,6 +118,7 @@ function Write() {
           </Paper>
           <BtnWrapper>
             <WritePopup
+              onClick={CheckBlank}
               content={content}
               title={title}
               date={getDate()}
@@ -200,6 +214,7 @@ const BtnWrapper = styled.div`
   margin: 10px;
   display: flex;
   justify-content: flex-end;
+  border: 1px solid red;
 `;
 
 const TextLimit = styled.div`
