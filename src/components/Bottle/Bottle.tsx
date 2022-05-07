@@ -107,16 +107,11 @@ const MainContainer = styled.div`
   height: 100%;
   background-color: white;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  /* align-items: center; */
-  /* padding: 10px; */
 `;
 
 const Container = styled.div`
   width: 100%;
-
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -190,11 +185,10 @@ const HappyMemo = styled.div<MemoPositionProps>`
   }
 
   // index: 1,2,3 구간
-  ${(props) =>
+  ${(props: { index: number }) =>
     (props.index === 0 || props.index === 1 || props.index === 2) &&
     css`
       bottom: 0.5em;
-      /* background-color: red; */
       left: calc(65 * ${(props) => props.index}px);
     `};
   // index: 4,5,6 구간
@@ -202,7 +196,6 @@ const HappyMemo = styled.div<MemoPositionProps>`
     (props.index === 3 || props.index === 4 || props.index === 5) &&
     css`
       bottom: 5.5em;
-      /* background-color: blue; */
       left: calc(65 * ${(props) => props.index % 3}px);
     `};
 
@@ -211,7 +204,6 @@ const HappyMemo = styled.div<MemoPositionProps>`
     (props.index === 6 || props.index === 7 || props.index === 8) &&
     css`
       bottom: 10.5em;
-      /* background-color: green; */
       left: calc(65 * ${(props) => props.index % 3}px);
     `};
 
@@ -220,13 +212,11 @@ const HappyMemo = styled.div<MemoPositionProps>`
     (props.index === 9 || props.index === 10 || props.index === 11) &&
     css`
       bottom: 15.5em;
-      /* background-color: green; */
       left: calc(65 * ${(props) => props.index % 3}px);
     `};
   ${(props) =>
     props.degree &&
     css`
-      /* border: 2px solid black; */
       transform: rotate(${(props) => props.degree}deg);
     `};
 `;
