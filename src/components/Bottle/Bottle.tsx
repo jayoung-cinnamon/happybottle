@@ -1,5 +1,4 @@
-//@ts-nocheck
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import Header from "components/Header";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,7 +12,6 @@ import add from "date-fns/add";
 
 function Bottle() {
   const { bottleUid } = useParams();
-  console.log("{bottleUid}: ", bottleUid);
   const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
@@ -21,18 +19,17 @@ function Bottle() {
   const memoRef = ref(db, `${userUid}/${bottleUid}`);
   const [snapshot, loading, error] = useObject(memoRef);
   const onClickMemo = (index: any) => {
-    console.log("memoList[index]: ", Object.keys(memoList[index])[0]);
     const memoUid = Object.keys(memoList[index])[0];
     navigate(`/read/${bottleUid}/${memoUid}`);
   };
   let memoList: any[] = [];
   let bottleColor: string = "";
+  interface MemoIsOpenedType {
+    isOpened: boolean;
+  }
   const setMemoList = (data: any) => {
     memoList.push(data);
-    console.log("memoList: ", memoList);
-    memoList.map((item, index) => {
-      console.log("isOpened", Object.values(item)[0]["memo"].isOpened);
-      // console.log("writtenDate", Object.values(item)[0]["memo"].writtenDate);
+    memoList.map((item) => {
       const targetDate = add(
         parse(
           Object.values(item)[0]["memo"].writtenDate,
@@ -40,24 +37,12 @@ function Bottle() {
           new Date()
         ),
         {
-          //TODO: 30일로 변경
-          days: 1,
+          days: 30,
         }
       );
-      // console.log(
-      //   "writtenDate",
-      //   parse(
-      //     Object.values(item)[0]["memo"].writtenDate,
-      //     "yyyy.MM.dd HH:mm:ss",
-      //     new Date()
-      //   )
-      // );
-      console.log("지금시간: ", new Date());
-      console.log("30일 지났어?", isAfter(new Date(), targetDate));
-
       const isPassed30days = isAfter(new Date(), targetDate);
       if (isPassed30days) {
-        const updates = {};
+        const updates = {} as MemoIsOpenedType;
         updates["isOpened"] = true;
         update(
           ref(db, `${userUid}/${bottleUid}/${Object.keys(item)[0]}/memo/`),
@@ -67,7 +52,6 @@ function Bottle() {
     });
   };
   if (snapshot) {
-    console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
       bottleColor = data.bottleShape;
@@ -76,7 +60,6 @@ function Bottle() {
         if (value.memo) {
           setMemoList({ [key]: value });
           //@ts-ignore
-          console.log("value: ", value.memo);
         }
       }
     }
@@ -94,7 +77,6 @@ function Bottle() {
                   isOpened={Object.values(item)[0]["memo"].isOpened}
                   key={index}
                   onClick={() => onClickMemo(index)}
-                  // position={getRandomInteger(180, 500)}
                   degree={getRandomInteger(1, 360)}
                 />
               ))}
@@ -111,12 +93,11 @@ function Bottle() {
 export default Bottle;
 interface MemoPositionProps {
   index: number;
-  position: number;
   isOpened: boolean;
   degree: number;
 }
 interface BottleProps {
-  bottleColor: string;
+  shape: string;
 }
 const MainContainer = styled.div`
   margin: 0 auto;
@@ -181,7 +162,6 @@ const TempBottleBox = styled.div`
   position: relative;
 `;
 
-//TODO: 인덱스 받아서 위치 랜덤으로?, isOpened 받아서 열 수 있는거랑 구분
 const HappyMemo = styled.div<MemoPositionProps>`
   width: 70px;
   height: 90px;
