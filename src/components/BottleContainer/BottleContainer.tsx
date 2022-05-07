@@ -196,7 +196,6 @@ const Bottle = styled.div<BottleColorProps>`
     width: 50%;
     height: 20px;
     font-size: 15px;
-    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: flex-end;
