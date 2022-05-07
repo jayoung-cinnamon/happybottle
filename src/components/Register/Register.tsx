@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { signUpWithEmailPassword } from "service/auth";
-import { BrowserRouter, Route, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setAuthErrorCode } from "service/auth";
 
 function Index() {
@@ -24,7 +24,6 @@ function Index() {
     try {
       let data;
       data = signUpWithEmailPassword(email, password);
-      console.log(data);
       alert("회원가입완료");
       navigate("/nickname");
     } catch (error: any) {

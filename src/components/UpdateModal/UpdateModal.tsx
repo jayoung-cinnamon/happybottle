@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Popup from "reactjs-popup";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { signOut, getAuth, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +18,6 @@ function UpdateModal() {
     try {
       signOut(auth);
       navigate("/");
-      console.log("로그아웃");
     } catch (error) {
       console.log(error);
     }
@@ -29,8 +27,6 @@ function UpdateModal() {
     e.preventDefault();
     try {
       let data = await deleteUser(user!);
-      console.log(user);
-      console.log(data);
       alert("탈퇴되었습니다");
       navigate("/");
     } catch (error) {
@@ -52,10 +48,6 @@ function UpdateModal() {
     } = e;
     setNickName(value);
   };
-
-  useEffect(() => {
-    console.log(`nickName: ${nickName}`);
-  }, [nickName]);
 
   const updateUserNickName = () => {
     if (nickName.length < 3) {
@@ -131,9 +123,7 @@ function UpdateModal() {
 export default UpdateModal;
 
 const SlideMenu = styled.div`
-  /* width: 100%; */
   height: 100vh;
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -240,12 +230,9 @@ const ModalOverlay = styled.div`
   box-sizing: border-box;
   position: fixed;
   overflow: hidden;
-  /* top: 0; */
   left: 0;
-  /* bottom: 0; */
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
-  /* width: 100%; */
   height: 100vh;
 `;

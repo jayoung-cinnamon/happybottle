@@ -31,7 +31,7 @@ const MainContainer = styled.div`
   max-width: 640px;
   min-width: 320px;
   min-height: 60vh;
-  height: 100%;
+  height: 100vh;
   background-color: white;
   display: flex;
   flex-direction: column;

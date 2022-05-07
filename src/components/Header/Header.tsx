@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
-import { loginStatus } from "service/auth";
-import { signOut, getAuth, deleteUser } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Popup from "reactjs-popup";
 import UpdateModal from "components/UpdateModal";
 import { useRecoilState } from "recoil";
 import { modalRecoilStore } from "recoil/mainModal";
@@ -12,7 +10,7 @@ const Header = () => {
   const auth = getAuth();
   const [open, setOpen] = useRecoilState(modalRecoilStore);
   const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
+
   useEffect(() => {
     setOpen(false);
   }, []);
@@ -21,9 +19,6 @@ const Header = () => {
     setOpen(!open);
   };
 
-  useEffect(() => {
-    console.log(`open: ${open}`);
-  }, [open]);
   return (
     <>
       <HeaderContainer>
@@ -102,21 +97,10 @@ const LogoutBtn = styled.button`
 
 const ModalContainer = styled.div<SlideProps>`
   width: 100%;
-  /* border: 1px solid blue; */
   height: 100vh;
-  /* transition: transform 1s linear;
-  transform: translateX(-100%);
-  position: fixed; */
-  /* left: 0; */
   z-index: 1;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* ${(props) =>
-    props.modalOpen &&
-    css`
-      background-color: red;
-      transform: translateX(0px);
-    `} */
 `;

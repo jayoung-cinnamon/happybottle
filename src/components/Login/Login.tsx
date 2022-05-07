@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,7 +27,6 @@ function Login() {
       e.preventDefault();
       data = await signInWithEmailAndPassword(auth, email, password);
       navigate("/hbmain");
-      console.log("로그인성공");
     } catch (error: any) {
       console.log(error.code);
       alert(setAuthErrorCode(error.code));
@@ -82,10 +81,8 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 10px; */
 `;
 
-// TODO: 컨테이너 위치 조정 필요 - 세로 중앙 정렬
 const LoginContainer = styled.div`
   margin: 0 auto;
   width: 240px;
@@ -110,7 +107,6 @@ const Logo = styled.div`
   background-image: url("/images/main/SmileLogo.png");
   background-repeat: no-repeat;
   background-size: cover;
-  /* border: 1px solid red; */
 `;
 
 const InputContainer = styled.form`

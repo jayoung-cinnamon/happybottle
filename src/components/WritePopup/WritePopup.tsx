@@ -1,14 +1,22 @@
-// @ts-nocheck
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import Popup from "reactjs-popup";
 import { useObject } from "react-firebase-hooks/database";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref, set } from "firebase/database";
-import { Navigate } from "react-router-dom";
+import { getDatabase, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
-function WritePopup({ content, title, date, memoUid }): JSX.Element {
+function WritePopup({
+  content,
+  title,
+  date,
+  memoUid,
+}: {
+  content: string;
+  title: string;
+  date: string;
+  memoUid: string;
+}): JSX.Element {
   const navigate = useNavigate();
   const db = getDatabase();
   const auth = getAuth();
@@ -20,7 +28,6 @@ function WritePopup({ content, title, date, memoUid }): JSX.Element {
     dataArr.push(data);
   };
   if (snapshot) {
-    console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
       for (const [key, value] of Object.entries(data)) {
@@ -29,17 +36,15 @@ function WritePopup({ content, title, date, memoUid }): JSX.Element {
     }
   }
 
-  dataArr.map((item: object, index: any) => {
-    // console.log("Select BOttle");
-    // console.log(item);
-  });
   const [bottleName, setBottleName] = useState("");
-  const onClickRadioButton = (e: MouseEvent, uid: string) => {
+  const onClickRadioButton = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    uid: string
+  ) => {
     const {
       target: { value },
     } = e;
     setBottleName(value);
-    console.log("value : ", value);
     const db = getDatabase();
     const userUid = auth.currentUser?.uid;
     set(ref(db, `${userUid}/${uid}/${memoUid}`), {
@@ -55,11 +60,6 @@ function WritePopup({ content, title, date, memoUid }): JSX.Element {
     alert(`${value}에 저장되었습니다!`);
     navigate("/hbmain");
   };
-
-  // useEffect(() => {
-  //   console.log("123", bottleName);
-  // }, [bottleName]);
-
   if (dataArr.length) {
     return (
       <Popup trigger={<BtnContainer>병에 담기</BtnContainer>} modal nested>
@@ -71,7 +71,7 @@ function WritePopup({ content, title, date, memoUid }): JSX.Element {
             </TitleBox>
             <ModalPage>
               <TagInputBox>
-                {dataArr.map((item: any, index: any) => (
+                {dataArr.map((item: object, index: number) => (
                   <Item key={index}>
                     <RadioButton
                       type="radio"
@@ -173,14 +173,11 @@ const TagInputBox = styled.div`
 `;
 
 const Item = styled.div`
-  /* margin-top: 3px; */
   display: flex;
-  /* align-items: center; */
   height: 48px;
   position: relative;
   border-radius: 2px;
   color: white;
-  /* font-weight: 500; */
   width: 100%;
   justify-content: space-between;
 `;
@@ -205,7 +202,6 @@ const RadioButton = styled.input`
   margin-right: 10px;
   &:checked + ${RadioButtonLabel} {
     background: #ec7b59;
-    /* z-index: 999; */
   }
   &:hover + ${RadioButtonLabel} {
     background-color: #ec7b59;

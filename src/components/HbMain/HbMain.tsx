@@ -21,19 +21,12 @@ function HbMain() {
   let dataArr: any[] = [];
   const setBottleList = (data: any) => {
     dataArr.push(data);
-    console.log("dataArr: ", dataArr);
   };
-  useEffect(() => {
-    console.log("hbMain open value: ", open);
-  }, [open]);
+
   if (snapshot) {
-    console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
       for (const [key, value] of Object.entries(data)) {
-        //@ts-ignore
-        // console.log("key: ", key);
-        // console.log("value: ", value);
         setBottleList({ [key]: value });
       }
     }

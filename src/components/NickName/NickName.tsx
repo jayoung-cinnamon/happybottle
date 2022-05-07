@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { updateUserInfo } from "service/auth";
 import { useNavigate } from "react-router-dom";
@@ -14,15 +14,11 @@ function NickName() {
       setNickName(value);
     }
   };
-  useEffect(() => {
-    console.log("nickname:", nickName);
-  }, [nickName]);
 
   const updateUserNickName = (e: any) => {
     try {
       e.preventDefault();
       let data = updateUserInfo(nickName);
-      console.log(data);
       navigate("/hbmain");
     } catch (error) {
       alert(error);
@@ -66,7 +62,6 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 10px; */
 `;
 
 const NickNameContainer = styled.div`
@@ -93,7 +88,6 @@ const Logo = styled.div`
   background-image: url("/images/main/Sneaky.png");
   background-repeat: no-repeat;
   background-size: cover;
-  /* border: 1px solid red; */
 `;
 
 const InputContainer = styled.form`
