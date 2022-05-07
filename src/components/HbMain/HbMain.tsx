@@ -73,7 +73,7 @@ const Main = styled.div`
   position: relative;
 `;
 const MainContainer = styled.div`
-  width: 640px;
+  width: 100vw;
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
@@ -82,7 +82,6 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 10px; */
   z-index: 999;
   /* position: absolute; */
   top: 0;
