@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -9,11 +8,20 @@ function BottleContainer({ bottleList }: any) {
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
   };
-
-  const renderBottle = (reversedBottleList) => {
-    let bottleMemo = [];
-    const isOpenedCount = (item) => {
-      let isOpened = [];
+  interface Memo {
+    memo: Memo;
+    contents: string;
+    isOpened: boolean;
+    memoColor: string;
+    picture: string;
+    title: string;
+    writtenDate: string;
+  }
+  const renderBottle = (reversedBottleList: []) => {
+    let bottleMemo: Memo[] = [];
+    const isOpenedCount = (item: Memo) => {
+      let isOpened: Memo[] = [];
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       for (const [key, value] of Object.entries(item)) {
         //@ts-ignore
         bottleMemo = [...Object.values(value)];
@@ -25,7 +33,7 @@ function BottleContainer({ bottleList }: any) {
       return isOpened.length - 2;
     };
 
-    return reversedBottleList.map((item: any, index: any) => (
+    return reversedBottleList.map((item: Memo, index: number) => (
       <ShelveBack>
         <BottleItemWrapper key={index}>
           <Bottle
