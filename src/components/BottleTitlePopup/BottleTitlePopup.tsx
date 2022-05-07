@@ -36,18 +36,22 @@ function BottleTitlePopup() {
     setBottleShape(value);
   };
 
-  useEffect(() => {
-    console.log("bottleName", bottleName);
-    console.log("bottleShape", bottleShape);
-  }, [bottleName, bottleShape]);
-
   const createBottleName = () => {
+    if (bottleName.length === 0 && bottleShape.length === 0) {
+      alert("병 색을 선택하고 , 한글자 이상 이름을 입력해주세요");
+      return;
+    } else if (bottleName.length === 0) {
+      alert("보틀이름을 한글자 이상 입력해주세요");
+      return;
+    } else if (bottleShape.length === 0) {
+      alert("보틀 컬러를 선택해주세요");
+      return;
+    }
     try {
       set(ref(db, `${userUid}/${target}`), {
         bottleName: bottleName,
         bottleShape: bottleShape,
       });
-      console.log(`BottleName: ${bottleName} | bottleShape : ${bottleShape}`);
       navigate(`/hbmain`);
     } catch (error) {
       console.log(`error: ${error}`);
@@ -64,7 +68,6 @@ function BottleTitlePopup() {
             setMemoData(value.memo);
             //@ts-ignore
             setBottleName(value.bottleName);
-            console.log("보틀만들기 버튼 클릭:", bottleName);
           }
         } catch (error: any) {
           console.log(`error: ${error}`);
@@ -76,7 +79,6 @@ function BottleTitlePopup() {
   let dataArr: any[] = [];
   const setMemoData = (data: any) => {
     dataArr.push(data);
-    console.log(`dataArr`, dataArr);
   };
 
   return (

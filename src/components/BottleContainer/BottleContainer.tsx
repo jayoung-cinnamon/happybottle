@@ -1,48 +1,65 @@
-// @ts-nocheck
 import React from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function BottleContainer({ bottleList }: any) {
   const navigate = useNavigate();
-
-  // console.log("bottleList: ", bottleList);
-
-  // bottleList.map((item: object, index: any) => {
-  //@ts-ignore
-  // console.log(Object.values(item)[0]?.bottleName);
-  // });
   const reversedBottleList = bottleList.reverse();
-  console.log(reversedBottleList);
-
   const onCLickBottle = (index: any) => {
     navigate(`/bottle/${Object.keys(bottleList[index])}`);
   };
+  interface Memo {
+    memo: Memo;
+    contents: string;
+    isOpened: boolean;
+    memoColor: string;
+    picture: string;
+    title: string;
+    writtenDate: string;
+  }
+  const renderBottle = (reversedBottleList: []) => {
+    let bottleMemo: Memo[] = [];
+    const isOpenedCount = (item: Memo) => {
+      let isOpened: Memo[] = [];
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      for (const [key, value] of Object.entries(item)) {
+        //@ts-ignore
+        bottleMemo = [...Object.values(value)];
+      }
+      isOpened = bottleMemo.filter((item, index) => {
+        if (item.memo) return item.memo.isOpened === true;
+        return [];
+      });
+      return isOpened.length - 2;
+    };
 
-  // TODO: 1. bottleList 받아서 동적으로 렌더링되도록 수정
-  // TODO: 1-1. bottleShape랑 bottleUid가 반영되어야함
+    return reversedBottleList.map((item: Memo, index: number) => (
+      <ShelveBack>
+        <BottleItemWrapper key={index}>
+          <Bottle
+            shape={Object.values(item)[0].bottleShape}
+            onClick={() => {
+              onCLickBottle(index);
+            }}
+          >
+            <h1>{Object.values(item)[0].bottleName}</h1>{" "}
+            <h2>{`${isOpenedCount(item)}/${
+              Object.keys(Object.values(item)[0]).length - 2
+            }`}</h2>
+          </Bottle>
+        </BottleItemWrapper>
+        <ShelveDark />
+        <ShelveBottom />
+      </ShelveBack>
+    ));
+  };
 
   if (bottleList.length) {
     return (
       <Container>
         <BottleWrapper>
           <ShelveBackGround>
-            {reversedBottleList.map((item: any, index: any) => (
-              <ShelveBack>
-                <BottleItemWrapper key={index}>
-                  <Bottle
-                    shape={Object.values(item)[0].bottleShape}
-                    onClick={() => {
-                      onCLickBottle(index);
-                    }}
-                  >
-                    <h1>{Object.values(item)[0].bottleName}</h1>
-                  </Bottle>
-                </BottleItemWrapper>
-                <ShelveDark />
-                <ShelveBottom />
-              </ShelveBack>
-            ))}
+            {renderBottle(reversedBottleList)}
             {reversedBottleList.length % 2 !== 0 && (
               <>
                 <ShelveBack>
@@ -59,7 +76,7 @@ function BottleContainer({ bottleList }: any) {
       </Container>
     );
   } else {
-    return <></>;
+    return <Container></Container>;
   }
 }
 
@@ -68,7 +85,8 @@ interface BottleColorProps {
   shape: string;
 }
 const Container = styled.div`
-  width: 100%;
+  max-width: 640px;
+  min-width: 320px;
   margin-top: 35px;
   margin-bottom: 35px;
 `;
@@ -85,7 +103,6 @@ const BottleItemWrapper = styled.div`
   justify-content: space-around;
   margin-bottom: 30px;
   flex-wrap: auto;
-  /* border: 1px solid red; */
   width: 40%;
 `;
 
@@ -97,11 +114,9 @@ const ShelveBackGround = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* border: 1px solid black; */
 `;
 const ShelveBack = styled.div`
   width: 49%;
-  /* border: 2px solid green; */
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -112,9 +127,6 @@ const ShelveBottom = styled.div`
   width: 100%;
   height: 20px;
   background-color: #cdac79;
-  /* border: 1px solid blue; */
-  /* position: absolute; */
-  /* bottom: -60px; */
 `;
 const ShelveDark = styled.div`
   width: 100%;
@@ -128,7 +140,9 @@ const EmptyBottle = styled.div`
   margin-top: 40px;
 `;
 const Bottle = styled.div<BottleColorProps>`
-  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
   cursor: pointer;
   bottom: -60px;
   width: 92px;
@@ -165,7 +179,6 @@ const Bottle = styled.div<BottleColorProps>`
     padding: 10px;
     background-color: #454d96;
     color: white;
-    /* border: 1px solid red; */
     min-width: 72px;
     ${(props) =>
       props.shape === "blue" &&
@@ -185,5 +198,16 @@ const Bottle = styled.div<BottleColorProps>`
         background-color: #754da8;
         color: black;
       `}
+  }
+  //오픈된 갯수/ 쪽지 총개수
+  & > h2 {
+    width: 50%;
+    height: 20px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    color: #7c7c7c;
   }
 `;

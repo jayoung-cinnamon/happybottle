@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
         /* 배경 테스트용도 */
         /* background-color: violet; */
-        background-color: #F3FFEC;
+        background-color:  #4040a1;
         box-sizing: border-box;
     };
 

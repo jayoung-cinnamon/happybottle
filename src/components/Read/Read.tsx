@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import React from "react";
 import styled from "styled-components";
 import Header from "components/Header";
@@ -20,16 +18,9 @@ function Read() {
   const userUid = auth.currentUser?.uid;
   const memoRef = ref(db, `${userUid}/${bottleUid}/${memoUid}`);
   const [snapshot, loading, error] = useObject(memoRef);
-  let memo;
-  if (snapshot) {
-    const data = snapshot.val();
-    if (data !== null) {
-      memo = Object.values(data)[0];
-    }
-  }
-  const getETA = (memoDate) => {
+
+  const getETA = (memoDate: any) => {
     const targetDate = add(parse(memoDate, "yyyy.MM.dd HH:mm:ss", new Date()), {
-      //TODO: 30일로 변경
       days: 1,
     });
     const diffrenceInDay = differenceInDays(new Date(), targetDate);
@@ -62,7 +53,31 @@ function Read() {
 
     return result;
   };
-  if (!loading) {
+
+  let memo: Memo = {
+    contents: "string",
+    isOpened: true,
+    memoColor: "string",
+    picture: "string",
+    title: "string",
+    writtenDate: "string",
+  };
+
+  interface Memo {
+    contents: string;
+    isOpened: boolean;
+    memoColor: string;
+    picture: string;
+    title: string;
+    writtenDate: string;
+  }
+  if (snapshot) {
+    const data = snapshot.val();
+    if (data !== null) {
+      memo = Object.values(data)[0] as Memo;
+    }
+  }
+  if (memo && !loading) {
     const isOpened = memo.isOpened;
     return (
       <MainContainer>
@@ -102,10 +117,7 @@ const MainContainer = styled.div`
   height: 100%;
   background-color: white;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  /* align-items: center; */
-  /* padding: 10px; */
 `;
 
 const Container = styled.div`
@@ -129,7 +141,6 @@ const PaperWrapper = styled.div`
 const Paper = styled.div`
   width: 90%;
   background-color: #ededed;
-
   min-height: 100vh;
   border-radius: 10px;
   display: flex;

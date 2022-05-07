@@ -21,19 +21,12 @@ function HbMain() {
   let dataArr: any[] = [];
   const setBottleList = (data: any) => {
     dataArr.push(data);
-    console.log("dataArr: ", dataArr);
   };
-  useEffect(() => {
-    console.log("hbMain open value: ", open);
-  }, [open]);
+
   if (snapshot) {
-    console.log("snapshot.val(): ", snapshot.val());
     const data = snapshot.val();
     if (data !== null) {
       for (const [key, value] of Object.entries(data)) {
-        //@ts-ignore
-        // console.log("key: ", key);
-        // console.log("value: ", value);
         setBottleList({ [key]: value });
       }
     }
@@ -73,6 +66,7 @@ const Main = styled.div`
   position: relative;
 `;
 const MainContainer = styled.div`
+  width: 100vw;
   max-width: 640px;
   min-width: 320px;
   min-height: 100vh;
@@ -81,9 +75,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 10px; */
   z-index: 999;
-  /* position: absolute; */
   top: 0;
   left: 0;
 `;

@@ -2,9 +2,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
-  onAuthStateChanged,
 } from "firebase/auth";
-import { Router } from "react-router-dom";
 
 export function setAuthErrorCode(errorCode) {
   // TODO: errorCode 한글화 작업
@@ -110,30 +108,6 @@ export function setAuthErrorCode(errorCode) {
   };
   return AUTH_ERROR_CODE[errorCode];
 }
-
-//로그인
-// export async function signInWithEmailPassword(email, password) {
-//   // [START auth_signin_password]
-//   const { getAuth, signInWithEmailAndPassword } = require("firebase/auth");
-
-//   const auth = getAuth();
-//   await signInWithEmailAndPassword(auth, email, password)
-//     .then((result) => {
-//       console.log(`await result user: ${result.user.email}`);
-
-//       console.log(`await result operationType: ${result.operationType}`);
-//       // alert("로그인성공");
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       console.log("sign in");
-//       console.log(`errorCode: ${errorCode} /errorMessage: ${errorMessage} `);
-//     });
-//   // [END auth_signin_password]
-// }
-
 //회원가입
 export function signUpWithEmailPassword(email, password) {
   const auth = getAuth();
@@ -201,26 +175,7 @@ export function updateUserInfo(nickname) {
     });
 }
 
-// export function signOut() {
-//   const auth = getAuth();
-//   console.log("로그아웃");
-//   return auth.signOut();
-// }
 export function loginStatus() {
   const auth = getAuth();
   return auth;
-  // TODO: 아래 코드 사용 방법 알아야함.
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     console.log("user: ", user);
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     // ...
-  //     return user;
-  //   } else {
-  //     // User is signed out
-  //     // ...
-  //   }
-  // });
 }

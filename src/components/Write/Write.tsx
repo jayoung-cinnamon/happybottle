@@ -1,8 +1,7 @@
 import React, { useState, useEffect, KeyboardEvent } from "react";
 import Header from "components/Header";
-import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import styled from "styled-components";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { randomUid } from "utils/common";
 import { getDateStringType, getDate } from "utils/date";
@@ -14,8 +13,6 @@ import { alertRecoilStore } from "recoil/mainModal";
 function Write() {
   const [alertOpen, setAlertOpen] = useRecoilState(alertRecoilStore);
   const auth = getAuth();
-  console.log(auth.currentUser?.uid);
-
   const [content, setContent] = useState<string>("");
   const limitTextArea = (e: KeyboardEvent): void => {};
   interface WriteFunction {
@@ -26,27 +23,17 @@ function Write() {
     if (input.inputType !== "deleteContentBackward") {
       if (content.length > 10) {
         setAlertOpen(true);
-        console.log("모달 열려라");
         return;
       }
     }
     setContent(e.target.value);
   };
 
-  useEffect(() => {
-    console.log("alertOpen:", alertOpen);
-  }, [alertOpen]);
-
   const [title, setTitle] = useState<string>("");
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitle(e.target.value);
   };
-  useEffect(() => {
-    console.log("content: ", content);
-    console.log("title: ", title);
-  }, [content, title]);
 
-  const navigate = useNavigate();
   const [random, setRandom] = useState(randomUid(28));
   const target = random;
   useEffect(() => {
@@ -55,7 +42,6 @@ function Write() {
     const memoRef = ref(db, `${userUid}/${target}`);
     onValue(memoRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("data:", data);
       for (const [key, value] of Object.entries(data)) {
         //@ts-ignore
         setMemoData(value.memo);
@@ -65,7 +51,6 @@ function Write() {
   let dataArr: any[] = [];
   const setMemoData = (data: any) => {
     dataArr.push(data);
-    console.log("dataArr: ", dataArr);
   };
 
   const CheckBlank = () => {
@@ -144,7 +129,6 @@ const MainContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  /* padding: 10px; */
 `;
 
 const Container = styled.div`
