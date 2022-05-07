@@ -18,16 +18,16 @@ function Bottle() {
   const userUid = auth.currentUser?.uid;
   const memoRef = ref(db, `${userUid}/${bottleUid}`);
   const [snapshot, loading, error] = useObject(memoRef);
-  const onClickMemo = (index: any) => {
+  const onClickMemo = (index: number) => {
     const memoUid = Object.keys(memoList[index])[0];
     navigate(`/read/${bottleUid}/${memoUid}`);
   };
-  let memoList: any[] = [];
+  let memoList: object[] = [];
   let bottleColor: string = "";
   interface MemoIsOpenedType {
     isOpened: boolean;
   }
-  const setMemoList = (data: any) => {
+  const setMemoList = (data: object) => {
     memoList.push(data);
     memoList.map((item) => {
       const targetDate = add(
@@ -96,6 +96,7 @@ interface MemoPositionProps {
   isOpened: boolean;
   degree: number;
 }
+
 interface BottleProps {
   shape: string;
 }
@@ -185,7 +186,7 @@ const HappyMemo = styled.div<MemoPositionProps>`
   }
 
   // index: 1,2,3 구간
-  ${(props: { index: number }) =>
+  ${(props) =>
     (props.index === 0 || props.index === 1 || props.index === 2) &&
     css`
       bottom: 0.5em;
