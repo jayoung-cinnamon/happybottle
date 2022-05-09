@@ -63,7 +63,7 @@ function Index() {
             <LoginBtn>로그인</LoginBtn>
           </StyledLink>
         </LoginContainer>
-        <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
+        {/* <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn> */}
       </RegisterContainer>
     </MainContainer>
   );

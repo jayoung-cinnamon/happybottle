@@ -134,10 +134,18 @@ const BtnContainer = styled.div`
 const TitleBox = styled.div`
   width: 90%;
   display: flex;
-  margin-bottom: 10px;
   justify-content: space-between;
-  display: flex;
   align-items: center;
+  margin-bottom: 10px;
+  background-color: #ec7b59;
+  border-radius: 10px;
+  border: 5px dotted white;
+  padding: 10px;
+  & > h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+  }
 `;
 
 const CancelBtn = styled.div`
@@ -186,8 +194,8 @@ const RadioButtonLabel = styled.label`
   position: absolute;
   top: 25%;
   left: 4px;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: white;
   border: 1px solid #ccc;
@@ -210,7 +218,7 @@ const RadioButton = styled.input`
 
 const RadioText = styled.div`
   padding: 10px;
-  font-size: 15px;
+  font-size: 17px;
   color: white;
   width: 100%;
   text-align: right;

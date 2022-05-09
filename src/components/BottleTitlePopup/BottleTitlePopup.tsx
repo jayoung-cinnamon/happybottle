@@ -199,13 +199,17 @@ const CreateBottleBtn = styled.div`
 const TitleBox = styled.div`
   width: 90%;
   display: flex;
-  margin-bottom: 10px;
-  justify-content: space-around;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
+  background-color: #ec7b59;
+  border-radius: 10px;
+  border: 5px dotted white;
+  padding: 10px;
   & > h1 {
     font-size: 20px;
     font-weight: 600;
+    color: white;
   }
 `;
 
@@ -241,7 +245,7 @@ const TagInput = styled.input`
 `;
 
 const SubjectSubmitBtn = styled.button`
-  font-size: 15px;
+  font-size: 17px;
   padding: 5px;
   margin-top: 30px;
   margin-left: 100px;
@@ -250,7 +254,7 @@ const SubjectSubmitBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(116, 187, 187);
+  background: #d96098;
   border: none;
   border-radius: 3px;
   color: black;
@@ -266,6 +270,8 @@ const Item = styled.div`
   border-radius: 2px;
   color: white;
   font-weight: 500;
+  width: 78%;
+  justify-content: space-around;
 `;
 
 const RadioButtonLabel = styled.label`
