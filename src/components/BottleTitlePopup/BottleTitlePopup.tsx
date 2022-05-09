@@ -179,7 +179,7 @@ const ModalPage = styled.div`
   min-height: 300px;
   width: 80%;
   height: 100%;
-  background-color: #454d96;
+  background-color: #143f6b;
   border-radius: 10px;
   box-shadow: 0px 0px 37px 6px rgba(91, 91, 91, 0.81);
   display: flex;
@@ -202,14 +202,13 @@ const TitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  background-color: #ec7b59;
+  background-color: #f6f54d;
   border-radius: 10px;
   border: 5px dotted white;
   padding: 10px;
   & > h1 {
     font-size: 20px;
     font-weight: 600;
-    color: white;
   }
 `;
 
@@ -254,7 +253,7 @@ const SubjectSubmitBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #d96098;
+  background: #f55353;
   border: none;
   border-radius: 3px;
   color: black;
@@ -293,9 +292,9 @@ const RadioButton = styled.input`
   height: 25px;
   margin-right: 10px;
   &:checked + ${RadioButtonLabel} {
-    background: #ec7b59;
+    background: #feb139;
   }
   &:hover + ${RadioButtonLabel} {
-    background-color: #ec7b59;
+    background-color: #feb139;
   }
 `;
