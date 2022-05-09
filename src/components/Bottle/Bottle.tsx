@@ -124,7 +124,9 @@ const BottleContainer = styled.div<BottleProps>`
   margin-top: 30px;
   width: 90%;
   min-height: 580px;
+  height: 100%;
   display: flex;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   background-image: url("/images/main/Big_Bottle_White.png");
