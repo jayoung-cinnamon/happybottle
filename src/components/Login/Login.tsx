@@ -63,7 +63,7 @@ function Login() {
             <RegisterBtn>회원가입</RegisterBtn>
           </StyledLink>
         </RegisterContainer>
-        <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn>
+        {/* <GoogleLoginBtn>Google로 로그인</GoogleLoginBtn> */}
       </LoginContainer>
     </MainContainer>
   );

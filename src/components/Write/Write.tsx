@@ -21,7 +21,7 @@ function Write() {
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const input = e.nativeEvent as any as WriteFunction;
     if (input.inputType !== "deleteContentBackward") {
-      if (content.length > 10) {
+      if (content.length > 201) {
         setAlertOpen(true);
         return;
       }

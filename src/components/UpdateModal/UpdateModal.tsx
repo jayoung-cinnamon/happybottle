@@ -182,14 +182,14 @@ const LogoutBtn = styled.button`
   cursor: pointer;
 `;
 const DeleteBtn = styled(LogoutBtn)`
-  background: #a31414;
+  background: #d96098;
 `;
 const UpdateBtn = styled(LogoutBtn)`
   background: #729743;
 `;
 
 const HomeBtn = styled(LogoutBtn)`
-  background-color: #485edf;
+  background-color: #325288;
 `;
 
 const UpdateSuccessBtn = styled(LogoutBtn)`
