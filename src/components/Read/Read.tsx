@@ -21,7 +21,7 @@ function Read() {
 
   const getETA = (memoDate: any) => {
     const targetDate = add(parse(memoDate, "yyyy.MM.dd HH:mm:ss", new Date()), {
-      days: 1,
+      days: 30,
     });
     const diffrenceInDay = differenceInDays(new Date(), targetDate);
     let result = "";
@@ -51,7 +51,7 @@ function Read() {
       )}분 뒤에 읽을 수 있습니다.`.substring(1);
     }
 
-    return result;
+    return result.slice(1);
   };
 
   let memo: Memo = {
