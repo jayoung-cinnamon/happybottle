@@ -25,5 +25,14 @@ TypeScript
 React
 styled-component
 Recoil
-firebase
+Firebase
 ```
+
+### 기능
+1. Firebase auth를 이용한 회원가입 및 로그인
+<img width="479" alt="스크린샷 2022-05-09 오후 5 07 24" src="https://user-images.githubusercontent.com/68357066/167558638-c6ee0cf4-0bc1-4425-94a0-1a4fedac02a3.png">
+<img width="479" alt="스크린샷 2022-05-09 오후 5 07 04" src="https://user-images.githubusercontent.com/68357066/167558680-619acf4c-4add-4a74-8cfb-2113937acf25.png">
+<img width="479" alt="스크린샷 2022-05-09 오후 5 08 44" src="https://user-images.githubusercontent.com/68357066/167559410-a419a9e2-0372-4237-a632-fbc561223054.png">
+
+
+2. Firebase Realtime DB를 이용한 데이터 쓰기, 읽기
