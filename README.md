@@ -30,14 +30,54 @@ Firebase
 
 ### 기능
 #### 1. Firebase auth를 이용한 회원가입 및 로그인
++ 둥댕이 스마일은 항상 웃지! :) 
 <img width="479" alt="스크린샷 2022-05-09 오후 5 07 24" src="https://user-images.githubusercontent.com/68357066/167558638-c6ee0cf4-0bc1-4425-94a0-1a4fedac02a3.png">
+
++ 우선 회원가입을 해주세요!
+<img width="492" alt="스크린샷 2022-05-10 오후 3 59 56" src="https://user-images.githubusercontent.com/68357066/167567760-60883847-4fae-4258-8ff9-1d1cd3174025.png">
+
++ 로그인을 합니다:)
 <img width="479" alt="스크린샷 2022-05-09 오후 5 07 04" src="https://user-images.githubusercontent.com/68357066/167558680-619acf4c-4add-4a74-8cfb-2113937acf25.png">
+
+
 
 
 #### 2. Firebase auth를 활용한 회원 정보 관리 기능  
  #### 2-1 닉네임 지정  
+ + 닉네임을 지정해주세요!
 <img width="479" alt="스크린샷 2022-05-09 오후 5 08 44" src="https://user-images.githubusercontent.com/68357066/167559410-a419a9e2-0372-4237-a632-fbc561223054.png">
 
 #### 2-2 닉네임 수정  
-#### 2-3 회원탈퇴  
+#### 2-3 회원탈퇴 
++ 언제든지 닉네임은 수정 할 수 있어요!
++ 회원 탈퇴도 가능합니다 :)
 <img width="492" alt="스크린샷 2022-05-10 오후 3 40 04" src="https://user-images.githubusercontent.com/68357066/167564796-ef6603f7-f20b-4c66-93c2-ff8554b116b0.png">
+
+#### 3. Firebase Realtime DB를 이용한 데이터 쓰기, 읽기
+
++ 쪽지를 담을 보틀을 우선 만들어주세요!
+<img width="492" alt="스크린샷 2022-05-10 오후 3 11 05" src="https://user-images.githubusercontent.com/68357066/167565452-7cd604d9-e092-425b-b008-d9dfc7b7211a.png">
+
++ 행복을 분류해보세요:)
+<img width="492" alt="스크린샷 2022-05-10 오후 3 11 17" src="https://user-images.githubusercontent.com/68357066/167566841-be7b4cec-b888-4c10-afe1-04d73398ad86.png">
+
++ 찬장에 보틀이 생겼어요!
+<img width="492" alt="스크린샷 2022-05-10 오후 3 11 28" src="https://user-images.githubusercontent.com/68357066/167566521-224490ad-54da-494c-8756-b5e5488ce7d4.png">
+
++ 메모를 생성해보세요 제목과 간단한 내용을 입력하세요
++ 한번 생성한 메모는 30일뒤에 열리기 때문에 수정,삭제가 불가능합니다! 
++ ( 저는 오늘 마신 카페라떼가 맛있어서 행복했어요 크크☕️ )
+<img width="492" alt="스크린샷 2022-05-10 오후 3 14 32" src="https://user-images.githubusercontent.com/68357066/167567283-514c66e9-edf8-48be-92ce-c392e3d8935b.png">
+
++ 보틀에 쪽지가 담겼습니다:)
+<img width="492" alt="스크린샷 2022-05-10 오후 3 15 13" src="https://user-images.githubusercontent.com/68357066/167567317-c8a2763a-c826-411d-b848-f85044fec835.png">
+
++ 30일뒤에 봐요 생각보다 행복한 순간은 많더라구요!
+<img width="492" alt="스크린샷 2022-05-10 오후 3 15 19" src="https://user-images.githubusercontent.com/68357066/167567333-3f40c68a-52f5-4f08-95f1-72efb75584ec.png">
+
++ 30일이 지나서 읽을수 있는 메모들은 반짝거려요:)
++ 물론 찬장에서도 표시된답니다!
+
+
+---
+
