@@ -29,10 +29,15 @@ Firebase
 ```
 
 ### 기능
-1. Firebase auth를 이용한 회원가입 및 로그인
+#### 1. Firebase auth를 이용한 회원가입 및 로그인
 <img width="479" alt="스크린샷 2022-05-09 오후 5 07 24" src="https://user-images.githubusercontent.com/68357066/167558638-c6ee0cf4-0bc1-4425-94a0-1a4fedac02a3.png">
 <img width="479" alt="스크린샷 2022-05-09 오후 5 07 04" src="https://user-images.githubusercontent.com/68357066/167558680-619acf4c-4add-4a74-8cfb-2113937acf25.png">
+
+
+#### 2. Firebase auth를 활용한 회원 정보 관리 기능  
+ #### 2-1 닉네임 지정  
 <img width="479" alt="스크린샷 2022-05-09 오후 5 08 44" src="https://user-images.githubusercontent.com/68357066/167559410-a419a9e2-0372-4237-a632-fbc561223054.png">
 
-
-2. Firebase Realtime DB를 이용한 데이터 쓰기, 읽기
+#### 2-2 닉네임 수정  
+#### 2-3 회원탈퇴  
+<img width="492" alt="스크린샷 2022-05-10 오후 3 40 04" src="https://user-images.githubusercontent.com/68357066/167564796-ef6603f7-f20b-4c66-93c2-ff8554b116b0.png">
