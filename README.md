@@ -36,8 +36,6 @@ Firebase
 ### 👩🏻‍💻 Developers
 
 Jayoung - https://github.com/jayoung-cinnamon  
-재밌었습니당:) 크크
-팀장님도 재밌었길 바라며!
 
 Taehoon Kim - https://github.com/realkth
 
