@@ -1,4 +1,6 @@
-# ✨ Happy Bottle  <img src="https://user-images.githubusercontent.com/68357066/167374915-505ce6f6-aa09-46e9-bf95-5e9fde4a7c34.png" width="35" height="35"/> ✨
+# <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /> Happy Bottle  <img src="https://user-images.githubusercontent.com/68357066/167374915-505ce6f6-aa09-46e9-bf95-5e9fde4a7c34.png" width="35" height="35"/> <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" />
+
+
 ## 매일 행복하진 않지만 매일 행복한 일들은 있어! 🍾
 해피보틀은 행복한 순간들을 기록하기 위한 앱입니다.  
 행복한 순간들을 기록해보세요!  
@@ -80,4 +82,10 @@ Firebase
 
 
 ---
+<img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572018-ed07740c-8ba6-419d-ae4b-8860c4d3b9ed.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572029-1e4ab971-ec24-4dea-99e4-0dcde828cfcf.png" width="60" height="50" />
+<img src="https://user-images.githubusercontent.com/68357066/167572036-1c591c54-3a93-42fb-a281-c83866ff9ee5.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572056-d30abb93-05f7-421d-9627-3b1cf898d961.png" width="60" height="50" />
+<img src="https://user-images.githubusercontent.com/68357066/167572062-ab430bda-7caa-4654-9d6f-99890541c423.png" width="50" heigth="50" /><img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572018-ed07740c-8ba6-419d-ae4b-8860c4d3b9ed.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572029-1e4ab971-ec24-4dea-99e4-0dcde828cfcf.png" width="60" height="50" />
+<img src="https://user-images.githubusercontent.com/68357066/167572036-1c591c54-3a93-42fb-a281-c83866ff9ee5.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572056-d30abb93-05f7-421d-9627-3b1cf898d961.png" width="60" height="50" />
+<img src="https://user-images.githubusercontent.com/68357066/167572062-ab430bda-7caa-4654-9d6f-99890541c423.png" width="50" heigth="50" />
+
 
