@@ -1,4 +1,4 @@
-# <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167574857-d5561e33-f20e-4c12-aa0f-fef618986cbe.png" width="50" height="45" /> Happy Bottle <img src="https://user-images.githubusercontent.com/68357066/167574857-d5561e33-f20e-4c12-aa0f-fef618986cbe.png" width="50" height="45" /><img src="https://user-images.githubusercontent.com/68357066/167374915-505ce6f6-aa09-46e9-bf95-5e9fde4a7c34.png" width="40" height="40"/> <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" />
+# <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /><img src="https://user-images.githubusercontent.com/68357066/167374915-505ce6f6-aa09-46e9-bf95-5e9fde4a7c34.png" width="40" height="40"/> Happy Bottle <img src="https://user-images.githubusercontent.com/68357066/167574857-d5561e33-f20e-4c12-aa0f-fef618986cbe.png" width="50" height="45" /> <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" />
 
 
 
@@ -32,6 +32,19 @@ styled-component
 Recoil
 Firebase
 ```
+
+### 👩🏻‍💻 Developers
+
+Jaoung - https://github.com/jayoung-cinnamon  
+재밌었습니당:) 크크
+팀장님도 재밌었길 바라며!
+
+Taehoon Kim - https://github.com/realkth
+
+
+
+
+---
 
 ### 기능
 #### 1. Firebase auth를 이용한 회원가입 및 로그인
@@ -81,9 +94,14 @@ Firebase
 <img width="492" alt="스크린샷 2022-05-10 오후 3 15 19" src="https://user-images.githubusercontent.com/68357066/167567333-3f40c68a-52f5-4f08-95f1-72efb75584ec.png">
 
 + 30일이 지나서 읽을수 있는 메모들은 반짝거려요:)
-+ 물론 찬장에서도 표시된답니다!
+
+<img src="https://user-images.githubusercontent.com/68357066/167578020-a875f02a-773e-492d-8846-d4d0ab12169f.gif" width="492"/>
+
++ 물론 찬장에서도 표시된답니다! (읽을수 있는 메모갯수 / 총 담긴 메모 수)
+<img src="https://user-images.githubusercontent.com/68357066/167578707-55d9cc96-a5bc-4940-a8c4-042a0da4f4ec.png"  width="492" />
 
 
+# 우리 모두 해피보틀하자구요:) 
 
 <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572018-ed07740c-8ba6-419d-ae4b-8860c4d3b9ed.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572029-1e4ab971-ec24-4dea-99e4-0dcde828cfcf.png" width="60" height="50" />
 <img src="https://user-images.githubusercontent.com/68357066/167572036-1c591c54-3a93-42fb-a281-c83866ff9ee5.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572056-d30abb93-05f7-421d-9627-3b1cf898d961.png" width="60" height="50" />
@@ -91,5 +109,6 @@ Firebase
 <img src="https://user-images.githubusercontent.com/68357066/167572036-1c591c54-3a93-42fb-a281-c83866ff9ee5.png" width="50" height="50" /> <img src="https://user-images.githubusercontent.com/68357066/167572056-d30abb93-05f7-421d-9627-3b1cf898d961.png" width="60" height="50" />
 <img src="https://user-images.githubusercontent.com/68357066/167572062-ab430bda-7caa-4654-9d6f-99890541c423.png" width="50" heigth="50" />
 <img src="https://user-images.githubusercontent.com/68357066/167571982-8bb4f978-401d-4f18-b5ba-3fea4dc00034.png" width="60" height="50" />
+
 
 
