@@ -80,7 +80,8 @@ Taehoon Kim - https://github.com/realkth
 + 찬장에 보틀이 생겼어요!
 <img width="492" alt="스크린샷 2022-05-10 오후 3 11 28" src="https://user-images.githubusercontent.com/68357066/167566521-224490ad-54da-494c-8756-b5e5488ce7d4.png">
 
-+ 메모를 생성해보세요 제목과 간단한 내용을 입력하세요
++ 메모를 생성해보세요
++ 제목과 간단한 내용을 입력하면 됩니다!
 + 한번 생성한 메모는 30일뒤에 열리기 때문에 수정,삭제가 불가능합니다! 
 + ( 저는 오늘 마신 카페라떼가 맛있어서 행복했어요 크크☕️ )
 <img width="492" alt="스크린샷 2022-05-10 오후 3 14 32" src="https://user-images.githubusercontent.com/68357066/167567283-514c66e9-edf8-48be-92ce-c392e3d8935b.png">
