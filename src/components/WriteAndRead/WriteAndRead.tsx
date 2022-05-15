@@ -48,8 +48,8 @@ const Container = styled.div`
 `;
 
 const WriteLogo = styled.div`
-  width: 95px;
-  height: 120px;
+  width: 75px;
+  height: 100px;
   background-image: url("/images/main/Write.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -80,8 +80,8 @@ const LogoWrapper = styled.div`
 `;
 
 const CreateBottleBtn = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   background-image: url("/images/main/Yummy.png");
   background-repeat: no-repeat;
   background-size: cover;
